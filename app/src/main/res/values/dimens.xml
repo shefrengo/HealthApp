@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nav_header_height">@dimen/_200sdp</dimen>
+    <dimen name="fab_margin">@dimen/_16sdp</dimen>
+    <dimen name="clip_padding">@dimen/_70sdp</dimen>
+
+    <dimen name="font_size_nano">10sp</dimen>
+    <dimen name="font_size_micro">12sp</dimen>
+    <dimen name="font_size_small">14sp</dimen>
+    <dimen name="font_size_medium">16sp</dimen>
+    <dimen name="font_size_normal">18sp</dimen>
+    <dimen name="font_size_large">20sp</dimen>
+    <dimen name="font_size_xlarge">22sp</dimen>
+    <dimen name="font_size_xxlarge">26sp</dimen>
+    <dimen name="font_size_xxxlarge">30sp</dimen>
+    <dimen name="font_size_splash">40sp</dimen>
+
+    <dimen name="spacing_control_half">@dimen/_2sdp</dimen>
+    <dimen name="spacing_control">@dimen/_4sdp</dimen>
+    <dimen name="spacing_standard">@dimen/_8sdp</dimen>
+    <dimen name="spacing_standard_new">@dimen/_16sdp</dimen>
+    <dimen name="spacing_large">@dimen/_24sdp</dimen>
+    <dimen name="spacing_xlarge">@dimen/_32sdp</dimen>
+    <dimen name="spacing_xxlarge">@dimen/_40sdp</dimen>
+
+    <dimen name="spacing_small">@dimen/_3sdp</dimen>
+    <dimen name="spacing_medium">@dimen/_5sdp</dimen>
+    <dimen name="spacing_xmedium">@dimen/_7sdp</dimen>
+    <dimen name="spacing_middle">@dimen/_10sdp</dimen>
+    <dimen name="spacing_smlarge">@dimen/_18sdp</dimen>
+    <dimen name="spacing_mlarge">@dimen/_20sdp</dimen>
+    <dimen name="spacing_mxlarge">@dimen/_25sdp</dimen>
+    <dimen name="spacing_xxxlarge">@dimen/_55sdp</dimen>
+    <dimen name="edit_text_h">@dimen/_45sdp</dimen>
+    <dimen name="img_height">@dimen/_300sdp</dimen>
+    <dimen name="sidebar_img_height">@dimen/_110sdp</dimen>
+    <dimen name="product_img_height">@dimen/_115sdp</dimen>
+    <dimen name="product_img_width">@dimen/_130sdp</dimen>
+    <dimen name="product_item_height">@dimen/_300sdp</dimen>
+    <dimen name="review_img_height_width">@dimen/_70sdp</dimen>
+    <dimen name="product_grid_img_height">@dimen/_140sdp</dimen>
+    <dimen name="payment_card_width">@dimen/_270sdp</dimen>
+    <dimen name="splash_img">@dimen/_70sdp</dimen>
+
+    <dimen name="stroke_width">@dimen/_1sdp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="divider_width">0.5dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

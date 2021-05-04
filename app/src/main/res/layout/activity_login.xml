@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
+    <include layout="@layout/layout_background"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_standard_new"
+            android:paddingTop="@dimen/spacing_xxxlarge"
+            android:paddingEnd="@dimen/spacing_standard_new"
+            android:paddingBottom="@dimen/spacing_large">
+
+            <ImageView
+                android:layout_width="@dimen/spacing_xxlarge"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_standard"
+                android:src="@drawable/ic_app_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name"
+                android:textAppearance="@style/FontBold"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/font_size_xxlarge"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/textColorPrimary"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginTop="@dimen/spacing_xxxlarge"
+                android:layout_marginEnd="@dimen/spacing_standard"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ractangle_rounded_inactive"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginTop="@dimen/spacing_smlarge"
+                android:layout_marginEnd="@dimen/spacing_standard">
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    style="@style/EditTextStyle"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/tvForget"
+                    android:layout_width="wrap_content"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:id="@+id/tvForget"
+                    style="@style/EditTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:paddingEnd="@dimen/spacing_middle"
+                    android:text="@string/lbl_forgot"
+                    android:textAppearance="@style/FontSemiBold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/font_size_medium"
+                    android:theme="@style/Widget.MaterialComponents.Button.TextButton" />
+            </RelativeLayout>
+
+
+            <ProgressBar
+                android:layout_width="@dimen/_23sdp"
+                android:id="@+id/login_progress"
+                android:visibility="gone"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignIn"
+                style="@style/MaterialButtonStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                android:layout_marginEnd="@dimen/spacing_standard"
+                android:text="@string/lbl_sign_in"
+                 />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
+                style="@style/MaterialButtonStyle.Stroked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginTop="@dimen/spacing_standard"
+                android:layout_marginEnd="@dimen/spacing_standard"
+                android:text="@string/lbl_sign_up"
+              />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard_new"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:layout_marginEnd="@dimen/spacing_standard"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_small"
+                android:visibility="gone" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

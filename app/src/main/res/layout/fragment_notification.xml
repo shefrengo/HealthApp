@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bnve">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_toolbar_relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/top_toolbar_laout" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextAppearance.Body2.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+
+                android:text="@string/notifications"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/notification_progress"
+            android:layout_width="@dimen/_27sdp"
+            android:layout_height="@dimen/_27sdp"
+            android:layout_centerInParent="true"
+
+            android:indeterminateDuration="@android:integer/config_longAnimTime" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/center_relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_toolbar_relative_layout">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notication_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_notifications"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="@dimen/_11sdp"
+            style="@style/TextAppearance.Headline5"
+            android:text="@string/no_notifications"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

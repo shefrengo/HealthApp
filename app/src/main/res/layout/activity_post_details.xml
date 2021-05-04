@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_2"
+    tools:context=".PostDetails">
+
+    <RelativeLayout
+        android:id="@+id/deltaRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/top_toolbar_laout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="@style/TextAppearance.Body2.Medium"
+            android:text="@string/post"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/more"
+            android:id="@+id/more"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/deltaRelative"
+        android:fillViewport="true"
+        android:padding="@dimen/_1sdp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/background_color"
+
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_5sdp"
+                android:background="@color/background_color"
+                android:id="@+id/description_relative">
+                <TextView
+                    android:id="@+id/title_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    style="@style/TextAppearance.Body2.Medium"
+                    android:text="@string/women_forum"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_39sdp"
+                    android:layout_below="@id/title_question"
+                    android:layout_marginTop="@dimen/_8sdp"
+
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_app_background" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_question"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/profile_pic"
+                    style="@style/TextAppearance.Body2.Medium"
+                    android:text="shefrengo"
+
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp" />
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_300sdp"
+                    android:layout_below="@id/timestamp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/username"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_toEndOf="@id/profile_pic"
+                    style="@style/TextAppearance.Subtitle1"
+                    android:text="timestamp"
+                    android:textColor="#373737"
+                    android:textSize="@dimen/_11sdp" />
+
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/photo"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    style="@style/TextAppearance.Subtitle1"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/black"
+                    android:text="description"
+                    />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/reply_relativelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description_relative"
+                android:layout_marginTop="@dimen/_20sdp"
+               android:background="@drawable/gray_bottom_border"
+                android:paddingBottom="@dimen/_15sdp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_profile_pic"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:scaleType="centerCrop"
+
+                    android:src="@drawable/ic_app_background" />
+
+                <TextView
+                    android:id="@+id/my_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_toEndOf="@id/my_profile_pic"
+                    style="@style/TextAppearance.Body2.Medium"
+
+                    android:text="Reply to shefrengo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+
+
+                    />
+
+                <EditText
+                    android:id="@+id/reply_edit"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/my_profile_pic"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/gray_bottom_border"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/my_profile_pic"
+                    android:hint="@string/write_your_reply_here"
+                    android:textColorHint="@color/textColorPrimary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reply_button"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_below="@id/reply_edit"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="@string/comment" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reply_count"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_below="@id/reply_button"
+                    />
+
+                <ProgressBar
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:id="@+id/reply_progress"
+                    android:layout_below="@id/reply_button"
+                   android:layout_centerHorizontal="true"
+                    android:visibility="gone"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/reply_recyclerview"
+                android:layout_height="match_parent"
+
+                android:layout_below="@id/reply_relativelayout"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

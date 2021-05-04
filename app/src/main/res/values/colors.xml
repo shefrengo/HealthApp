@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#358CC9</color>
+    <color name="colorPrimaryDark">#358CC9</color>
+    <color name="colorAccent">#728cd4</color>
+<color name="background_extra_extra_light_gray">#F5F8FA</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="commonColorWhite">#FFFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="semi_white">#F8F7F7</color>
+    <color name="black">#243447</color>
+    <color name="twitter_dark_blue">#243447</color>
+    <color name="gray_text">#808080</color>
+    <color name="view_color">#eaeaea</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_view_color">#1D4A90E2</color>
+    <color name="notification_unread">#f1f8fb</color>
+    <color name="link_text">#358CC9</color>
+    <color name="background_color">#FCFDFD</color>
+    <color name="background_color_2">#F3F3F3</color>
+    <color name="editText_background">#F1F1F1</color>
+    <color name="img_background">#F4F4F4</color>
+    <color name="tomato">#FF6347</color>
+    <color name="dots_color">#A5A5A5</color>
+    <color name="faceBooK_blue">#343B9D</color>
+    <color name="google_red">#CB3634</color>
+    <color name="twitter_blue">#358CC9</color>
+    <color name="editText_background_active">#FFFCEAE8</color>
+    <color name="cat_1">#FA4352</color>
+    <color name="cat_2">#34B5C8</color>
+    <color name="cat_3">#FED76D</color>
+    <color name="cat_4">#0C5A93</color>
+    <color name="cat_5">#0C3A6A</color>
+    <color name="cat_6">#4D84B1</color>
+    <color name="cat_7">#3CA69B</color>
+    <color name="cat_8">#D95362</color>
+    <color name="sidebar_background">#EFEEEF</color>
+    <color name="favourite_background">#FFEBEC</color>
+    <color name="favourite_unselected_background">#ECECEC</color>
+    <color name="yellow">#FEBA39</color>
+    <color name="light_gray">#ECECEC</color>
+    <color name="green">#66953A</color>
+    <color name="red">#F61929</color>
+    <color name="light_green">#81C049</color>
+    <color name="more_infoHeading_background">#DDDDDD</color>
+    <color name="more_infoValue_background">#F3F3F3</color>
+    <color name="item_background">#EFF3F6</color>
+
+    <color name="light_grey">#FAFAFA</color>
+    <color name="checkbox_color">#DFDFDF</color>
+    <color name="itemText_background">#F8F8F8</color>
+    <color name="track_green">#64B931</color>
+    <color name="track_yellow">#ECC134</color>
+    <color name="track_red">#F61929</color>
+    <color name="track_grey">#D3D3D3</color>
+    <color name="radiobuttonTint">#4353FA</color>
+    <color name="scratch_start_gradient">#e5e5e5</color>
+    <color name="scratch_end_gradient">#cccccc</color>
+    <color name="light_color_primary">#FFE8EA</color>
+    <color name="bottom_bar_color">#f3f3f3</color>
+    <color name="item_background_common">#EFF3F6</color>
+    <color name="gray_80">#80ECECEC</color>
+    <color name="color_selected">#79303F9F</color>
+
+    <array name="rainbow">
+        <item>@color/red</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </array>
+</resources>

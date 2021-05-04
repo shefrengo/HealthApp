@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Health App</string>
+    <string name="action_search">search</string>
+    <string name="action_home">home</string>
+    <string name="action_heart">heart</string>
+    <string name="action_profile">profile</string>
+    <string name="hint_first_name">name</string>
+    <string name="hint_last_name">surname</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="lbl_sign_up">Sign Up</string>
+    <string name="hint_username">Username</string>
+    <string name="lbl_sign_in">Sign In</string>
+    <string name="lbl_forgot">forgot</string>
+    <string name="enter_field">Field Required</string>
+    <string name="user_exits">Username already exits</string>
+    <string name="password_legth">should be at least 8 characters</string>
+    <string name="password_not_matching">Passwords do not match</string>
+    <string name="question_text">What is your question?</string>
+    <string name="give_your_post_a_title">Give your post a title</string>
+    <string name="add_image">Optionally add image</string>
+
+    <string name="privacy_tip">Privacy tip</string>
+    <string name="write_your_post_here">Write your post here</string>
+    <string name="create_post">Create post</string>
+    <string name="mens_forum">In mens forum</string>
+    <string name="women_forum">In womens forum</string>
+    <string name="first_reply">Be the first on to comment</string>
+    <string name="write_your_reply_here">Write your comment here</string>
+    <string name="comment">Reply</string>
+    <string name="repy_notification">Replied to your comment</string>
+    <string name="comment_notification">Commented on your post</string>
+    <string name="liked_your_post">Liked your post</string>
+    <string name="started_following_you">Started following you</string>
+    <string name="comment_reply">Replied to your comment</string>
+    <string name="notifications">Notifications</string>
+    <string name="community_title">Give your community a title</string>
+    <string name="enroll_in_program">Enroll in program</string>
+    <string name="warning_text">Content on this app does not replace the relationship between you and your doctors or other healthcare professionals
+    not the advice you receive from them. \Never delay seeking advice or  dialling emergency services because of something that you have read here</string>
+    <string name="about_this_program">About this program</string>
+    <string name="enrolled">Enrolled</string>
+    <string name="dialog_header">Which Community would you like to post to</string>
+    <string name="my_communities">My Communities</string>
+    <string name="view_all">View all</string>
+    <string name="search">Search</string>
+    <string name="all_communities">All Communities</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_community">Search for Community</string>
+    <string name="post">Post</string>
+    <string name="write">Write</string>
+    <string name="please_select_communities_to_join">Please Select Communities to join</string>
+    <string name="no_posts_yet">No Posts Yet</string>
+    <string name="health_community">0J9PZ5R2BMJV5L740Z</string>
+    <string name="company_name">Ren Technology</string>
+    <string name="no_notifications">No notifications</string>
+    <string name="username">username</string>
+    <string name="home">Home</string>
+    <string name="admin">(admin)</string>
+    <string name="delete">Delete</string>
+</resources>

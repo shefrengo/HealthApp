@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_5sdp"
+
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:layout_marginStart="@dimen/_2sdp"
+    app:cardBackgroundColor="@color/background_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/profile_pic"
+            android:src="@drawable/ic_app_background" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/profile_pic"
+
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/_11sdp"
+            android:id="@+id/title"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+
+            android:text="The wok" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/category"
+            android:layout_below="@id/title"
+
+            android:textColor="@color/gray_text"
+            android:textSize="@dimen/_10sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Mens health " />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_210sdp"
+            android:id="@+id/image"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/ic_app_background"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:layout_below="@id/category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/short_description"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_below="@id/image"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/textColorPrimary"
+            android:text="Realy hoping everything will be ok" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reply_count"
+            android:layout_below="@id/short_description"
+            android:layout_toEndOf="@id/profile_pic"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="15 replies" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

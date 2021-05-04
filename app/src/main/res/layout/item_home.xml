@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_2sdp"
+    android:layout_marginTop="@dimen/_1sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:background="@drawable/gray_bottom_border"
+    android:padding="@dimen/_3sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/ic_app_background" />
+
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.Headline5.Medium"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="The wok"
+            android:textColor="@color/twitter_dark_blue"
+
+            android:textSize="@dimen/_11sdp" />
+
+        <TextView
+            android:id="@+id/category"
+            style="@style/TextAppearance.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/title"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:text="Mens health "
+            android:textColor="@color/gray_text"
+            android:textSize="@dimen/_10sdp" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_210sdp"
+            android:layout_below="@id/category"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_app_background" />
+
+        <TextView
+            android:id="@+id/short_description"
+            style="@style/TextAppearance.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:text="Realy hoping everything will be ok"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp" />
+
+        <TextView
+            android:id="@+id/reply_count"
+            style="@style/TextAppearance.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/short_description"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_toEndOf="@id/profile_pic"
+            android:text="15 replies"
+            android:textColor="@color/gray_text"
+            android:textSize="@dimen/_11sdp" />
+    </RelativeLayout>
+</RelativeLayout>

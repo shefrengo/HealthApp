@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".PostQuestionActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/post_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/deltaRelative"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/qestion_title_editext"
+                style="@style/EditTextStylePost"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+
+                android:hint="@string/community_title"
+                android:textColorHint="@color/textColorPrimary" />
+
+            <EditText
+                android:id="@+id/question_post_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:layout_below="@id/qestion_title_editext"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_15sdp"
+                android:background="@drawable/gray_bottom_border"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/write_your_post_here"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/textColorPrimary" />
+
+            <TextView
+                android:id="@+id/privacy_tip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question_post_edit"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_11sdp"
+
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/privacy_tip"
+                android:textColor="@color/link_text"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <RelativeLayout
+                android:id="@+id/add_iamge_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/privacy_tip_text"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                android:padding="@dimen/_7sdp">
+
+                <ImageView
+                    android:id="@+id/addImage"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_app_background" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_9sdp"
+                    android:layout_toEndOf="@id/addImage"
+                    android:text="@string/add_image"
+                    android:textColor="@color/textColorPrimary" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/category_linear"
+                android:layout_below="@id/add_iamge_relative"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/gray_bottom_border">
+
+                <ProgressBar
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:id="@+id/progressbar"
+                    android:visibility="gone"
+                    android:indeterminateDrawable="@drawable/circular_upload_progressbar"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/postbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+
+
+                android:layout_below="@id/category_linear"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="@string/post"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/deltaRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/top_toolbar_laout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/create_post"
+            android:textColor="@color/textColorPrimary" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_color">
+
+    <RelativeLayout
+        android:id="@+id/color_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        android:padding="4dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/notification_profile_pic2"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp" />
+
+        <TextView
+            android:id="@+id/notificatin_type"
+            style="@style/TextAppearance.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="5dp"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_toEndOf="@id/notification_profile_pic2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp" />
+
+
+
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:background="@drawable/gray_bottom_border">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_39sdp"
+
+        android:layout_marginTop="@dimen/_8sdp"
+
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_app_background" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_toEndOf="@id/profile_pic"
+        style="@style/TextAppearance.Body2.Medium"
+        android:text="shefrengo"
+
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11sdp" />
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:layout_below="@id/timestamp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        style="@style/TextAppearance.Subtitle2"
+        android:layout_toEndOf="@id/profile_pic"
+        android:text="timestamp"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/_10sdp" />
+
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/photo"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+style="@style/TextAppearance.Body2"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:text="description"
+        />
+
+
+</RelativeLayout>

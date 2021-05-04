@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_2"
+    tools:context=".HomeActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/deltaRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/top_toolbar_laout" />
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bnve"
+        android:padding="@dimen/_5sdp"
+        android:fillViewport="true"
+        android:layout_below="@id/deltaRelative">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+
+                app:cardBackgroundColor="@color/background_color"
+
+                android:id="@+id/home_cardview"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_height="@dimen/_45sdp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:id="@+id/home_profile_pic"
+                        android:scaleType="centerCrop"
+                        android:layout_centerVertical="true"
+
+                        android:src="@drawable/ic_app_background"
+                        android:layout_height="@dimen/_50sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/question_textview"
+                        android:layout_toEndOf="@id/home_profile_pic"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/question_text"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_below="@id/home_cardview"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/center_profile_main_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_centerInParent="true"
+                android:id="@+id/recycler_view_progress"/>
+            <RelativeLayout
+                android:id="@+id/head_profile_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_display_photo"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    app:civ_border_color="@color/gray_text"
+                    app:civ_border_width="1dp" />
+
+                <TextView
+                    android:id="@+id/profile_display_name"
+                    style="@style/TextAppearance.Subtitle2.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_display_photo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="9dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_11sdp" />
+
+                <TextView
+                    android:id="@+id/profile_display_bio"
+                    style="@style/TextAppearance.Subtitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_display_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="9dp"
+
+                    android:text="@string/admin"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_display_bio"
+                    android:layout_centerInParent="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/add_photos"
+                        android:layout_width="@dimen/_170sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="6dp"
+                        android:elevation="9dp"
+
+                        android:text="Edit profile"
+                        android:textAllCaps="false"
+
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/admin"
+                        android:layout_width="@dimen/_170sdp"
+                        android:layout_height="@dimen/_31sdp"
+                        android:layout_below="@id/add_photos"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="6dp"
+                        android:elevation="9dp"
+                        android:text="Create Community"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/followers_layout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/head_profile_relative"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/gray_bottom_border"
+                android:paddingBottom="10dp">
+
+                <include layout="@layout/followers_layout" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/nopost"
+                style="@style/TextAppearance.Headline5.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/no_posts_yet"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/followers_layout"
+                android:layout_marginTop="@dimen/_5sdp" />
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</merge>

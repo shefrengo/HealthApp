@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/background_color"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relative0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/background_color">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/ic_app_background"
+              />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_photo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="25dp"
+
+                android:text="Change photo"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/curve_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relative0"
+            android:layout_marginBottom="7dp">
+
+
+            <!--username relative below-->
+            <RelativeLayout
+                android:id="@+id/username_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/username_edit"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:layout_marginTop="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/spacing_standard"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    android:singleLine="true" />
+            </RelativeLayout>
+            <!--username relative above-->
+
+            <!--email relative below-->
+            <RelativeLayout
+                android:id="@+id/email_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username_relative"
+                android:layout_marginTop="20dp">
+                <EditText
+                    android:id="@+id/email_edit"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:layout_marginTop="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/spacing_standard"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    android:singleLine="true" />
+            </RelativeLayout>
+            <!--username relative above-->
+
+
+            <!--phonenumber relative below-->
+            <RelativeLayout
+                android:id="@+id/phone_number_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:layout_below="@id/email_relative"
+                android:layout_marginTop="20dp">
+                <EditText
+                    android:id="@+id/phone_number"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:layout_marginTop="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/spacing_standard"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    android:singleLine="true" />
+            </RelativeLayout>
+            <!--username relative above-->
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_edit_profile"
+                style="@style/MaterialButtonStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_below="@id/phone_number_relative"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/spacing_standard"
+
+                android:text="@string/lbl_sign_up" />
+            <ProgressBar
+                android:id="@+id/update_info_progress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+
+                android:indeterminateDuration="@android:integer/config_longAnimTime"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</merge>
