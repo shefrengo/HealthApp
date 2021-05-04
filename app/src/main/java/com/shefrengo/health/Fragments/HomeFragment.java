@@ -46,6 +46,7 @@ import com.shefrengo.health.PostDetails;
 import com.shefrengo.health.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,12 +67,12 @@ public class HomeFragment extends Fragment {
 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-private CircleImageView circleImageView;
-private TextView name;
-private String question = "What is you question.";
+    private CircleImageView circleImageView;
+    private TextView name;
+    private String question = "What is you question.";
     private DocumentSnapshot lastVisible;
-
-    private static final int limit = 10;
+    private List<String> useridList = new ArrayList<>();
+    private static final int limit = 1;
 
     public static HomeFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
@@ -119,7 +120,7 @@ private String question = "What is you question.";
             intent.putExtra("image", image);
             intent.putExtra("photo", photo);
             intent.putExtra("username", username);
-            intent.putExtra("community",community);
+            intent.putExtra("community", community);
             intent.putExtra("timestamp", timestamp);
             intent.putExtra("category", category);
             intent.putExtra("postid", postid);
@@ -141,7 +142,7 @@ private String question = "What is you question.";
             String username = users.getUsername();
             String photo = users.getProfilePhotoUrl();
             Glide.with(getActivity()).asBitmap().placeholder(R.drawable.ic_app_background).load(photo).into(circleImageView);
-            question = "What is your question, "+username+"?";
+            question = "What is your question, " + username + "?";
             name.setText(question);
         });
 
@@ -168,59 +169,71 @@ private String question = "What is you question.";
             for (QueryDocumentSnapshot myCommunitySnapshot : queryDocumentSnapshots) {
                 MyCommunities myCommunities = myCommunitySnapshot.toObject(MyCommunities.class);
                 String communityId = myCommunities.getCommunityId();
-                CollectionReference postRef = db.collection("Posts");
-                Query query = postRef.whereEqualTo("community", communityId)
-                        .orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
 
-                // posts
-                query.get().addOnSuccessListener(postSnapshot -> {
-
-                    for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
-                        String id = queryDocumentSnapshot1.getId();
-                        Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
-                        String userid = posts.getUserid();
-
-                        db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
-                            Users users = documentSnapshot.toObject(Users.class);
-                            String username = users.getUsername();
-                            String photo = users.getProfilePhotoUrl();
-                            dataList.add(new Data(username, photo));
-                            postsList.add(posts);
-                            //  adapter.notifyDataSetChanged();
-                            hideProgress();
-                        });
-
-                    }
-
-                    if (postSnapshot.size() > 0) {
-                        lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
-                    }
-                    nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                        View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
-                        int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
-                        if (diff == 0) {
-                            // load more
-                            loadMore(communityId);
-
-                        }
-                    });
-                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                        @Override
-                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                            super.onScrolled(recyclerView, dx, dy);
-                            boolean bottomReached = !recyclerView.canScrollVertically(1);
-                            if (bottomReached) {
-                                //loadMore(communityId);
-                            }
-                        }
-                    });
-
-                }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+                useridList.add(communityId);
 
             }
+            getPosts();
         });
 
+    }
+    private void getPosts(){
+        for (int i =0; i<useridList.size();i++){
+            CollectionReference postRef = db.collection("Posts");
+            Query query = postRef
+                    .whereEqualTo("community",useridList.get(i))
+                    .orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
 
+            // posts
+            int finalI = i;
+            query.get().addOnSuccessListener(postSnapshot -> {
+
+                for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
+                    String id = queryDocumentSnapshot1.getId();
+                    Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
+                    String userid = posts.getUserid();
+
+                    db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
+                        Users users = documentSnapshot.toObject(Users.class);
+                        String username = users.getUsername();
+                        String photo = users.getProfilePhotoUrl();
+                        dataList.add(new Data(username, photo));
+                        postsList.add(posts);
+
+
+                        adapter.notifyDataSetChanged();
+                        hideProgress();
+                    });
+
+                }
+
+                if (postSnapshot.size() > 0) {
+                    lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
+                }
+                nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                    View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
+                    int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
+                    if (diff == 0) {
+                        // load more
+                        loadMore(useridList.get(finalI));
+
+
+                    }
+                });
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        boolean bottomReached = !recyclerView.canScrollVertically(1);
+                        if (bottomReached) {
+                            //loadMore(communityId);
+                        }
+                    }
+                });
+
+            }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+
+        }
     }
 
 
@@ -245,7 +258,8 @@ private String question = "What is you question.";
                     String photo = users.getProfilePhotoUrl();
                     dataList.add(new Data(username, photo));
                     postsList.add(posts);
-                   
+
+                    adapter.notifyDataSetChanged();
 
                 });
 
