@@ -179,71 +179,74 @@ public class HomeFragment extends Fragment {
     }
     private void getPosts(){
         for (int i =0; i<useridList.size();i++){
-            CollectionReference postRef = db.collection("Posts");
-            Query query = postRef
-                    .whereEqualTo("community",useridList.get(i))
-                    .orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
 
-            // posts
-            int finalI = i;
-            query.get().addOnSuccessListener(postSnapshot -> {
-
-                for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
-                    String id = queryDocumentSnapshot1.getId();
-                    Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
-                    String userid = posts.getUserid();
-
-                    db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
-                        Users users = documentSnapshot.toObject(Users.class);
-                        String username = users.getUsername();
-                        String photo = users.getProfilePhotoUrl();
-                        dataList.add(new Data(username, photo));
-                        postsList.add(posts);
-
-
-                        adapter.notifyDataSetChanged();
-                        hideProgress();
-                    });
-
-                }
-
-                if (postSnapshot.size() > 0) {
-                    lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
-                }
-                nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                    View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
-                    int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
-                    if (diff == 0) {
-                        // load more
-                        loadMore(useridList.get(finalI));
-
-
-                    }
-                });
-                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-                        boolean bottomReached = !recyclerView.canScrollVertically(1);
-                        if (bottomReached) {
-                            //loadMore(communityId);
-                        }
-                    }
-                });
-
-            }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
 
         }
+
+        CollectionReference postRef = db.collection("Posts");
+        Query query = postRef
+
+                .orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
+
+        // posts
+
+        postRef.get().addOnSuccessListener(postSnapshot -> {
+
+
+            for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
+                String id = queryDocumentSnapshot1.getId();
+                Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
+                String userid = posts.getUserid();
+
+                db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
+                    Users users = documentSnapshot.toObject(Users.class);
+                    String username = users.getUsername();
+                    String photo = users.getProfilePhotoUrl();
+                    dataList.add(new Data(username, photo));
+                    postsList.add(posts);
+
+
+                    adapter.notifyDataSetChanged();
+                    hideProgress();
+                });
+
+            }
+
+            if (postSnapshot.size() > 0) {
+                lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
+            }
+            nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
+                int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
+                if (diff == 0) {
+                    // load more
+                    loadMore();
+
+
+                }
+            });
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    boolean bottomReached = !recyclerView.canScrollVertically(1);
+                    if (bottomReached) {
+                        //loadMore(communityId);
+                    }
+                }
+            });
+
+        }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
     }
 
 
-    private void loadMore(String communityId) {
+    private void loadMore() {
         CollectionReference postRef = db.collection("Posts");
-        Query query = postRef.whereEqualTo("community", communityId)
+        Query query = postRef
                 .orderBy("timestamp", Query.Direction.DESCENDING).startAfter(lastVisible).limit(limit);
 
         // posts
-        query.get().addOnSuccessListener(postSnapshot -> {
+      query.get().addOnSuccessListener(postSnapshot -> {
 
 
             for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {

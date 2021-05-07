@@ -8,13 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.Index;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -29,6 +34,9 @@ import com.shefrengo.health.Models.Communities;
 import com.shefrengo.health.Models.MyCommunities;
 import com.shefrengo.health.R;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +54,7 @@ public class CommunitiesFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Communities> communities;
 
+    private EditText editText;
     private CommunityAdapter adapter;
     private RecyclerView recyclerView2;
     private TextView viewAll;
@@ -73,6 +82,7 @@ public class CommunitiesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.communitiesRecy);
         communities = new ArrayList<>();
         communitiesList = new ArrayList<>();
+        editText = view.findViewById(R.id.edtPassword);
 
         viewAll = view.findViewById(R.id.view_all);
         progressBar = view.findViewById(R.id.communities_progress);
@@ -129,6 +139,23 @@ public class CommunitiesFragment extends Fragment {
         getData();
         myCommunities();
         viewAll.setOnClickListener(v -> startActivity(new Intent(getActivity(), ViewAllCommunities.class)));
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchOnline(s.toString());
+            }
+        });
         return view;
     }
 
@@ -159,9 +186,8 @@ public class CommunitiesFragment extends Fragment {
         collectionReference.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
 
-                MyCommunities myCommunities =queryDocumentSnapshot.toObject(MyCommunities.class);
-                String id =myCommunities.getCommunityId();
-
+                MyCommunities myCommunities = queryDocumentSnapshot.toObject(MyCommunities.class);
+                String id = myCommunities.getCommunityId();
 
 
                 CollectionReference collectionReference1 = db.collection("Communities");
@@ -170,7 +196,7 @@ public class CommunitiesFragment extends Fragment {
                     for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots1) {
 
                         Communities communities1 = snapshot.toObject(Communities.class).withId(snapshot.getId());
-                        Log.d(TAG, "myCommunities: "+id);
+                        Log.d(TAG, "myCommunities: " + id);
                         communitiesList.add(communities1);
                         adapter2.notifyDataSetChanged();
                         hideProgress();
@@ -190,5 +216,62 @@ public class CommunitiesFragment extends Fragment {
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
         nestedScrollView.setVisibility(View.VISIBLE);
+    }
+
+
+    private void searchOnline(final String text) {
+        final Client client = new Client(getString(R.string.Agloia_application_id), getString(R.string.Admiin_api_key));
+
+        final Index index = client.getIndex(getString(R.string.agolia_index_name));
+
+        final com.algolia.search.saas.Query query = new com.algolia.search.saas.Query(text)
+                .setAttributesToRetrieve("name", "profilePhotoUrl")
+                .setHitsPerPage(30);
+
+
+        index.searchAsync(query, (content, error) -> {
+            try {
+
+
+                assert content != null;
+                JSONArray hits = content.getJSONArray("hits");
+
+                final List<Communities> hitList = new ArrayList<>();
+                final CommunityAdapter adapter = new CommunityAdapter( hitList,getActivity());
+                for (int i = 0; i < hits.length(); i++) {
+                    JSONObject jsonObject = hits.getJSONObject(i);
+
+
+                    String name = jsonObject.getString("name");
+                    String profileUrl = jsonObject.getString("profilePhotoUrl");
+                    String userid = jsonObject.getString("objectID");
+
+
+
+                    hitList.add(new Communities(name,profileUrl));
+                    adapter.notifyDataSetChanged();
+                }
+
+
+                recyclerView.setHasFixedSize(true);
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(adapter);
+
+               adapter.setOnItemClickListener(new CommunityAdapter.OnItemClickListener() {
+                   @Override
+                   public void onItemClick(int position) {
+
+                   }
+               });
+
+            } catch (Exception e1) {
+                Log.d(TAG, "requestCompleted: " + e1.getMessage());
+
+
+
+
+            }
+        });
     }
 }

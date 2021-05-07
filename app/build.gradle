@@ -70,8 +70,13 @@ dependencies {
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+
     implementation 'androidx.paging:paging-runtime:2.1.2'
     implementation 'com.github.okaybroda:FragmentStateManager:1.0.1'
     implementation 'net.skoumal.fragmentback:fragment-back:0.2.3'
+  //  implementation 'com.google.android.gms:play-services-ads:20.1.0'
+   // implementation project(':nativetemplates')
+    //algolia
+    implementation 'com.algolia:algoliasearch-android:3.27.0'
 }
 apply plugin: 'com.google.gms.google-services'

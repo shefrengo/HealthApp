@@ -60,4 +60,7 @@
     <string name="home">Home</string>
     <string name="admin">(admin)</string>
     <string name="delete">Delete</string>
+    <string name="Agloia_application_id">DSXA6S4A7I</string>
+    <string name="Admiin_api_key">1e2795c221606a221fe0f4c1012aa9c7</string>
+    <string name="agolia_index_name">rentech</string>
 </resources>

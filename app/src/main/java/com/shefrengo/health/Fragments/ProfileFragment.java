@@ -78,7 +78,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView circleImageView;
     private List<Data> dataList;
     private TextView adminText;
-    private static final int limit = 3;
+    private static final int limit = 10;
     private DocumentSnapshot lastvisible;
     public static ProfileFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();

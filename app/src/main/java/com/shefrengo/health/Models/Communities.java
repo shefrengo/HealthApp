@@ -19,6 +19,11 @@ public class Communities extends PostId {
     public Communities() {
     }
 
+    public Communities(String name, String imageUrl) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+    }
+
     public String getAdminUserid() {
         return adminUserid;
     }
