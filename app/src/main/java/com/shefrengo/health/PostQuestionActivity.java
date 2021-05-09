@@ -5,10 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+
 import com.shefrengo.health.Models.Posts;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -77,10 +82,10 @@ public class PostQuestionActivity extends AppCompatActivity implements View.OnCl
         relativeLayout.setOnClickListener(this);
         postBtn.setOnClickListener(this);
         privacyTip.setOnClickListener(this);
-        if (intent.hasExtra("community")){
+        if (intent.hasExtra("community")) {
             community = intent.getStringExtra("community");
         }
-        if (intent.hasExtra("communityId")){
+        if (intent.hasExtra("communityId")) {
             id = intent.getStringExtra("communityId");
         }
 
@@ -118,12 +123,22 @@ public class PostQuestionActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         if (v == privacyTip) {
 
+            displayTip();
         } else if (v == postBtn) {
             validate();
         } else if (v == relativeLayout) {
 
             setImage();
         }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void displayTip() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.tip_layout);
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.show();
     }
 
 
@@ -167,7 +182,7 @@ public class PostQuestionActivity extends AppCompatActivity implements View.OnCl
 
             db.collection("Users").document(user.getUid()).update("posts", FieldValue.increment(1));
             Toast.makeText(this, "Posted", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(PostQuestionActivity.this,MainActivity.class);
+            Intent intent = new Intent(PostQuestionActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

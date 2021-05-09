@@ -1,3 +1,2 @@
-include ':nativetemplates'
 include ':app'
 rootProject.name = "Health"

@@ -12,7 +12,7 @@
     <string name="lbl_sign_up">Sign Up</string>
     <string name="hint_username">Username</string>
     <string name="lbl_sign_in">Sign In</string>
-    <string name="lbl_forgot">forgot</string>
+    <string name="lbl_forgot">Forgot</string>
     <string name="enter_field">Field Required</string>
     <string name="user_exits">Username already exits</string>
     <string name="password_legth">should be at least 8 characters</string>
@@ -20,6 +20,7 @@
     <string name="question_text">What is your question?</string>
     <string name="give_your_post_a_title">Give your post a title</string>
     <string name="add_image">Optionally add image</string>
+
 
     <string name="privacy_tip">Privacy tip</string>
     <string name="write_your_post_here">Write your post here</string>
@@ -63,4 +64,6 @@
     <string name="Agloia_application_id">DSXA6S4A7I</string>
     <string name="Admiin_api_key">1e2795c221606a221fe0f4c1012aa9c7</string>
     <string name="agolia_index_name">rentech</string>
+    <string name="tip">Your health experiences have the potential to help others in a similar situation and transform lives. Because this may involve you sharing sensitive information, we encourage you to stay anonymous: \n\n -Don\'t share your real full name\n\n -Don\'t share your contact details\n\n -Don\'t share any other piece of information that could identify you.</string>
+    <string name="lbl_forgot_password">Forgot Password</string>
 </resources>

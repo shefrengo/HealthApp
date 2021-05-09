@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/spacing_xxlarge"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/spacing_standard"
-                android:src="@drawable/ic_app_icon" />
+                android:src="@drawable/icc" />
 
             <TextView
                 android:layout_width="wrap_content"

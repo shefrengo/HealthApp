@@ -28,9 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.shefrengo.health.Adapters.Data;
+
 import com.shefrengo.health.Adapters.NotificationAdapter;
 import com.shefrengo.health.LoginActivity;
+import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.Notifications;
 import com.shefrengo.health.R;
 
@@ -96,7 +97,7 @@ public class NotificationFragment extends Fragment {
         dataList = new ArrayList<>();
         notificationList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.notication_recyclerview);
-        adapter = new NotificationAdapter(appCompatActivity, notificationList, dataList);
+      //  adapter = new NotificationAdapter(appCompatActivity, notificationList, dataList);
         recyclerView.setLayoutManager(new LinearLayoutManager(appCompatActivity));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);

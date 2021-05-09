@@ -8,16 +8,19 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@drawable/icc"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icc"
-
         android:supportsRtl="true"
         android:theme="@style/Theme.Health">
+        <activity android:name=".AActivity"/>
         <activity android:name=".Fragments.ViewAllCommunities" />
         <activity android:name=".Communities.MyCommunitiesDetails" />
-        <activity android:name=".MainActivity" android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".Activities.CommunityDetails" />
         <activity android:name=".Admin" />
         <activity android:name=".PostDetails" />
@@ -35,6 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,19 +43,25 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import com.shefrengo.health.AActivity;
+import com.shefrengo.health.AdClass;
 import com.shefrengo.health.Adapters.HomeAdapter;
+import com.shefrengo.health.Adapters.HomeFragmentAdapter;
 import com.shefrengo.health.DialogRecyclerview;
 
 import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.MyCommunities;
 import com.shefrengo.health.Models.Posts;
 import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.NativeTemplateStyle;
 import com.shefrengo.health.PostDetails;
 import com.shefrengo.health.R;
+import com.shefrengo.health.TemplateView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,24 +69,27 @@ import static com.shefrengo.health.Utils.Constants.EXTRA_IS_ROOT_FRAGMENT;
 
 
 public class HomeFragment extends Fragment {
-    private HomeAdapter adapter;
+    private HomeFragmentAdapter adapter;
     private RecyclerView recyclerView;
     private List<Posts> postsList;
     private static final String TAG = "HomeFragment";
     private RelativeLayout relativeLayout;
-    private CardView cardview;
     private NestedScrollView nestedScrollView;
     private List<Data> dataList;
     private ProgressBar progressBar;
 
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private int count = 0;
+    private static final int AD_COUNT = 2;
+    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CircleImageView circleImageView;
     private TextView name;
     private String question = "What is you question.";
     private DocumentSnapshot lastVisible;
-    private List<String> useridList = new ArrayList<>();
-    private static final int limit = 1;
+    private final List<String> useridList = new ArrayList<>();
+    private List<Object>objects;
+    private List<NativeAd>adList;
+    private static final int limit = 10;
 
     public static HomeFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
@@ -95,14 +112,17 @@ public class HomeFragment extends Fragment {
         name = view.findViewById(R.id.question_textview);
 
         dataList = new ArrayList<>();
+        adList = new ArrayList<>();
         progressBar = view.findViewById(R.id.home_progress);
-        cardview = view.findViewById(R.id.home_cardview);
+        CardView cardview = view.findViewById(R.id.home_cardview);
         showProgress();
         //hideProgress();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setNestedScrollingEnabled(false);
 
-        adapter = new HomeAdapter(postsList, getActivity(), dataList);
+        adapter = new HomeFragmentAdapter(dataList,getActivity());
+
+/*
         adapter.setOnItemClickListener(position -> {
             String image = postsList.get(position).getImageUrl();
             String userid = postsList.get(position).getUserid();
@@ -129,7 +149,7 @@ public class HomeFragment extends Fragment {
             intent.putExtra("reply", reply);
             startActivity(intent);
 
-        });
+        });*/
         cardview.setOnClickListener(v -> {
             DialogRecyclerview dialogRecyclerview = new DialogRecyclerview();
             FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -141,13 +161,14 @@ public class HomeFragment extends Fragment {
             Users users = documentSnapshot.toObject(Users.class);
             String username = users.getUsername();
             String photo = users.getProfilePhotoUrl();
-            Glide.with(getActivity()).asBitmap().placeholder(R.drawable.ic_app_background).load(photo).into(circleImageView);
+            Glide.with(Objects.requireNonNull(getActivity())).asBitmap().placeholder(R.drawable.ic_app_background).load(photo).into(circleImageView);
             question = "What is your question, " + username + "?";
             name.setText(question);
         });
-
-        initRecyclerview();
         getData();
+        createNativeAd();
+        initRecyclerview();
+
 
         return view;
     }
@@ -162,6 +183,7 @@ public class HomeFragment extends Fragment {
     private void getData() {
 
 
+        assert user != null;
         CollectionReference myCommunitRef = db.collection("Users")
                 .document(user.getUid()).collection("MyCommunities");
 
@@ -173,12 +195,13 @@ public class HomeFragment extends Fragment {
                 useridList.add(communityId);
 
             }
-            getPosts();
-        });
 
+        });
+        getPosts();
     }
-    private void getPosts(){
-        for (int i =0; i<useridList.size();i++){
+
+    private void getPosts() {
+        for (int i = 0; i < useridList.size(); i++) {
 
 
         }
@@ -190,7 +213,7 @@ public class HomeFragment extends Fragment {
 
         // posts
 
-        postRef.get().addOnSuccessListener(postSnapshot -> {
+       query.get().addOnSuccessListener(postSnapshot -> {
 
 
             for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
@@ -200,13 +223,17 @@ public class HomeFragment extends Fragment {
 
                 db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
                     Users users = documentSnapshot.toObject(Users.class);
+                    assert users != null;
                     String username = users.getUsername();
                     String photo = users.getProfilePhotoUrl();
                     dataList.add(new Data(username, photo));
                     postsList.add(posts);
 
+                    adapter.setList(postsList);
+                    if (count==AD_COUNT){
 
-                    adapter.notifyDataSetChanged();
+                        adapter.mixedData();
+                    }
                     hideProgress();
                 });
 
@@ -246,7 +273,7 @@ public class HomeFragment extends Fragment {
                 .orderBy("timestamp", Query.Direction.DESCENDING).startAfter(lastVisible).limit(limit);
 
         // posts
-      query.get().addOnSuccessListener(postSnapshot -> {
+        query.get().addOnSuccessListener(postSnapshot -> {
 
 
             for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
@@ -261,8 +288,12 @@ public class HomeFragment extends Fragment {
                     String photo = users.getProfilePhotoUrl();
                     dataList.add(new Data(username, photo));
                     postsList.add(posts);
+                    adapter.setList(postsList);
 
-                    adapter.notifyDataSetChanged();
+                    if (count==AD_COUNT){
+
+                       // adapter.mixedData();
+                    }
 
                 });
 
@@ -284,5 +315,57 @@ public class HomeFragment extends Fragment {
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void createNativeAd() {
+
+        AdClass adClass = new AdClass();
+        objects = new ArrayList<>();
+        MobileAds.initialize(getActivity(), initializationStatus -> {
+
+
+            AdLoader adLoader = new AdLoader.Builder(Objects.requireNonNull(getActivity()),
+                    "ca-app-pub-3940256099942544/2247696110")
+
+                    .forNativeAd(nativeAd -> {
+                        if (isDetached()) {
+                            nativeAd.destroy();
+                            return;
+                        }
+
+                        count++;
+                        adList.add(nativeAd);
+
+
+                        if (count==AD_COUNT){
+                            adapter.setAd(adList);
+                            adapter.mixedData();
+                        }
+
+                    })
+
+
+                    .withAdListener(new AdListener() {
+                        @Override
+                        public void onAdFailedToLoad(LoadAdError adError) {
+                            Log.d(TAG, "onAdFailedToLoad: " + adError.toString());
+                            // Handle the failure by logging, altering the UI, and so on.
+                            count++;
+                            if (count ==AD_COUNT){
+                                adapter.mixedData();
+                            }
+
+
+                        }
+                    })
+                    .withNativeAdOptions(new NativeAdOptions.Builder()
+                            // Methods in the NativeAdOptions.Builder class can be
+                            // used here to specify individual options settings.
+                            .build())
+                    .build();
+
+            adLoader.loadAds(new AdRequest.Builder().build(),AD_COUNT);
+            adClass.setAdLoader(adLoader);
+        });
     }
 }

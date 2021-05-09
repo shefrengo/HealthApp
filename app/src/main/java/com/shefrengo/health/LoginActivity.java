@@ -3,22 +3,28 @@ package com.shefrengo.health;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private static final String TAG = "LoginActivity";
     private TextView forgortPassword;
     private EditText emailEdit;
     private EditText passwordEdit;
@@ -37,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signUp = findViewById(R.id.btnSignUp);
         progressBar = findViewById(R.id.login_progress);
         logIn = findViewById(R.id.btnSignIn);
+        forgortPassword.setOnClickListener(this);
         logIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
     }
@@ -78,6 +85,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         } else if (v == logIn) {
             signIn();
+        } else if (v == forgortPassword) {
+            setDailog();
         }
+    }
+
+    private void setDailog() {
+
+        android.app.Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.forgot_password_layout);
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.show();
+        MaterialButton button = dialog.findViewById(R.id.btnForgotPassword);
+        EditText editText = dialog.findViewById(R.id.edtForgotEmaildiag);
+
+
+        ProgressBar progressBar = dialog.findViewById(R.id.password_progress);
+        button.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            String email = editText.getText().toString().trim();
+
+            if (email.isEmpty()) {
+
+                progressBar.setVisibility(View.GONE);
+                editText.setError("Provide an email");
+                return;
+            }
+
+            auth.sendPasswordResetEmail(email).addOnSuccessListener(aVoid -> {
+                Toast.makeText(this, "Please check your email", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                dialog.cancel();
+            }).addOnFailureListener(e -> {
+                Log.e(TAG, "onFailure: ",e );
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(LoginActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+            });
+        });
     }
 }

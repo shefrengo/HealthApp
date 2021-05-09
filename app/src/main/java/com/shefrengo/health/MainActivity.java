@@ -3,6 +3,7 @@ package com.shefrengo.health;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import com.onesignal.OneSignal;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -54,6 +55,7 @@ import static com.shefrengo.health.Utils.StackListManager.updateTabStackIndex;
 public class MainActivity extends BackFragmentAppCompatActivity implements BaseFragment.FragmentInteractionCallback {
 
     public static final String TAG = "MainActivity";
+    private static final String ONESIGNAL_APP_ID = "7d9a06ac-2bea-45e8-a1bc-01ba56ef2844";
 
     private BottomNavigationViewEx bottomNavigationView;
 
@@ -79,6 +81,23 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
         setContentView(R.layout.activity_main2);
         bottomNavigationView = findViewById(R.id.bnve);
         viewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        // OneSignal Initialization
+
+        /**  OneSignal.startInit(this)
+         .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+         .unsubscribeWhenNotificationsAreDisabled(true)
+         .init();**/
+
+
+        // Enable verbose OneSignal logging to debug issues if needed.
+
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
         setupFirebaseAuth();
         createStacks();
     }

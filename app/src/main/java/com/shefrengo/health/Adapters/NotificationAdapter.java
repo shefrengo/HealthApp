@@ -40,6 +40,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.Notifications;
 import com.shefrengo.health.Models.Posts;
 import com.shefrengo.health.Models.Users;
