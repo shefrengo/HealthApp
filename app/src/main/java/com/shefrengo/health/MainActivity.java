@@ -3,6 +3,7 @@ package com.shefrengo.health;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.onesignal.OneSignal;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.shefrengo.health.Fragments.ChatsFragment;
 import com.shefrengo.health.Fragments.CommunitiesFragment;
 import com.shefrengo.health.Fragments.HomeFragment;
 import com.shefrengo.health.Fragments.NotificationFragment;
@@ -39,6 +41,7 @@ import static com.shefrengo.health.Utils.Constants.DATA_KEY_3;
 import static com.shefrengo.health.Utils.Constants.EXTRA_IS_ROOT_FRAGMENT;
 
 import static com.shefrengo.health.Utils.Constants.TAB_CHALLENGES;
+import static com.shefrengo.health.Utils.Constants.TAB_CHATS;
 import static com.shefrengo.health.Utils.Constants.TAB_HOME_VIDEOS;
 import static com.shefrengo.health.Utils.Constants.TAB_NOTIFICATIONS;
 import static com.shefrengo.health.Utils.Constants.TAB_PROFILE;
@@ -72,6 +75,7 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
     private Fragment homeVideos;
     private Fragment notificationFragment;
     private Fragment profileFragment;
+    private Fragment chatfragment;
     private Fragment communities;
 
 
@@ -92,7 +96,6 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
         // Enable verbose OneSignal logging to debug issues if needed.
 
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-
 
 
         // OneSignal Initialization
@@ -158,6 +161,9 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
             case R.id.action_search:
                 popStackExceptFirst();
                 break;
+            case R.id.action_chats:
+                popStackExceptFirst();
+                break;
             case R.id.action_heart:
                 popStackExceptFirst();
                 break;
@@ -183,7 +189,10 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
 
             case R.id.action_profile:
                 selectedTab(TAB_PROFILE);
-              return true;
+                return true;
+            case R.id.action_chats:
+                selectedTab(TAB_CHATS);
+                return true;
         }
         return false;
     };
@@ -209,6 +218,9 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
                     showFragment(bundle, NotificationFragment.newInstance(false));
                     break;
 
+                case FragmentStrings.CHATS_FRAGMENT:
+                    showFragment(bundle, ChatsFragment.newInstance(false));
+
             }
         }
     }
@@ -223,6 +235,7 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
         homeVideos = HomeFragment.newInstance(true);
         notificationFragment = NotificationFragment.newInstance(true);
         profileFragment = ProfileFragment.newInstance(true);
+        chatfragment = ChatsFragment.newInstance(true);
         communities = CommunitiesFragment.newInstance(true);
         tagStacks = new LinkedHashMap<>();
 
@@ -230,6 +243,7 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
         tagStacks.put(TAB_NOTIFICATIONS, new Stack<String>());
         tagStacks.put(TAB_CHALLENGES, new Stack<String>());
         tagStacks.put(TAB_PROFILE, new Stack<String>());
+        tagStacks.put(TAB_CHATS,new Stack<String >());
 
         menuStacks = new ArrayList<>();
         menuStacks.add(TAB_HOME_VIDEOS);
@@ -238,6 +252,7 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
         stackList.add(TAB_NOTIFICATIONS);
         stackList.add(TAB_CHALLENGES);
         stackList.add(TAB_PROFILE);
+        stackList.add(TAB_CHATS);
 
         bottomNavigationView.setSelectedItemId(R.id.action_home);
         bottomNavigationView.setOnNavigationItemReselectedListener(reselectedListener);
@@ -273,6 +288,12 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
                     break;
                 case TAB_PROFILE:
                     addAdditionalTabFragment(getSupportFragmentManager(), tagStacks, TAB_PROFILE, profileFragment, currentFragment, R.id.center_frame_layout, true);
+                    resolveStackLists(tabId);
+                    assignCurrentFragment(profileFragment);
+                    break;
+
+                case TAB_CHATS:
+                    addAdditionalTabFragment(getSupportFragmentManager(), tagStacks, TAB_CHATS, chatfragment, currentFragment, R.id.center_frame_layout, true);
                     resolveStackLists(tabId);
                     assignCurrentFragment(profileFragment);
                     break;
@@ -408,6 +429,10 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
             case TAB_CHALLENGES:
                 tabIndex = R.id.action_search;
                 break;
+
+            case TAB_CHATS:
+                tabIndex = R.id.action_chats;
+                break;
         }
 
         return tabIndex;
@@ -415,7 +440,6 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
 
     private void resolveStackLists(String tabId) {
         updateStackIndex(stackList, tabId);
-
 
 
         updateTabStackIndex(menuStacks, tabId);

@@ -3,6 +3,7 @@ package com.shefrengo.health.Utils;
 public class FragmentStrings {
     public static final String USER_PROFILE = "USER_PROFILE";
     public static final String SEARRCH_FRAGMENT = "SEARCH_FRAGMENT";
+    public static final String CHATS_FRAGMENT = "CHATS_FRAGMENT";
     public static final String VIDEO_PARTICIPATE = "VIDEO_PARTICIPATE";
     public static final String HOME = "HOME_FRAGMENT";
     public static final String HOME_VIDEOS = "HOME_VIDEOS";

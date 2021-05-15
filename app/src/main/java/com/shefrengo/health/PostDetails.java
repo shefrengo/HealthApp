@@ -64,6 +64,7 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
     private ProgressBar replyProgressbar;
     private String communityId;
     private ImageView moreOptions;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +73,9 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
         intent = getIntent();
         moreOptions = findViewById(R.id.more);
         replyBtn = findViewById(R.id.reply_button);
-        RecyclerView recyclerView = findViewById(R.id.reply_recyclerview);
-        commentList = new ArrayList<>();
-        adapter = new ReplyAdapter(commentList, this);
+         recyclerView = findViewById(R.id.reply_recyclerview);
+
+
         imageView = findViewById(R.id.photo);
         replyProgressbar = findViewById(R.id.reply_progress);
         RelativeLayout replyRelative = findViewById(R.id.reply_relativelayout);
@@ -87,10 +88,7 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
         title = findViewById(R.id.title_question);
         description = findViewById(R.id.description);
         replyCount = findViewById(R.id.reply_count);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+
         getIntents();
         getInfo();
         getReplies();
@@ -104,15 +102,24 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    private void setRecyclerview(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
     @SuppressLint("SetTextI18n")
     private void getReplies() {
+         commentList = new ArrayList<>();
         CollectionReference collectionReference = db.collection("Posts").document(postid).collection("Comments");
 
         collectionReference.addSnapshotListener((queryDocumentSnapshots, error) -> {
 
+            commentList.clear();
             if (error != null) {
                 Log.e(TAG, "onEvent: ", error);
             } else {
+                assert queryDocumentSnapshots != null;
                 int replies = queryDocumentSnapshots.size();
 
                 replyCount.setText(replies + " replies");
@@ -120,8 +127,10 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
                     String id = queryDocumentSnapshot.getId();
                     Comment comment = queryDocumentSnapshot.toObject(Comment.class).withId(id);
                     commentList.add(comment);
-                    adapter.notifyDataSetChanged();
+
                 }
+                adapter = new ReplyAdapter(commentList, this);
+                setRecyclerview();
             }
         });
     }
@@ -345,7 +354,6 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
             Log.d(TAG, "onSuccess: ");
 
             if (documentSnapshots.isEmpty()) {
-                Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
                 collectionReference.add(notifications);
             } else {
                 for (QueryDocumentSnapshot queryDocumentSnapshot : documentSnapshots) {

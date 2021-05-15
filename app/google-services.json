@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "923874856752",
-    "project_id": "the-health-project",
-    "storage_bucket": "the-health-project.appspot.com"
+    "project_number": "930366252632",
+    "project_id": "health-7b721",
+    "storage_bucket": "health-7b721.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:923874856752:android:1e51f539ddaa6aa893c2f5",
+        "mobilesdk_app_id": "1:930366252632:android:3dfff8f2f4f5e075138c2d",
         "android_client_info": {
           "package_name": "com.shefrengo.health"
         }
       },
       "oauth_client": [
         {
-          "client_id": "923874856752-8p4a00lpvg4f9pigr72easlj1go9mpd5.apps.googleusercontent.com",
+          "client_id": "930366252632-1agk0cdg2g1rof93u5vf0hlbdfg5rpm0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCxRqhVupc9bLpcHxynZB8koUkEoXRkxmk"
+          "current_key": "AIzaSyCqAhMKETiI-li_PQeHwjDN-y2bEpbRSaA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "923874856752-8p4a00lpvg4f9pigr72easlj1go9mpd5.apps.googleusercontent.com",
+              "client_id": "930366252632-1agk0cdg2g1rof93u5vf0hlbdfg5rpm0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

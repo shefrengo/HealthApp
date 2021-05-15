@@ -10,6 +10,7 @@
         android:visible="true"
         app:iconTint="@color/black"
         app:showAsAction="always" />
+
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
@@ -18,8 +19,17 @@
         android:visible="true"
 
         app:showAsAction="always"
-       />
+        />
 
+    <item
+        android:id="@+id/action_chats"
+        android:icon="@drawable/ic_baseline_chat_bubble_24"
+        android:orderInCategory="100"
+        android:title="@string/action_chats"
+        android:visible="true"
+
+        app:showAsAction="always"
+        />
 
     <item
         android:id="@+id/action_heart"
@@ -40,4 +50,6 @@
         android:visible="true"
         app:iconTint="@color/black"
         app:showAsAction="always" />
+
+
 </menu>

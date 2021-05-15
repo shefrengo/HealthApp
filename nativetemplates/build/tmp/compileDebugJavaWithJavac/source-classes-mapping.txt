@@ -1,0 +1,7 @@
+com/google/android/ads/nativetemplates/TemplateView.java
+ com.google.android.ads.nativetemplates.TemplateView
+com/google/android/ads/nativetemplates/NativeTemplateStyle.java
+ com.google.android.ads.nativetemplates.NativeTemplateStyle
+ com.google.android.ads.nativetemplates.NativeTemplateStyle$Builder
+com/google/android/ads/nativetemplates/BuildConfig.java
+ com.google.android.ads.nativetemplates.BuildConfig

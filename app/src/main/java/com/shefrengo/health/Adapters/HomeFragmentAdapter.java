@@ -26,7 +26,7 @@ import java.util.Random;
 public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int IS_AD = 0;
     private static final int NO_AD = 1;
-    private static final int OFFSET = 10;
+    private static final int OFFSET = 2;
     private List<NativeAd> nativeAdList = new ArrayList<>();
     private List<Object> list = new ArrayList<>();
     private final List<Data> dataList;

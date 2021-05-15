@@ -12,7 +12,8 @@ public class Constants {
     public static final String TAB_NOTIFICATIONS = "action_heart";
     public static final String TAB_CHALLENGES = "action_search";
     public static final String TAB_PROFILE = "action_profile";
-    public static final String TAB_CAMERA = "TAB_CAMERA";
+
+    public static final String TAB_CHATS = "TAB_CHATS";
     public static final String HOME_FRAGMENT_PHOTOS = "HomePhotos";
     public static final String NOTIFICATIONS_FRAGMENT = "NotificationFragment";
     public static final String HOME_VIDEOS_FRAGMENT = "VideoHomeFragment";

@@ -19,8 +19,9 @@ public class Communities extends PostId {
     public Communities() {
     }
 
-    public Communities(String name, String imageUrl) {
+    public Communities(String name, String communityId, String imageUrl) {
         this.name = name;
+        this.communityId = communityId;
         this.imageUrl = imageUrl;
     }
 

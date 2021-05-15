@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gnt_ad_green">#3A6728</color>
+    <color name="gnt_black">#000000</color>
+    <color name="gnt_blue">#4285f4</color>
+    <color name="gnt_gray">#808080</color>
+    <color name="gnt_green">#00FF00</color>
+    <color name="gnt_outline">#E0E0E0</color>
+    <color name="gnt_red">#FF0000</color>
+    <color name="gnt_test_background_color">#00F4F4F4</color>
+    <color name="gnt_test_background_color_2">#00A3A3A3</color>
+    <color name="gnt_white">#FFFFFF</color>
+    <dimen name="gnt_ad_indicator_bar_height">30dp</dimen>
+    <dimen name="gnt_ad_indicator_bottom_margin">10dp</dimen>
+    <dimen name="gnt_ad_indicator_height">20dp</dimen>
+    <dimen name="gnt_ad_indicator_text_size">10sp</dimen>
+    <dimen name="gnt_ad_indicator_top_margin">0dp</dimen>
+    <dimen name="gnt_ad_indicator_width">25dp</dimen>
+    <dimen name="gnt_default_margin">10dp</dimen>
+    <item format="float" name="gnt_media_view_weight" type="dimen">1.0</item>
+    <dimen name="gnt_medium_cta_button_height">50dp</dimen>
+    <item format="float" name="gnt_medium_template_bottom_weight" type="dimen">0.4</item>
+    <item format="float" name="gnt_medium_template_top_weight" type="dimen">0.2</item>
+    <dimen name="gnt_no_margin">0dp</dimen>
+    <dimen name="gnt_no_size">0dp</dimen>
+    <dimen name="gnt_small_cta_button_height">30dp</dimen>
+    <item format="float" name="gnt_text_row_weight" type="dimen">0.25</item>
+    <dimen name="gnt_text_size_large">15sp</dimen>
+    <dimen name="gnt_text_size_small">12sp</dimen>
+    <declare-styleable name="TemplateView">
+    <attr format="reference" name="gnt_template_type"/>
+  </declare-styleable>
+</resources>

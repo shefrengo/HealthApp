@@ -70,6 +70,7 @@ import static com.shefrengo.health.Utils.Constants.EXTRA_IS_ROOT_FRAGMENT;
 
 public class HomeFragment extends Fragment {
     private HomeFragmentAdapter adapter;
+    private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private List<Posts> postsList;
     private static final String TAG = "HomeFragment";
@@ -77,7 +78,6 @@ public class HomeFragment extends Fragment {
     private NestedScrollView nestedScrollView;
     private List<Data> dataList;
     private ProgressBar progressBar;
-
     private int count = 0;
     private static final int AD_COUNT = 2;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -87,9 +87,9 @@ public class HomeFragment extends Fragment {
     private String question = "What is you question.";
     private DocumentSnapshot lastVisible;
     private final List<String> useridList = new ArrayList<>();
-    private List<Object>objects;
-    private List<NativeAd>adList;
-    private static final int limit = 10;
+    private List<Object> objects;
+    private List<NativeAd> adList;
+    private static final int limit = 1;
 
     public static HomeFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
@@ -120,10 +120,61 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setNestedScrollingEnabled(false);
 
-        adapter = new HomeFragmentAdapter(dataList,getActivity());
+        adapter = new HomeFragmentAdapter(dataList, getActivity());
 
-/*
-        adapter.setOnItemClickListener(position -> {
+
+        cardview.setOnClickListener(v -> {
+            DialogRecyclerview dialogRecyclerview = new DialogRecyclerview();
+            FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+            dialogRecyclerview.show(fm, "tag");
+
+        });
+
+        assert user != null;
+        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
+            Users users = documentSnapshot.toObject(Users.class);
+            assert users != null;
+            String username = users.getUsername();
+            String photo = users.getProfilePhotoUrl();
+            Glide.with(Objects.requireNonNull(getActivity())).asBitmap().placeholder(R.drawable.icc).load(photo).into(circleImageView);
+            question = "What is your question, " + username + "?";
+            name.setText(question);
+        });
+        getData();
+        //  createNativeAd();
+
+
+        return view;
+    }
+
+    private void initRecyclerview() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(homeAdapter);
+    }
+
+
+    private void getData() {
+        assert user != null;
+        CollectionReference myCommunitRef = db.collection("Users")
+                .document(user.getUid()).collection("MyCommunities");
+
+        myCommunitRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot myCommunitySnapshot : queryDocumentSnapshots) {
+                MyCommunities myCommunities = myCommunitySnapshot.toObject(MyCommunities.class);
+                String communityId = myCommunities.getCommunityId();
+
+                useridList.add(communityId);
+
+            }
+
+        });
+
+        getPosts();
+    }
+
+    private void setAdapterClick() {
+        homeAdapter.setOnItemClickListener(position -> {
             String image = postsList.get(position).getImageUrl();
             String userid = postsList.get(position).getUserid();
             String timestamp = postsList.get(position).getTimestamp().toString();
@@ -149,95 +200,64 @@ public class HomeFragment extends Fragment {
             intent.putExtra("reply", reply);
             startActivity(intent);
 
-        });*/
-        cardview.setOnClickListener(v -> {
-            DialogRecyclerview dialogRecyclerview = new DialogRecyclerview();
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            dialogRecyclerview.show(fm, "tag");
-
         });
-
-        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
-            Users users = documentSnapshot.toObject(Users.class);
-            String username = users.getUsername();
-            String photo = users.getProfilePhotoUrl();
-            Glide.with(Objects.requireNonNull(getActivity())).asBitmap().placeholder(R.drawable.ic_app_background).load(photo).into(circleImageView);
-            question = "What is your question, " + username + "?";
-            name.setText(question);
-        });
-        getData();
-        createNativeAd();
-        initRecyclerview();
-
-
-        return view;
-    }
-
-    private void initRecyclerview() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    private void getData() {
-
-
-        assert user != null;
-        CollectionReference myCommunitRef = db.collection("Users")
-                .document(user.getUid()).collection("MyCommunities");
-
-        myCommunitRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            for (QueryDocumentSnapshot myCommunitySnapshot : queryDocumentSnapshots) {
-                MyCommunities myCommunities = myCommunitySnapshot.toObject(MyCommunities.class);
-                String communityId = myCommunities.getCommunityId();
-
-                useridList.add(communityId);
-
-            }
-
-        });
-        getPosts();
     }
 
     private void getPosts() {
-        for (int i = 0; i < useridList.size(); i++) {
-
-
-        }
-
         CollectionReference postRef = db.collection("Posts");
-        Query query = postRef
-
-                .orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
+        Query query = postRef.orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
 
         // posts
 
-       query.get().addOnSuccessListener(postSnapshot -> {
+        query.get().addOnSuccessListener(postSnapshot -> {
 
-
+            postsList.clear();
+            dataList.clear();
             for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
                 String id = queryDocumentSnapshot1.getId();
                 Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
                 String userid = posts.getUserid();
+                db.collection("Users").document(userid).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            Users users = documentSnapshot.toObject(Users.class);
+                            assert users != null;
+                            String username = users.getUsername();
+                            String photo = users.getProfilePhotoUrl();
+                            for (String ids : useridList) {
+                                if (posts.getCommunity().equals(ids)) {
+                                    if (postsList.size() != 0) {
 
-                db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
-                    Users users = documentSnapshot.toObject(Users.class);
-                    assert users != null;
-                    String username = users.getUsername();
-                    String photo = users.getProfilePhotoUrl();
-                    dataList.add(new Data(username, photo));
-                    postsList.add(posts);
+                                        try {
+                                            for (Posts posts1 : postsList) {
+                                                if (!posts.getCommunity().equals(posts1.getCommunity())) {
+                                                    dataList.add(new Data(username, photo));
+                                                    postsList.add(posts);
+                                                }
+                                            }
+                                        } catch (Exception e) {
+                                            Log.e(TAG, "getPosts: ", e);
+                                        }
+                                    } else {
+                                        dataList.add(new Data(username, photo));
+                                        postsList.add(posts);
+                                    }
+                                }
+                            }
 
-                    adapter.setList(postsList);
-                    if (count==AD_COUNT){
+            /*        adapter.setList(postsList);
+                    if (count == AD_COUNT) {
 
                         adapter.mixedData();
-                    }
-                    hideProgress();
-                });
+                    }*/
+                            hideProgress();
+                        });
 
             }
+            homeAdapter = new HomeAdapter(postsList, getActivity(), dataList);
+
+            initRecyclerview();
+            setAdapterClick();
+
 
             if (postSnapshot.size() > 0) {
                 lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
@@ -248,7 +268,6 @@ public class HomeFragment extends Fragment {
                 if (diff == 0) {
                     // load more
                     loadMore();
-
 
                 }
             });
@@ -284,16 +303,19 @@ public class HomeFragment extends Fragment {
 
                 db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
                     Users users = documentSnapshot.toObject(Users.class);
+                    assert users != null;
                     String username = users.getUsername();
                     String photo = users.getProfilePhotoUrl();
                     dataList.add(new Data(username, photo));
                     postsList.add(posts);
-                    adapter.setList(postsList);
 
-                    if (count==AD_COUNT){
+                    homeAdapter.notifyDataSetChanged();
+                 /*   adapter.setList(postsList);
 
-                       // adapter.mixedData();
-                    }
+                    if (count == AD_COUNT) {
+
+                        // adapter.mixedData();
+                    }*/
 
                 });
 
@@ -325,37 +347,59 @@ public class HomeFragment extends Fragment {
 
 
             AdLoader adLoader = new AdLoader.Builder(Objects.requireNonNull(getActivity()),
-                    "ca-app-pub-3940256099942544/2247696110")
+                    getResources().getString(R.string.admob_sample_interstitial))
 
                     .forNativeAd(nativeAd -> {
                         if (isDetached()) {
                             nativeAd.destroy();
                             return;
                         }
-
                         count++;
                         adList.add(nativeAd);
 
-
-                        if (count==AD_COUNT){
+                        if (count == AD_COUNT) {
                             adapter.setAd(adList);
                             adapter.mixedData();
                         }
 
                     })
 
-
                     .withAdListener(new AdListener() {
                         @Override
                         public void onAdFailedToLoad(LoadAdError adError) {
                             Log.d(TAG, "onAdFailedToLoad: " + adError.toString());
+
+                            Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
                             // Handle the failure by logging, altering the UI, and so on.
                             count++;
-                            if (count ==AD_COUNT){
+                            if (count == AD_COUNT) {
                                 adapter.mixedData();
                             }
 
+                        }
 
+                        @Override
+                        public void onAdLoaded() {
+                            super.onAdLoaded();
+                            Toast.makeText(getActivity(), "loaded", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onAdImpression() {
+                            super.onAdImpression();
+                            Toast.makeText(getActivity(), "impression", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onAdOpened() {
+                            super.onAdOpened();
+                            Toast.makeText(getActivity(), "ad opened", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onAdClicked() {
+                            super.onAdClicked();
+                            Toast.makeText(getActivity(), "ad clicked", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .withNativeAdOptions(new NativeAdOptions.Builder()
@@ -364,7 +408,7 @@ public class HomeFragment extends Fragment {
                             .build())
                     .build();
 
-            adLoader.loadAds(new AdRequest.Builder().build(),AD_COUNT);
+            adLoader.loadAds(new AdRequest.Builder().build(), AD_COUNT);
             adClass.setAdLoader(adLoader);
         });
     }

@@ -9,6 +9,7 @@
     <color name="commonColorWhite">#FFFFFF</color>
     <color name="white">#ffffff</color>
     <color name="semi_white">#F8F7F7</color>
+    <color name="fui_transparent">#00000000</color>
     <color name="black">#243447</color>
     <color name="gnt_test_background_color">#00F4F4F4</color>
     <color name="gnt_test_background_color_2">#00A3A3A3</color>

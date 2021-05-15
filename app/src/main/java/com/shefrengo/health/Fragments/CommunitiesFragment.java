@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algolia.search.saas.Client;
 import com.algolia.search.saas.Index;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.shefrengo.health.Activities.AlgoliaCommunityDetails;
 import com.shefrengo.health.Adapters.CommunityAdapter;
 import com.shefrengo.health.Adapters.MyCommunitiesAdapter;
 import com.shefrengo.health.Communities.MyCommunitiesDetails;
@@ -160,12 +162,11 @@ public class CommunitiesFragment extends Fragment {
     }
 
     private void getData() {
-        CollectionReference collectionReference = db.collection("Users")
-                .document(user.getUid()).collection("MyCommunities");
 
         CollectionReference communityRef = db.collection("Communities");
 
-        communityRef.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
+        Query query = communityRef.orderBy("timestamp", Query.Direction.DESCENDING).limit(5);
+        query.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
 
             for (QueryDocumentSnapshot queryDocument : queryDocumentSnapshots1) {
                 String id = queryDocument.getId();
@@ -232,12 +233,11 @@ public class CommunitiesFragment extends Fragment {
         index.searchAsync(query, (content, error) -> {
             try {
 
-
                 assert content != null;
                 JSONArray hits = content.getJSONArray("hits");
 
                 final List<Communities> hitList = new ArrayList<>();
-                final CommunityAdapter adapter = new CommunityAdapter( hitList,getActivity());
+                final CommunityAdapter adapter = new CommunityAdapter(hitList, getActivity());
                 for (int i = 0; i < hits.length(); i++) {
                     JSONObject jsonObject = hits.getJSONObject(i);
 
@@ -247,8 +247,7 @@ public class CommunitiesFragment extends Fragment {
                     String userid = jsonObject.getString("objectID");
 
 
-
-                    hitList.add(new Communities(name,profileUrl));
+                    hitList.add(new Communities(name,userid, profileUrl));
                     adapter.notifyDataSetChanged();
                 }
 
@@ -258,17 +257,29 @@ public class CommunitiesFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setAdapter(adapter);
 
-               adapter.setOnItemClickListener(new CommunityAdapter.OnItemClickListener() {
-                   @Override
-                   public void onItemClick(int position) {
+                adapter.setOnItemClickListener(position -> {
+                    String title = hitList.get(position).getName();
+                    String description = hitList.get(position).getDescription();
+                    int members = hitList.get(position).getMembers();
+                    int posts = hitList.get(position).getPosts();
+                    String postid = hitList.get(position).postId;
+                    String image = hitList.get(position).getImageUrl();
+                    String communityId = hitList.get(position).getCommunityId();
 
-                   }
-               });
+
+                    Intent intent = new Intent(getActivity(), AlgoliaCommunityDetails.class);
+                    intent.putExtra("title", title);
+                    intent.putExtra("description", description);
+                    intent.putExtra("members", members);
+                    intent.putExtra("posts", posts);
+                    intent.putExtra("communityId", communityId);
+                    intent.putExtra("image", image);
+                    intent.putExtra("postid", postid);
+                    startActivity(intent);
+                });
 
             } catch (Exception e1) {
                 Log.d(TAG, "requestCompleted: " + e1.getMessage());
-
-
 
 
             }
