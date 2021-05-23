@@ -73,7 +73,7 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
         intent = getIntent();
         moreOptions = findViewById(R.id.more);
         replyBtn = findViewById(R.id.reply_button);
-         recyclerView = findViewById(R.id.reply_recyclerview);
+        recyclerView = findViewById(R.id.reply_recyclerview);
 
 
         imageView = findViewById(R.id.photo);
@@ -94,7 +94,7 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
         getReplies();
         if (userid.equals(user.getUid())) {
             moreOptions.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             moreOptions.setVisibility(View.GONE);
         }
         moreOptions.setOnClickListener(this);
@@ -102,18 +102,22 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private void setRecyclerview(){
+    private void setRecyclerview() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
+
     @SuppressLint("SetTextI18n")
     private void getReplies() {
-         commentList = new ArrayList<>();
-        CollectionReference collectionReference = db.collection("Posts").document(postid).collection("Comments");
+        commentList = new ArrayList<>();
+        CollectionReference collectionReference = db.collection("Posts").document(postid).
+                collection("Comments");
 
-        collectionReference.addSnapshotListener((queryDocumentSnapshots, error) -> {
+        Query query = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING);
+
+        query.addSnapshotListener((queryDocumentSnapshots, error) -> {
 
             commentList.clear();
             if (error != null) {
@@ -263,9 +267,9 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
         popupMenu.setOnMenuItemClickListener(item -> {
 
             replyProgressbar.setVisibility(View.VISIBLE);
-            if (image.equals("")){
-            deletePost();
-            }else {
+            if (image.equals("")) {
+                deletePost();
+            } else {
                 deleteStorageMedia();
             }
             return false;
@@ -291,13 +295,13 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
                 db.collection("Posts").document(id).delete()
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(this, "successfully deleted", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(PostDetails.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ",e ));
+                            Intent intent = new Intent(PostDetails.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
             }
-        }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ",e ));
+        }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
 
     }
 
@@ -316,10 +320,14 @@ public class PostDetails extends AppCompatActivity implements View.OnClickListen
                     FirebaseStorage storage = FirebaseStorage.getInstance();
                     StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
                     storageRef.delete().addOnSuccessListener(aVoid1 -> {
-                        Intent intent = new Intent(PostDetails.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                        db.collection("Users").document(user.getUid()).update("posts", FieldValue.increment(-1))
+                                .addOnSuccessListener(unused -> {
+                                    Intent intent = new Intent(PostDetails.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                });
+
                     });
                 });
             }

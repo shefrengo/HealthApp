@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,8 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
         ChatListAdapter.OnChatListListener {
     private RecyclerView recyclerView;
     private ChatListAdapter adapter;
+    private ProgressBar progressbar;
+
     private List<Users> chatsList;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,9 +43,11 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
         chatsList = new ArrayList<>();
+        progressbar = findViewById(R.id.chatlist_progress);
         recyclerView = findViewById(R.id.chats_recyclerview);
         adapter = new ChatListAdapter(chatsList, this);
         adapter.setOnChatListListener(this);
+        showProgress();
         setRecyclerView();
         setData();
     }
@@ -59,9 +64,11 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
         Query query = collectionReference.whereEqualTo("admin", true);
         query.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+
                 Users users = queryDocumentSnapshot.toObject(Users.class);
                 chatsList.add(users);
                 adapter.notifyDataSetChanged();
+                hideProgress();
             }
         });
 
@@ -73,6 +80,15 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
 
     }
 
+    private void hideProgress(){
+        progressbar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
+    private void showProgress(){
+        progressbar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
 
     @Override
     public void onChatListClick(int position) {

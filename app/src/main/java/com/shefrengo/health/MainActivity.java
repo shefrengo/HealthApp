@@ -295,7 +295,7 @@ public class MainActivity extends BackFragmentAppCompatActivity implements BaseF
                 case TAB_CHATS:
                     addAdditionalTabFragment(getSupportFragmentManager(), tagStacks, TAB_CHATS, chatfragment, currentFragment, R.id.center_frame_layout, true);
                     resolveStackLists(tabId);
-                    assignCurrentFragment(profileFragment);
+                    assignCurrentFragment(chatfragment);
                     break;
 
             }

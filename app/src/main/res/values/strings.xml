@@ -70,6 +70,7 @@
     <string name="admob_samp_app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="admob_interstitial">ca-app-pub-3577292392494352/8160008460</string>
     <string name="admob_sample_interstitial">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="action_chats">Chats</string>
+    <string name="action_chats">Inbox</string>
     <string name="type_a_message">Type a Message</string>
+    <string name="no_messages">No Messages</string>
 </resources>

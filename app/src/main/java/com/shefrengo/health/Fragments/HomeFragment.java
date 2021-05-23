@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment {
     private List<Data> dataList;
     private ProgressBar progressBar;
     private int count = 0;
+    private RelativeLayout progressRelative;
     private static final int AD_COUNT = 2;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -89,7 +90,7 @@ public class HomeFragment extends Fragment {
     private final List<String> useridList = new ArrayList<>();
     private List<Object> objects;
     private List<NativeAd> adList;
-    private static final int limit = 1;
+    private static final int limit = 12;
 
     public static HomeFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
@@ -106,10 +107,11 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         relativeLayout = view.findViewById(R.id.main);
-        nestedScrollView = view.findViewById(R.id.home_nestedScrollView);
+        //nestedScrollView = view.findViewById(R.id.home_nestedScrollView);
         postsList = new ArrayList<>();
         circleImageView = view.findViewById(R.id.home_profile_pic);
         name = view.findViewById(R.id.question_textview);
+        progressRelative = view.findViewById(R.id.pagination_relatvie);
 
         dataList = new ArrayList<>();
         adList = new ArrayList<>();
@@ -163,9 +165,7 @@ public class HomeFragment extends Fragment {
             for (QueryDocumentSnapshot myCommunitySnapshot : queryDocumentSnapshots) {
                 MyCommunities myCommunities = myCommunitySnapshot.toObject(MyCommunities.class);
                 String communityId = myCommunities.getCommunityId();
-
                 useridList.add(communityId);
-
             }
 
         });
@@ -207,40 +207,27 @@ public class HomeFragment extends Fragment {
         CollectionReference postRef = db.collection("Posts");
         Query query = postRef.orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
 
-        // posts
-
         query.get().addOnSuccessListener(postSnapshot -> {
 
-            postsList.clear();
-            dataList.clear();
+
             for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
                 String id = queryDocumentSnapshot1.getId();
                 Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
                 String userid = posts.getUserid();
+                postsList.clear();
+                dataList.clear();
                 db.collection("Users").document(userid).get()
                         .addOnSuccessListener(documentSnapshot -> {
                             Users users = documentSnapshot.toObject(Users.class);
                             assert users != null;
                             String username = users.getUsername();
                             String photo = users.getProfilePhotoUrl();
-                            for (String ids : useridList) {
-                                if (posts.getCommunity().equals(ids)) {
-                                    if (postsList.size() != 0) {
 
-                                        try {
-                                            for (Posts posts1 : postsList) {
-                                                if (!posts.getCommunity().equals(posts1.getCommunity())) {
-                                                    dataList.add(new Data(username, photo));
-                                                    postsList.add(posts);
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            Log.e(TAG, "getPosts: ", e);
-                                        }
-                                    } else {
-                                        dataList.add(new Data(username, photo));
-                                        postsList.add(posts);
-                                    }
+                            for (String ids : useridList) {
+
+                                if (posts.getCommunity().equals(ids)) {
+                                    dataList.add(new Data(username, photo));
+                                    postsList.add(posts);
                                 }
                             }
 
@@ -258,26 +245,28 @@ public class HomeFragment extends Fragment {
             initRecyclerview();
             setAdapterClick();
 
-
             if (postSnapshot.size() > 0) {
                 lastVisible = postSnapshot.getDocuments().get(postSnapshot.size() - 1);
             }
-            nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
-                int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
-                if (diff == 0) {
-                    // load more
-                    loadMore();
+            /**     nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+             View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
+             int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
+             if (diff == 0) {
+             // load more
 
-                }
-            });
+
+
+             }
+             });**/
+
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
                     boolean bottomReached = !recyclerView.canScrollVertically(1);
                     if (bottomReached) {
-                        //loadMore(communityId);
+                        progressRelative.setVisibility(View.VISIBLE);
+                        loadMore();
                     }
                 }
             });
@@ -294,22 +283,28 @@ public class HomeFragment extends Fragment {
         // posts
         query.get().addOnSuccessListener(postSnapshot -> {
 
+            if (postSnapshot.isEmpty()) {
+                progressRelative.setVisibility(View.GONE);
+            } else {
+                for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
+                    String id = queryDocumentSnapshot1.getId();
+                    Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
+                    String userid = posts.getUserid();
 
-            for (QueryDocumentSnapshot queryDocumentSnapshot1 : postSnapshot) {
-                String id = queryDocumentSnapshot1.getId();
-                Posts posts = queryDocumentSnapshot1.toObject(Posts.class).withId(id);
-                String userid = posts.getUserid();
+                    db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
+                        Users users = documentSnapshot.toObject(Users.class);
+                        assert users != null;
+                        String username = users.getUsername();
+                        String photo = users.getProfilePhotoUrl();
+                        progressRelative.setVisibility(View.GONE);
+                        for (String ids : useridList) {
+                            if (posts.getCommunity().equals(ids)) {
+                                dataList.add(new Data(username, photo));
+                                postsList.add(posts);
+                            }
+                        }
 
-
-                db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
-                    Users users = documentSnapshot.toObject(Users.class);
-                    assert users != null;
-                    String username = users.getUsername();
-                    String photo = users.getProfilePhotoUrl();
-                    dataList.add(new Data(username, photo));
-                    postsList.add(posts);
-
-                    homeAdapter.notifyDataSetChanged();
+                        homeAdapter.notifyDataSetChanged();
                  /*   adapter.setList(postsList);
 
                     if (count == AD_COUNT) {
@@ -317,7 +312,9 @@ public class HomeFragment extends Fragment {
                         // adapter.mixedData();
                     }*/
 
-                });
+                    });
+
+                }
 
             }
 

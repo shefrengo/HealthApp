@@ -17,17 +17,16 @@
         android:orderInCategory="100"
         android:title="@string/action_search"
         android:visible="true"
-
         app:showAsAction="always"
+
         />
 
     <item
         android:id="@+id/action_chats"
-        android:icon="@drawable/ic_baseline_chat_bubble_24"
+        android:icon="@drawable/chat"
         android:orderInCategory="100"
         android:title="@string/action_chats"
         android:visible="true"
-
         app:showAsAction="always"
         />
 

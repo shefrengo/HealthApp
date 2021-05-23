@@ -66,6 +66,7 @@ public class NotificationFragment extends Fragment {
     private TextView errorTitle;
 
     private TextView errorMessage;
+
     public static NotificationFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_IS_ROOT_FRAGMENT, isRoot);
@@ -79,34 +80,30 @@ public class NotificationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view =   inflater.inflate(R.layout.fragment_notification, container, false);
-        appCompatActivity = (AppCompatActivity)view.getContext();
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        appCompatActivity = (AppCompatActivity) view.getContext();
         if (user == null) {
             startActivity(new Intent(appCompatActivity, LoginActivity.class));
-           appCompatActivity. overridePendingTransition(0, 0);
+            appCompatActivity.overridePendingTransition(0, 0);
             appCompatActivity.finish();
         }
 
         notificationText = view.findViewById(R.id.no_notifications);
         progressBar = view.findViewById(R.id.notification_progress);
-        nestedScrollView =view. findViewById(R.id.center_relative_layout);
+        nestedScrollView = view.findViewById(R.id.center_relative_layout);
         showProgress();
         collectionReference = db
                 .collection("Notifications")
                 .document(user.getUid()).collection("Notifications");
-        dataList = new ArrayList<>();
-        notificationList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.notication_recyclerview);
-      //  adapter = new NotificationAdapter(appCompatActivity, notificationList, dataList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(appCompatActivity));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+
         setRecyclerview();
         return view;
     }
 
     private void setRecyclerview() {
+        dataList = new ArrayList<>();
+        notificationList = new ArrayList<>();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             Query query = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING).limit(limit);
@@ -114,15 +111,15 @@ public class NotificationFragment extends Fragment {
 
                 @Override
                 public void onSuccess(QuerySnapshot documentSnapshots) {
-
+                    dataList.clear();
+                    notificationList.clear();
                     assert documentSnapshots != null;
                     if (!documentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot query : documentSnapshots) {
                             final Notifications notification = query.toObject(Notifications.class);
                             final String userid = notification.getUserid();
                             assert userid != null;
-                            dataList.clear();
-                            notificationList.clear();
+
 
                             db.collection("Users").document(userid).addSnapshotListener((documentSnapshot, e) -> {
                                 if (e != null) {
@@ -136,11 +133,18 @@ public class NotificationFragment extends Fragment {
                                     dataList.add(new Data(username, profilePhotoUrl));
                                     notificationList.add(notification);
 
-                                    adapter.notifyDataSetChanged();
+
                                     hideProgress();
                                 }
                             });
                         }
+                        
+                        adapter = new NotificationAdapter(appCompatActivity, notificationList, dataList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(appCompatActivity));
+                        recyclerView.setNestedScrollingEnabled(false);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(adapter);
+
                         lastVisisble = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
                         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                             @Override
@@ -154,7 +158,7 @@ public class NotificationFragment extends Fragment {
                             }
                         });
 
-                    }else {
+                    } else {
                         notificationText.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
                     }
@@ -193,6 +197,7 @@ public class NotificationFragment extends Fragment {
 
         });
     }
+
     private void showProgress() {
 
         progressBar.setVisibility(View.VISIBLE);

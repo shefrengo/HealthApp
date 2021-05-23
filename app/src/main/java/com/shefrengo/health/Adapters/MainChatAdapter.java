@@ -29,10 +29,15 @@ public class MainChatAdapter extends RecyclerView.Adapter<MainChatAdapter.ViewHo
     private List<Chats> chatsList;
     private List<Data> dataList;
     private List<Users> usersList;
+    private List<Integer> messageCount;
 
     public MainChatAdapter(Context context, List<Users> usersList) {
         this.context = context;
         this.usersList = usersList;
+    }
+
+    public void setMessageCount(List<Integer> messageCount) {
+        this.messageCount = messageCount;
     }
 
     public void setOnNmeaMessageListener(OnMessageClickListerer onNmeaMessageListener) {
@@ -51,6 +56,8 @@ public class MainChatAdapter extends RecyclerView.Adapter<MainChatAdapter.ViewHo
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         String photo = usersList.get(position).getProfilePhotoUrl();
         String username = usersList.get(position).getUsername();
+        //int messages = messageCount.get(position);
+       // holder.textCount.setText(String.valueOf(messages));
         holder.name.setText(username);
         Glide.with(context).asBitmap().load(photo).into(holder.circleImageView);
     }
@@ -62,14 +69,15 @@ public class MainChatAdapter extends RecyclerView.Adapter<MainChatAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private CircleImageView circleImageView;
-        private TextView name, message;
+        final private CircleImageView circleImageView;
+        final private TextView name, message, textCount;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.chats_profile_image);
             name = itemView.findViewById(R.id.chats_username);
             message = itemView.findViewById(R.id._chat_message);
+            textCount = itemView.findViewById(R.id.messageCount);
             itemView.setOnClickListener(this);
         }
 

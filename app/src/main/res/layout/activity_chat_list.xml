@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Chats"
+            android:text="All Admins"
             android:textColor="@color/black" />
     </RelativeLayout>
 
@@ -35,4 +35,10 @@
             android:layout_height="match_parent" />
     </RelativeLayout>
 
+    <ProgressBar
+        android:layout_width="@dimen/_28sdp"
+        android:visibility="gone"
+        android:layout_height="@dimen/_28sdp"
+        android:id="@+id/chatlist_progress"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

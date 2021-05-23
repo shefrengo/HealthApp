@@ -11,8 +11,17 @@ public class Chats extends PostId {
     Date timestamp;
     private String message;
     private boolean seen;
+    private int count;
 
     public Chats() {
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getMyUserid() {

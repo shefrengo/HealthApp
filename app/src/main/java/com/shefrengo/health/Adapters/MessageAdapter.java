@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shefrengo.health.Models.Chats;
 import com.shefrengo.health.Models.Data;
@@ -33,10 +34,15 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public static final int RIGHT_MESSAGE = 1;
     private final List<Chats> chatsList;
     private Context context;
+    private  String imageUrl;
 
     public MessageAdapter(List<Chats> chatsList, Context context) {
         this.chatsList = chatsList;
         this.context = context;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @NonNull
@@ -132,6 +138,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Chats chats = chatsList.get(position);
         if (chats != null) {
             holder.message.setText(chats.getMessage());
+           // Glide.with(context).asBitmap().load(imageUrl).into(holder.circleImageView);
             try {
                 holder.timestamp.setText(SetTime.TwitterTimeDifferentitaion(chats.getTimestamp().toString()));
             } catch (Exception e) {
@@ -161,6 +168,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         public ReceiverViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+           // circleImageView = itemView.findViewById(R.id.message_profiel);
             timestamp = itemView.findViewById(R.id.timestamp);
             message = itemView.findViewById(R.id.left_message);
             constraintLayout = itemView.findViewById(R.id.layout_first_incoming);

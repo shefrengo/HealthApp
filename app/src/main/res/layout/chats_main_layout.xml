@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="@dimen/_8sdp"
     android:layout_height="wrap_content"
     android:background="@drawable/gray_bottom_border"
-    >
+    android:padding="@dimen/_8sdp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_30sdp"
         android:id="@+id/chats_profile_image"
-        android:src="@drawable/ic_app_background"
-        android:layout_height="@dimen/_30sdp"/>
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/ic_app_background" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/chats_profile_image"
-        android:text="Sheriff"
-        android:maxLines="1"
-        android:textSize="@dimen/_11sdp"
-        android:textStyle="bold"
         android:id="@+id/chats_username"
-        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_9sdp"/>
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@id/chats_profile_image"
+        android:maxLines="1"
+        android:text="Sheriff"
+
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/messageCount"
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginStart="@dimen/_9sdp"
         android:layout_height="wrap_content"
-        android:maxLines="1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/message_count_background"
+        android:padding="@dimen/_2sdp"
+
+        android:text="3"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/_chat_message"
-        android:layout_toEndOf="@id/chats_profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/chats_username"
+        android:layout_marginStart="@dimen/_9sdp"
+android:visibility="gone"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_toEndOf="@id/chats_profile_image"
+        android:maxLines="1"
+        android:text="Hello welcome to the health app"
         android:textColor="@color/gray_text"
-        android:textSize="@dimen/_11sdp"
-        android:text="Hello welcome to the health app"/>
+        android:textSize="@dimen/_11sdp" />
 
 </RelativeLayout>

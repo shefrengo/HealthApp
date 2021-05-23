@@ -93,12 +93,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_attach_file_black_24dp" />
-
 
         </LinearLayout>
 
@@ -107,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/layout_bottom_chat"
+
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:paddingTop="5dp"
@@ -114,14 +109,17 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/send_message"
-            android:layout_width="@dimen/_33sdp"
-            android:layout_height="@dimen/_33sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+
             android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:backgroundTint="@color/twitter_dark_blue"
-            android:src="@drawable/send" />
+            android:src="@drawable/ic_baseline_send_24"
+            android:tint="@color/white"
+            app:tint="@color/white" />
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

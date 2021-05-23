@@ -6,21 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/background_extra_extra_light_gray">
 
- <RelativeLayout
-     android:layout_width="match_parent"
-     android:id="@+id/deltaRelative"
-     android:layout_height="wrap_content">
-     <include layout="@layout/top_toolbar_laout"/>
+    <RelativeLayout
+        android:id="@+id/deltaRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/home"
-         android:layout_centerInParent="true"
-         android:textSize="@dimen/_11sdp"
-         style="@style/TextAppearance.Subtitle2"
-         android:textColor="@color/black"/>
- </RelativeLayout>
+        <include layout="@layout/top_toolbar_laout" />
+
+        <TextView
+            style="@style/TextAppearance.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/home"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp" />
+    </RelativeLayout>
 
 
     <ProgressBar
@@ -30,11 +31,11 @@
         android:layout_centerInParent="true" />
 
     <androidx.cardview.widget.CardView
-        android:layout_below="@id/deltaRelative"
         android:id="@+id/home_cardview"
         android:layout_width="match_parent"
-
         android:layout_height="@dimen/_45sdp"
+
+        android:layout_below="@id/deltaRelative"
         android:layout_margin="@dimen/_2sdp"
         app:cardBackgroundColor="@color/background_color">
 
@@ -45,9 +46,9 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/home_profile_pic"
                 android:layout_width="@dimen/_35sdp"
-                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_app_background" />
 
@@ -64,15 +65,31 @@
                 android:textSize="@dimen/_11sdp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    <androidx.core.widget.NestedScrollView
+
+    <RelativeLayout
         android:id="@+id/home_nestedScrollView"
-        android:fillViewport="true"
         android:layout_width="match_parent"
-    android:layout_below="@id/home_cardview"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/pagination_relatvie"
+        android:layout_below="@id/home_cardview"
+        >
 
         <include layout="@layout/home_fragment_center_layout" />
 
-    </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/pagination_relatvie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 </RelativeLayout>

@@ -46,6 +46,7 @@
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
+                android:textColor="@color/white"
                 android:text="10:10 PM"
                 android:textSize="@dimen/_9sdp"
                 app:layout_constraintBottom_toBottomOf="@id/layout_first"
