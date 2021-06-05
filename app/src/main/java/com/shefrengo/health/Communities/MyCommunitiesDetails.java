@@ -1,16 +1,8 @@
 package com.shefrengo.health.Communities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +11,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,17 +29,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.shefrengo.health.Adapters.HomeAdapter;
 import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.Posts;
 import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.PostDetails;
 import com.shefrengo.health.PostQuestionActivity;
 import com.shefrengo.health.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MyCommunitiesDetails extends AppCompatActivity {
     private NestedScrollView nestedScrollView;
@@ -51,6 +46,7 @@ public class MyCommunitiesDetails extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Posts> posts;
     private TextView count;
+    private static final int limit = 12;
     private TextView title;
     private TextView header_title;
     private Button writeButton;
@@ -61,6 +57,7 @@ public class MyCommunitiesDetails extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String titleText;
     private String description;
+    private DocumentSnapshot lastVisible;
     private int members;
     private int postscoun;
     private List<Data> dataList;
@@ -99,27 +96,95 @@ public class MyCommunitiesDetails extends AppCompatActivity {
             startActivity(intent);
         });
         getRecyclerview();
+        adapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String image = posts.get(position).getImageUrl();
+                String userid = posts.get(position).getUserid();
+                String timestamp = posts.get(position).getTimestamp().toString();
+                String title = posts.get(position).getTitle();
+                String description = posts.get(position).getDescription();
+                String category = posts.get(position).getCategory();
+                int reply = posts.get(position).getReplyCount();
+                String community = posts.get(position).getCommunity();
+                String photo = dataList.get(position).getProfilePhotoUrl();
+                String username = dataList.get(position).getUsername();
+                String postid = posts.get(position).postId;
+                Intent intent = new Intent(MyCommunitiesDetails.this, PostDetails.class);
+                intent.putExtra("userid", userid);
+                intent.putExtra("image", image);
+                intent.putExtra("photo", photo);
+                intent.putExtra("username", username);
+                intent.putExtra("community", community);
+                intent.putExtra("timestamp", timestamp);
+                intent.putExtra("category", category);
+                intent.putExtra("postid", postid);
+                intent.putExtra("title", title);
+                intent.putExtra("description", description);
+                intent.putExtra("reply", reply);
+                startActivity(intent);
+            }
+        });
 
     }
 
     private void getRecyclerview() {
         CollectionReference collectionReference = db.collection("Posts");
-        Query query = collectionReference.whereEqualTo("community", communityId).whereEqualTo("category", titleText);
+        Query query = collectionReference.whereEqualTo("community", communityId).whereEqualTo("category", titleText).limit(limit);
         query.get().addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e))
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
                     for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
-                        Posts posts1 = queryDocumentSnapshot.toObject(Posts.class);
+                        String id = queryDocumentSnapshot.getId();
+                        Posts posts1 = queryDocumentSnapshot.toObject(Posts.class).withId(id);
                         String userid = posts1.getUserid();
                         db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
                             Users users = documentSnapshot.toObject(Users.class);
                             posts.add(posts1);
+                            assert users != null;
+                            dataList.add(new Data(users.getUsername(), users.getProfilePhotoUrl()));
+                            adapter.notifyDataSetChanged();
+                            hideProgress();
+                        });
+
+                    }
+                    if (queryDocumentSnapshots.size() > 0) {
+                        lastVisible = queryDocumentSnapshots.getDocuments().get(queryDocumentSnapshots.size() - 1);
+                    }
+                    nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                        View view = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1);
+                        int diff = (view.getBottom() - (nestedScrollView.getHeight() + nestedScrollView.getScrollY()));
+                        if (diff == 0) {
+                            loadMore();
+                        }
+                    });
+                });
+    }
+
+    private void loadMore() {
+        CollectionReference collectionReference = db.collection("Posts");
+        Query query = collectionReference.whereEqualTo("community", communityId).whereEqualTo("category", titleText)
+                .startAfter(lastVisible).limit(limit);
+        query.get().addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e))
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                        String id = queryDocumentSnapshot.getId();
+                        Posts posts1 = queryDocumentSnapshot.toObject(Posts.class).withId(id);
+                        String userid = posts1.getUserid();
+                        db.collection("Users").document(userid).get().addOnSuccessListener(documentSnapshot -> {
+                            Users users = documentSnapshot.toObject(Users.class);
+                            posts.add(posts1);
+                            assert users != null;
                             dataList.add(new Data(users.getUsername(), users.getProfilePhotoUrl()));
                             adapter.notifyDataSetChanged();
                             hideProgress();
                         });
 
 
+                    }
+                    if (queryDocumentSnapshots.size() > 0) {
+                        lastVisible = queryDocumentSnapshots.getDocuments().get(queryDocumentSnapshots.size() - 1);
                     }
                 });
     }

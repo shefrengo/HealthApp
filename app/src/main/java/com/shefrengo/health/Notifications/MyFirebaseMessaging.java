@@ -1,6 +1,5 @@
 package com.shefrengo.health.Notifications;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,10 +23,10 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.shefrengo.health.Activities.MessagesActivity;
+import com.shefrengo.health.R;
 
 import org.jetbrains.annotations.NotNull;
 
-@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 public class MyFirebaseMessaging extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMessaging";
 
@@ -35,35 +34,45 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull @NotNull String s) {
         super.onNewToken(s);
-    //    updateToken(s);
+        updateToken(s);
     }
+
     private void updateToken(String refreshToken) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference collectionReference= FirebaseFirestore.getInstance().collection("Token");
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Token");
         Token token = new Token(refreshToken);
         assert user != null;
         collectionReference.document(user.getUid()).set(token, SetOptions.merge())
-                .addOnFailureListener(e -> Log.e(TAG, "onFailure: ",e ));
+                .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
     }
+
     @Override
     public void onMessageReceived(@NonNull @NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
 
-        String sented = remoteMessage.getData().get("sented");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String sented = remoteMessage.getData().get("body");
 
-        if (user != null) {
-            assert sented != null;
 
-            if (sented.equals(user.getUid())) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    sendOreoNotification(remoteMessage);
-                } else {
-                    sendMessage(remoteMessage);
-                }
+        Log.d(TAG, "onMessageReceived: " + sented);
+        /**FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            }
+         if (user != null) {
+
+
+         if (sented.equals(user.getUid())) {
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         sendOreoNotification(remoteMessage);
+         } else {
+         sendMessage(remoteMessage);
+         }
+
+         }
+         }**/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sendOreoNotification(remoteMessage);
+        } else {
+            sendMessage(remoteMessage);
         }
     }
 
@@ -71,7 +80,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     public void onMessageSent(@NonNull @NotNull String s) {
         super.onMessageSent(s);
 
-        Log.d(TAG, "onMessageSent: message sent "+s);
+        Log.d(TAG, "onMessageSent: message sent " + s);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -81,18 +90,21 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         String title = remoteMessage.getData().get("title");
         String body = remoteMessage.getData().get("body");
         RemoteMessage.Notification notification = remoteMessage.getNotification();
-        assert user != null;
-        int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
+//        assert user != null;
+        //  int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
+        int j = 1;
         Intent intent = new Intent(this, MessagesActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("userid", user);
+        bundle.putString("userid", "");
         intent.putExtras(bundle);
+        int icondrawable = R.drawable.icc;
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity
                 (this, j, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         OreoNotification oreoNotification = new OreoNotification(this);
-        Notification.Builder builder = oreoNotification.getOreoNotification(title, body, pendingIntent, defaultSound, icon);
+        Notification.Builder builder = oreoNotification.getOreoNotification("Health App", "You have a new Message", pendingIntent, defaultSound, "1");
         int i = 0;
         if (j > 0) {
             i = j;
@@ -111,7 +123,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
         Intent intent = new Intent(this, MessagesActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("userid", user);
+        bundle.putString("userid", "");
         intent.putExtras(bundle);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity
@@ -119,9 +131,9 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         assert icon != null;
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(Integer.parseInt(icon))
-                .setContentTitle(title)
-                .setContentText(body)
+                .setSmallIcon(R.drawable.icc)
+                .setContentTitle("Message")
+                .setContentText("You have a new Message")
                 .setAutoCancel(true)
                 .setSound(defaultSound)
                 .setContentIntent(pendingIntent);

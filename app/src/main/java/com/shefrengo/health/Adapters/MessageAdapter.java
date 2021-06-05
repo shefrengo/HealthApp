@@ -121,6 +121,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemViewType(int position) {
         Chats chat = chatsList.get(position);
+
         if (tes(chat)) {
             return RIGHT_MESSAGE;
         } else {

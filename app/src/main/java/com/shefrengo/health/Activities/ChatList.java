@@ -1,26 +1,21 @@
 package com.shefrengo.health.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.shefrengo.health.Adapters.ChatListAdapter;
-import com.shefrengo.health.Adapters.MainChatAdapter;
-import com.shefrengo.health.Models.Chats;
-import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.Users;
 import com.shefrengo.health.R;
 
@@ -36,7 +31,7 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
     private List<Users> chatsList;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,7 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
     private void setData() {
 
         CollectionReference collectionReference = db.collection("Users");
+
         Query query = collectionReference.whereEqualTo("admin", true);
         query.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
@@ -80,12 +76,13 @@ public class ChatList extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void hideProgress(){
+    private void hideProgress() {
         progressbar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
 
     }
-    private void showProgress(){
+
+    private void showProgress() {
         progressbar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }

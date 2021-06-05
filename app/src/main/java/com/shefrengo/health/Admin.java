@@ -149,7 +149,9 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
         communities.setName(title);
         communities.setDescription(description);
         communities.setPosts(0);
-        communities.setAdminUserid(user.getUid());
+        List<String> strings = new ArrayList<>();
+        strings.add(user.getUid());
+        communities.setAdminUserid(strings);
         communities.setMembers(0);
         communities.setCommunityId(StringManipulation.getSaltString());
         communities.setImageUrl(imageUri);

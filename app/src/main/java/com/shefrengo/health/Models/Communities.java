@@ -3,6 +3,7 @@ package com.shefrengo.health.Models;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 public class Communities extends PostId {
     private String name;
@@ -10,7 +11,7 @@ public class Communities extends PostId {
     private int members;
     private int posts;
     private String communityId;
-    private String adminUserid;
+    private List<String> adminUserid;
 
     private @ServerTimestamp
     Date timestamp;
@@ -25,11 +26,11 @@ public class Communities extends PostId {
         this.imageUrl = imageUrl;
     }
 
-    public String getAdminUserid() {
+    public List<String> getAdminUserid() {
         return adminUserid;
     }
 
-    public void setAdminUserid(String adminUserid) {
+    public void setAdminUserid(List<String> adminUserid) {
         this.adminUserid = adminUserid;
     }
 

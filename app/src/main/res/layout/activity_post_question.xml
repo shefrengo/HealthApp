@@ -25,7 +25,7 @@
                 style="@style/EditTextStylePost"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
-
+android:maxLines="1"
                 android:hint="@string/give_your_post_a_title"
                 android:textColorHint="@color/textColorPrimary" />
 
@@ -39,7 +39,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:textColor="@color/textColorPrimary"
                 android:layout_below="@id/qestion_title_editext"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/write_your_post_here"
                 android:inputType="textMultiLine"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_post_edit"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_13sdp"
 
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/privacy_tip"
@@ -73,13 +73,14 @@
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_app_background" />
+                    android:src="@drawable/icc" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_9sdp"
+                    android:textStyle="bold"
                     android:layout_toEndOf="@id/addImage"
                     android:text="@string/add_image"
                     android:textColor="@color/textColorPrimary" />
@@ -123,6 +124,24 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="@string/post"
                 android:textAllCaps="false" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/postbtn"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/notification_unread"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/health_app_warning"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp" />
+            </RelativeLayout>
         </RelativeLayout>
 
 

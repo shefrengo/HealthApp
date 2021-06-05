@@ -73,4 +73,7 @@
     <string name="action_chats">Inbox</string>
     <string name="type_a_message">Type a Message</string>
     <string name="no_messages">No Messages</string>
+    <string name="community_support">Community Support</string>
+    <string name="administrator">Administrator</string>
+    <string name="health_app_warning">Content on the Health App does not replace the relationship between you and doctors or other healthcare professionals nor the advice you receive from them. Never delay seeking advice or dialing emergency services because something you have read on the Health App</string>
 </resources>

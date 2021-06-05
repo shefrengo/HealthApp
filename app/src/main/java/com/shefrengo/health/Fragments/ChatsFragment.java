@@ -2,14 +2,6 @@ package com.shefrengo.health.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,35 +9,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
-
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.shefrengo.health.Activities.ChatList;
 import com.shefrengo.health.Activities.MessagesActivity;
 import com.shefrengo.health.Adapters.MainChatAdapter;
-import com.shefrengo.health.MainActivity;
-import com.shefrengo.health.Models.Chats;
+import com.shefrengo.health.Models.Conversations;
 import com.shefrengo.health.Models.Users;
 import com.shefrengo.health.Notifications.Token;
 import com.shefrengo.health.R;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +50,8 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
     private static final String TAG = "ChatsFragment";
     private AppCompatActivity appCompatActivity;
 
+    private List<Conversations> chatsList;
+
     public static ChatsFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_IS_ROOT_FRAGMENT, isRoot);
@@ -79,7 +65,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
-        appCompatActivity = (AppCompatActivity)view.getContext();
+        appCompatActivity = (AppCompatActivity) view.getContext();
         dataList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.chats_recyclerview);
         createMessageButton = view.findViewById(R.id.create_message);
@@ -96,7 +82,8 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
                     // Get new FCM registration token
                     String token = task.getResult();
 
-                 //   updateToken(token);
+                    Log.d(TAG, "onCreateView: "+token);
+                    updateToken(token);
                 });
 
 
@@ -123,8 +110,15 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
 
     private void setData() {
         assert user != null;
-        CollectionReference collectionReference = db.collection("Chats");
-        collectionReference.addSnapshotListener(
+        chatsList = new ArrayList<>();
+        usersList = new ArrayList<>();
+
+        CollectionReference collectionReference = db.collection("Conversation")
+                .document(user.getUid()).collection("Conversation");
+
+
+        Query query = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING);
+        query.addSnapshotListener(
                 (value, error) -> {
                     if (error != null) {
                         Log.e(TAG, "onEvent: ", error);
@@ -132,65 +126,38 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
                         return;
                     }
                     assert value != null;
-                    for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
-                        String id = queryDocumentSnapshot.getId();
-                        Chats chats = queryDocumentSnapshot.toObject(Chats.class).withId(id);
-                        if (chats.getMyUserid().equals(user.getUid())) {
-                            dataList.add(chats.getChatUserid());
+
+
+                    if (value.isEmpty()) {
+                        textView.setVisibility(View.VISIBLE);
+                    } else {
+                        textView.setVisibility(View.GONE);
+                        usersList.clear();
+                        chatsList.clear();
+                        for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
+                            Conversations chats = queryDocumentSnapshot.toObject(Conversations.class);
+                            String id = chats.getChatWithId();
+
+                            db.collection("Users").document(id).addSnapshotListener((value1, error1) -> {
+                                assert value1 != null;
+                                Users users = value1.toObject(Users.class);
+                                usersList.add(users);
+                                chatsList.add(chats);
+                                adapter = new MainChatAdapter(appCompatActivity, chatsList, usersList);
+                                adapter.setMessageCount(messageCount);
+                                setRecyclerView();
+                            });
+
                         }
-                        if (chats.getChatUserid().equals(user.getUid())) {
-                            dataList.add(chats.getMyUserid());
-                        }
+
+
                     }
-                    readChats();
+
+
                 });
 
     }
 
-    private void readChats() {
-        usersList = new ArrayList<>();
-        messageCount = new ArrayList<>();
-        CollectionReference collectionReference = db.collection("Users");
-        collectionReference.addSnapshotListener(appCompatActivity,(value, error) -> {
-            usersList.clear();
-            assert value != null;
-            //display 1 user from chats
-            for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
-                Users users = queryDocumentSnapshot.toObject(Users.class);
-                for (String id : dataList) {
-
-                    if (users.getUserId().equals(id)) {
-
-                        textView.setVisibility(View.GONE);
-                        if (usersList.size() != 0) {
-
-                            textView.setVisibility(View.GONE);
-                            try {
-                                for (Users users1 : usersList) {
-                                    if (!users.getUserId().equals(users1.getUserId())) {
-
-                                        usersList.add(users);
-                                    }
-                                }
-                            } catch (Exception e) {
-                                showToast(e.getMessage());
-                            }
-
-                        } else {
-                            usersList.add(users);
-                        }
-                    } else {
-                        textView.setVisibility(View.VISIBLE);
-                    }
-
-                }
-            }
-
-            adapter = new MainChatAdapter(appCompatActivity, usersList);
-            adapter.setMessageCount(messageCount);
-            setRecyclerView();
-        });
-    }
 
     @Override
     public void onClick(View v) {
@@ -204,6 +171,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
         String userid = usersList.get(position).getUserId();
         String name = usersList.get(position).getUsername();
         String photo = usersList.get(position).getProfilePhotoUrl();
+        clearUnreadChat(userid);
         Intent intent = new Intent(getActivity(), MessagesActivity.class);
         intent.putExtra("name", name);
         intent.putExtra("photo", photo);
@@ -213,5 +181,12 @@ public class ChatsFragment extends Fragment implements View.OnClickListener, Mai
 
     private void showToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearUnreadChat(String chatWithId) {
+        assert user != null;
+        CollectionReference collectionReference = db.collection("Conversation")
+                .document(user.getUid()).collection("Conversation");
+        collectionReference.document(chatWithId).update("unreadChatCount", 0);
     }
 }

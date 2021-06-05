@@ -11,6 +11,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.shefrengo.health.R;
+
 public class OreoNotification extends ContextWrapper {
     private static final String CHANNEL_ID = "com.shefrengo.health";
     private static final String CHANNEL_NAME = "HealthApp";
@@ -52,7 +54,7 @@ public class OreoNotification extends ContextWrapper {
                 setContentIntent(pendingIntent)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setSmallIcon(Integer.parseInt(icon))
+                .setSmallIcon(R.drawable.icc)
                 .setSound(sound)
                 .setAutoCancel(true);
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/icc"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:id="@+id/contact_profile"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/contact_profile"
+        android:text="Sheriff"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:maxLines="1"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:id="@+id/admin_name"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_toEndOf="@id/contact_profile"
+        android:layout_below="@id/admin_name"
+        android:id="@+id/admin_title"
+        android:background="@color/notification_unread"
+
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:text="Administrator"/>
+</RelativeLayout>

@@ -1,90 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fillViewport="true"
     android:layout_height="match_parent"
     android:background="@color/background_color"
+    android:fillViewport="true"
     tools:context=".Activities.CommunityDetails">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
+            android:id="@+id/header_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp"
-            android:scaleType="centerCrop"
-            android:id="@+id/header_image"
-            />
+            android:scaleType="centerCrop" />
+
         <RelativeLayout
+            android:id="@+id/enroll_button_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/header_image"
             android:background="@drawable/gray_bottom_border"
-            android:padding="@dimen/_4sdp"
-            android:id="@+id/enroll_button_relative"
-            android:layout_below="@id/header_image">
+            android:padding="@dimen/_4sdp">
 
             <TextView
+                android:id="@+id/community_details_title"
+                style="@style/TextAppearance.Body2.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-             style="@style/TextAppearance.Body2.Medium"
-                android:textSize="@dimen/_11sdp"
                 android:text="A life with dementia"
-                android:id="@+id/community_details_title"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
+                android:id="@+id/community_enrolled_number"
+                style="@style/TextAppearance.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.Subtitle2"
                 android:layout_below="@id/community_details_title"
-                android:id="@+id/community_enrolled_number"
-                android:textColor="@color/gray_text"
-                android:text="0 enrolled"
-                android:textSize="@dimen/_11sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                />
+                android:text="0 enrolled"
+                android:textColor="@color/gray_text"
+                android:textSize="@dimen/_11sdp" />
 
             <Button
+                android:id="@+id/enroll_button"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_35sdp"
-                android:text="@string/enroll_in_program"
-                android:textAllCaps="false"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_below="@id/community_enrolled_number"
-                android:id="@+id/enroll_button"/>
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/enroll_in_program"
+                android:textAllCaps="false" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/about_relative"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/enroll_button_relative"
-            android:padding="@dimen/_4sdp"
 
-            android:layout_height="wrap_content">
+            android:padding="@dimen/_4sdp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp"
                 android:id="@+id/about_this_program_text"
-                android:layout_marginTop="@dimen/_5sdp"
-               style="@style/TextAppearance.Subtitle2.Medium"
+                style="@style/TextAppearance.Subtitle2.Medium"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/about_this_program"/>
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/about_this_program"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
+
             <TextView
+                android:id="@+id/description_of_community"
+                style="@style/TextAppearance.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_this_program_text"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_11sdp"
-                style="@style/TextAppearance.Headline5"
-                android:textColor="@color/black"
                 android:text="@string/common_google_play_services_unknown_issue"
-                android:id="@+id/description_of_community"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
         </RelativeLayout>
 
 
+        <TextView
+            android:id="@+id/community_support_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_relative"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/gray_bottom_border"
+            android:text="@string/community_support"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/community_support_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/community_support_text"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <Button
+                android:id="@+id/contact_us_button"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Call"
+                android:textAllCaps="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contact_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contact_us_button" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/community_support_relative"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/notification_unread"
+            android:padding="@dimen/_10sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/health_app_warning"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

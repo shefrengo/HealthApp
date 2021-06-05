@@ -1,23 +1,19 @@
 package com.shefrengo.health.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,14 +21,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.shefrengo.health.Adapters.MessageAdapter;
 import com.shefrengo.health.Models.Chats;
+import com.shefrengo.health.Models.Conversations;
 import com.shefrengo.health.Models.Users;
 import com.shefrengo.health.Notifications.ApiService;
 import com.shefrengo.health.Notifications.Client;
@@ -62,12 +57,15 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     private ImageView backarrow;
     private FloatingActionButton sendButton;
     private EditText editText;
+    private int messageCount = 0;
     private String name;
     private static final String TAG = "MessagesActivity";
     private String photo;
     private ApiService apiService;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private boolean notify = false;
+
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +82,8 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         backarrow.setOnClickListener(this);
         circleImageView.setOnClickListener(this);
         setIntents();
+
+
         userName.setText(name);
         Glide.with(this).asBitmap().load(photo).into(circleImageView);
         setChatsList();
@@ -123,8 +123,6 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
                     ) {
                         chatsList.add(chats);
                     }
-
-
                 }
                 adapter = new MessageAdapter(chatsList, this);
                 setRecyclerView();
@@ -171,83 +169,109 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sendMessage(String message) {
+        messageCount = messageCount + 1;
         editText.setText("");
-        Chats senderChats = new Chats();
-        senderChats.setChatUserid(userid);
-        senderChats.setMessage(message);
-        senderChats.setMyUserid(user.getUid());
 
-        CollectionReference senderRef = db.collection("Chats");
+        // chats model
+        Chats chats = new Chats();
+        chats.setMessage(message);
+        chats.setMyUserid(user.getUid());
+        chats.setChatUserid(userid);
+        chats.setImage("");
 
-        senderRef.add(senderChats).addOnSuccessListener(documentReference -> {
+        // send conversations
+        Conversations sendConvos = new Conversations();
 
-        }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+        sendConvos.setLastMessage(message);
+        sendConvos.setChatWithId(userid);
+        sendConvos.setUserUid(user.getUid());
 
-        final String msg = message;
+        // receive conversations
+        Conversations receiveConvos = new Conversations();
+        receiveConvos.setUserUid(userid);
+        receiveConvos.setChatWithId(user.getUid());
+        receiveConvos.setLastMessage(message);
+        receiveConvos.setUnreadChatCount(messageCount);
 
+
+        CollectionReference chatsRef = db.collection("Chats");
+        CollectionReference senderRef = db.collection("Conversation");
+        CollectionReference receiverRef = db.collection("Conversation");
+
+
+        senderRef.document(user.getUid()).collection("Conversation").document(userid).set(sendConvos, SetOptions.merge());
+        receiverRef.document(userid).collection("Conversation").document(user.getUid()).set(receiveConvos, SetOptions.merge());
+        chatsRef.add(chats).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+
+
+        // set firebase Message
         CollectionReference collectionReference = db.collection("Users");
-        collectionReference.addSnapshotListener((value, error) -> {
-            if (error != null) {
-                Log.e(TAG, "sendMessage: ", error);
-                return;
-            }
-            assert value != null;
-            for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
-                Users users = queryDocumentSnapshot.toObject(Users.class);
 
-/**
-                if (notify){
-                    sendNotification(userid, users.getUsername(), msg);
-                }
+        collectionReference.document(userid).get().addOnSuccessListener(documentSnapshot -> {
+            Users users = documentSnapshot.toObject(Users.class);
+            assert users != null;
+            String username = users.getUsername();
+            if (notify) {
 
-                notify = false;**/
+                sendNotification(userid, username, message);
             }
+
+            notify = false;
         });
+
+
     }
 
     private void sendNotification(String userid, String username, String message) {
-       DocumentReference tokeRef = db.collection("Token")
+        DocumentReference tokeRef = db.collection("Token")
                 .document(userid);
 
 
-       tokeRef.addSnapshotListener((value, error) -> {
-           if (error!=null){
-               Log.e(TAG, "sendNotification: ",error );
-               return;
-           }
+        tokeRef.get().addOnSuccessListener(documentSnapshot -> {
+            assert documentSnapshot != null;
+            if (documentSnapshot.exists()) {
 
-           assert value != null;
-           Token token = value.toObject(Token.class);
-           NotificationsData data = new NotificationsData();
-           data.setIcon(R.drawable.icc);
-           data.setTitle("New Message");
-           data.setBody(username + ": " + message);
-           data.setSented(user.getUid());
-           data.setUser(userid);
+                Token token = documentSnapshot.toObject(Token.class);
 
-           assert token != null;
-           Sender sender = new Sender(data, token.getToken());
-           apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
-               @Override
-               public void onResponse(@NotNull Call<MyResponse> call, @NotNull Response<MyResponse> response) {
-                   if (response.code() == 200) {
-
-                       Log.d(TAG, "onResponse: "+response.code());
-                       assert response.body() != null;
-                       if (response.body().success != 1) {
-                           Toast.makeText(MessagesActivity.this, "failed", Toast.LENGTH_SHORT).show();
-                       }
-                   }
-               }
-
-               @Override
-               public void onFailure(@NotNull Call<MyResponse> call, @NotNull Throwable t) {
-                   Log.d(TAG, "onFailure: " + t.getMessage());
-               }
-           });
+                NotificationsData data = new NotificationsData();
+                data.setIcon(R.drawable.icc);
+                data.setTitle("New Message");
+                data.setBody(username + ": " + message);
+                data.setSented(user.getUid());
+                data.setUser(userid);
 
 
-       });
+                assert token != null;
+
+
+                Sender sender = new Sender();
+                sender.setTo(token.getToken());
+                sender.setNotificationsData(data);
+                apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+                    @Override
+                    public void onResponse(@NotNull Call<MyResponse> call, @NotNull Response<MyResponse> response) {
+                        if (response.code() == 200) {
+
+                            assert response.body() != null;
+
+                            if (response.body().success != 1) {
+                                Toast.makeText(MessagesActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<MyResponse> call, @NotNull Throwable t) {
+                        Log.d(TAG, "onFailure: " + t.getMessage());
+                    }
+                });
+
+            } else {
+                Log.d(TAG, "onSuccess: empty");
+            }
+
+
+        });
 
     }
 }

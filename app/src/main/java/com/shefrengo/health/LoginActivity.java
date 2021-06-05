@@ -22,6 +22,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+
+import org.jetbrains.annotations.NotNull;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
@@ -75,7 +78,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-        }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, e.toString(), Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> {
+            progressBar.setVisibility(View.GONE);
+       if (e instanceof FirebaseAuthInvalidUserException){
+           Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+           return;
+       }
+            Toast.makeText(LoginActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override

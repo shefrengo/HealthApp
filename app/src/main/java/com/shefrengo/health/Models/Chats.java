@@ -10,18 +10,16 @@ public class Chats extends PostId {
     private @ServerTimestamp
     Date timestamp;
     private String message;
-    private boolean seen;
-    private int count;
-
+    private String image;
     public Chats() {
     }
 
-    public int getCount() {
-        return count;
+    public String getImage() {
+        return image;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getMyUserid() {
@@ -56,11 +54,5 @@ public class Chats extends PostId {
         this.message = message;
     }
 
-    public boolean isSeen() {
-        return seen;
-    }
 
-    public void setSeen(boolean seen) {
-        this.seen = seen;
-    }
 }

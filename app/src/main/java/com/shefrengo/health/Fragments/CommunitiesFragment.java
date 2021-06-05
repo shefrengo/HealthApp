@@ -2,12 +2,6 @@ package com.shefrengo.health.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,25 +11,30 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.algolia.search.saas.Client;
 import com.algolia.search.saas.Index;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.shefrengo.health.Activities.AlgoliaCommunityDetails;
+import com.shefrengo.health.Activities.CommunityDetails;
 import com.shefrengo.health.Adapters.CommunityAdapter;
 import com.shefrengo.health.Adapters.MyCommunitiesAdapter;
 import com.shefrengo.health.Communities.MyCommunitiesDetails;
-import com.shefrengo.health.Activities.CommunityDetails;
 import com.shefrengo.health.Models.Communities;
 import com.shefrengo.health.Models.MyCommunities;
 import com.shefrengo.health.R;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,6 +54,7 @@ public class CommunitiesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<Communities> communities;
+    private List<String> userids = new ArrayList<>();
 
     private EditText editText;
     private CommunityAdapter adapter;
@@ -82,7 +82,7 @@ public class CommunitiesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_communities, container, false);
         recyclerView = view.findViewById(R.id.communitiesRecy);
-        communities = new ArrayList<>();
+
         communitiesList = new ArrayList<>();
         editText = view.findViewById(R.id.edtPassword);
 
@@ -91,34 +91,14 @@ public class CommunitiesFragment extends Fragment {
         nestedScrollView = view.findViewById(R.id.communities_nested);
         showProgress();
         recyclerView2 = view.findViewById(R.id.my_communities_recyclerview);
-        adapter = new CommunityAdapter(communities, getActivity());
+
         adapter2 = new MyCommunitiesAdapter(communitiesList, getActivity());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(adapter);
+
         recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setNestedScrollingEnabled(false);
         recyclerView2.setAdapter(adapter2);
-        adapter.setOnItemClickListener(position -> {
-            String title = communities.get(position).getName();
-            String description = communities.get(position).getDescription();
-            int members = communities.get(position).getMembers();
-            int posts = communities.get(position).getPosts();
-            String postid = communities.get(position).postId;
-            String image = communities.get(position).getImageUrl();
-            String communityId = communities.get(position).getCommunityId();
-            Intent intent = new Intent(getActivity(), CommunityDetails.class);
-            intent.putExtra("title", title);
-            intent.putExtra("description", description);
-            intent.putExtra("members", members);
-            intent.putExtra("posts", posts);
-            intent.putExtra("communityId", communityId);
-            intent.putExtra("image", image);
-            intent.putExtra("postid", postid);
-            startActivity(intent);
-        });
+
         adapter2.setOnItemClickListener(position -> {
             String title = communitiesList.get(position).getName();
             String description = communitiesList.get(position).getDescription();
@@ -138,8 +118,9 @@ public class CommunitiesFragment extends Fragment {
 
             startActivity(intent);
         });
-        getData();
+
         myCommunities();
+     getData();
         viewAll.setOnClickListener(v -> startActivity(new Intent(getActivity(), ViewAllCommunities.class)));
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -162,42 +143,75 @@ public class CommunitiesFragment extends Fragment {
     }
 
     private void getData() {
-
+        communities = new ArrayList<>();
         CollectionReference communityRef = db.collection("Communities");
 
-        Query query = communityRef.orderBy("timestamp", Query.Direction.DESCENDING).limit(5);
+
+        Query query = communityRef.orderBy("timestamp", Query.Direction.DESCENDING).limit(13);
         query.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
 
+
+            communities.clear();
             for (QueryDocumentSnapshot queryDocument : queryDocumentSnapshots1) {
                 String id = queryDocument.getId();
                 Communities communities1 = queryDocument.toObject(Communities.class).withId(id);
-
+                String communityId = communities1.getCommunityId();
                 communities.add(communities1);
-                adapter.notifyDataSetChanged();
             }
 
+            adapter = new CommunityAdapter(communities, getActivity());
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setNestedScrollingEnabled(false);
+            recyclerView.setAdapter(adapter);
+            getCommunityClick();
+
         }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+    }
+
+
+    private void getCommunityClick() {
+        adapter.setOnItemClickListener(position -> {
+            String title = communities.get(position).getName();
+            String description = communities.get(position).getDescription();
+            int members = communities.get(position).getMembers();
+            int posts = communities.get(position).getPosts();
+            String postid = communities.get(position).postId;
+            String image = communities.get(position).getImageUrl();
+            String communityId = communities.get(position).getCommunityId();
+            List<String> admins = communities.get(position).getAdminUserid();
+
+            Intent intent = new Intent(getActivity(), CommunityDetails.class);
+            intent.putExtra("title", title);
+            intent.putExtra("description", description);
+            intent.putExtra("members", members);
+            intent.putExtra("posts", posts);
+            intent.putExtra("communityId", communityId);
+            intent.putExtra("image", image);
+            intent.putStringArrayListExtra("admins",(ArrayList)admins);
+            intent.putExtra("postid", postid);
+            startActivity(intent);
+        });
+
     }
 
     private void myCommunities() {
         CollectionReference collectionReference = db.collection("Users")
                 .document(user.getUid()).collection("MyCommunities");
-        //      Query query = collectionReference.whereEqualTo("", user.getUid()).limit(3);
 
-        collectionReference.get().addOnSuccessListener(queryDocumentSnapshots -> {
+        Query query1 = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING).limit(10);
+       query1.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
 
                 MyCommunities myCommunities = queryDocumentSnapshot.toObject(MyCommunities.class);
                 String id = myCommunities.getCommunityId();
-
-
                 CollectionReference collectionReference1 = db.collection("Communities");
                 Query query = collectionReference1.whereEqualTo("communityId", id);
                 query.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
                     for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots1) {
 
                         Communities communities1 = snapshot.toObject(Communities.class).withId(snapshot.getId());
-                        Log.d(TAG, "myCommunities: " + id);
+
                         communitiesList.add(communities1);
                         adapter2.notifyDataSetChanged();
                         hideProgress();
@@ -205,6 +219,7 @@ public class CommunitiesFragment extends Fragment {
                 });
 
             }
+
         });
     }
 
@@ -247,7 +262,7 @@ public class CommunitiesFragment extends Fragment {
                     String userid = jsonObject.getString("objectID");
 
 
-                    hitList.add(new Communities(name,userid, profileUrl));
+                    hitList.add(new Communities(name, userid, profileUrl));
                     adapter.notifyDataSetChanged();
                 }
 

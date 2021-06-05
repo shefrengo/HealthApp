@@ -5,6 +5,9 @@ public class Sender {
 
     private String to;
 
+    public Sender() {
+    }
+
     public Sender(NotificationsData notificationsData, String to) {
         this.notificationsData = notificationsData;
         this.to = to;

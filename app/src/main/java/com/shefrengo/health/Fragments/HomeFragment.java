@@ -2,18 +2,6 @@ package com.shefrengo.health.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.paging.PagedList;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
@@ -42,24 +37,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import com.shefrengo.health.AActivity;
 import com.shefrengo.health.AdClass;
 import com.shefrengo.health.Adapters.HomeAdapter;
 import com.shefrengo.health.Adapters.HomeFragmentAdapter;
 import com.shefrengo.health.DialogRecyclerview;
-
+import com.shefrengo.health.Models.Communities;
 import com.shefrengo.health.Models.Data;
 import com.shefrengo.health.Models.MyCommunities;
 import com.shefrengo.health.Models.Posts;
 import com.shefrengo.health.Models.Users;
-import com.shefrengo.health.NativeTemplateStyle;
 import com.shefrengo.health.PostDetails;
 import com.shefrengo.health.R;
-import com.shefrengo.health.TemplateView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,6 +83,8 @@ public class HomeFragment extends Fragment {
     private List<Object> objects;
     private List<NativeAd> adList;
     private static final int limit = 12;
+
+    private List<String> strings = new ArrayList<>();
 
     public static HomeFragment newInstance(boolean isRoot) {
         Bundle args = new Bundle();
@@ -143,6 +137,8 @@ public class HomeFragment extends Fragment {
             name.setText(question);
         });
         getData();
+
+
         //  createNativeAd();
 
 
@@ -171,6 +167,7 @@ public class HomeFragment extends Fragment {
         });
 
         getPosts();
+        text();
     }
 
     private void setAdapterClick() {
@@ -216,6 +213,7 @@ public class HomeFragment extends Fragment {
                 String userid = posts.getUserid();
                 postsList.clear();
                 dataList.clear();
+
                 db.collection("Users").document(userid).get()
                         .addOnSuccessListener(documentSnapshot -> {
                             Users users = documentSnapshot.toObject(Users.class);
@@ -227,6 +225,7 @@ public class HomeFragment extends Fragment {
 
                                 if (posts.getCommunity().equals(ids)) {
                                     dataList.add(new Data(username, photo));
+
                                     postsList.add(posts);
                                 }
                             }
@@ -298,6 +297,7 @@ public class HomeFragment extends Fragment {
                         String photo = users.getProfilePhotoUrl();
                         progressRelative.setVisibility(View.GONE);
                         for (String ids : useridList) {
+
                             if (posts.getCommunity().equals(ids)) {
                                 dataList.add(new Data(username, photo));
                                 postsList.add(posts);
@@ -409,4 +409,28 @@ public class HomeFragment extends Fragment {
             adClass.setAdLoader(adLoader);
         });
     }
+
+    private void text() {
+        CollectionReference collectionReference = db.collection("Communities");
+        collectionReference.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                Communities communities = queryDocumentSnapshot.toObject(Communities.class);
+             //   Log.d(TAG, "onSuccess: " + communities.getAdminUserid());
+                CollectionReference collectionReference1 = db.collection("Users");
+                Query query = collectionReference1.whereEqualTo("userId", communities.getAdminUserid());
+                query.get().addOnSuccessListener(queryDocumentSnapshots1 -> {
+                    for (QueryDocumentSnapshot queryDocumentSnapshot1 : queryDocumentSnapshots1) {
+                        Log.d(TAG, "onSuccessnnn: " + queryDocumentSnapshot1.getId());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.e(TAG, "onFailure: ", e);
+                        Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+                    }
+                });
+            }
+        });
+    }
+
 }
