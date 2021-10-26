@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_fragment"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
@@ -12,35 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/top_toolbar_relative_layout"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/top_toolbar_laout" />
-
-            <ImageView
-                android:id="@+id/options"
-                android:layout_width="@dimen/_27sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/more" />
-
-            <TextView
-                android:id="@+id/profile_display_username"
-                style="@style/TextAppearance.Headline5.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:text="Profile"
-                android:textColor="@color/textColorPrimary"
-                android:textSize="15sp" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/nestedScr"
@@ -51,14 +23,6 @@
 
             <include layout="@layout/center_profile_content" />
         </RelativeLayout>
-
-
-        <ProgressBar
-            android:id="@+id/profile_progress"
-            android:layout_width="@dimen/_27sdp"
-            android:layout_height="@dimen/_27sdp"
-            android:layout_centerInParent="true" />
-
 
     </RelativeLayout>
 

@@ -23,16 +23,17 @@
         android:textColor="@color/black"
         android:id="@+id/admin_name"
         />
+
     <TextView
+        android:id="@+id/admin_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_toEndOf="@id/contact_profile"
         android:layout_below="@id/admin_name"
-        android:id="@+id/admin_title"
-        android:background="@color/notification_unread"
-
-        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_3sdp"
-        android:text="Administrator"/>
+        android:layout_toEndOf="@id/contact_profile"
+
+        android:background="@color/warning_bg"
+        android:text="Administrator"
+        android:textColor="@color/black" />
 </RelativeLayout>

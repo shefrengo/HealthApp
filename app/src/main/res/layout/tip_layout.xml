@@ -18,7 +18,8 @@
             android:id="@+id/card_tip"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            app:cardBackgroundColor="@color/track_grey">
+            android:layout_margin="@dimen/_2sdp"
+            app:cardBackgroundColor="@color/background_color">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -37,21 +38,20 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_350sdp"
+            android:layout_height="wrap_content"
 
             android:layout_marginTop="@dimen/_5sdp"
-            android:padding="@dimen/_15sdp">
+            android:padding="@dimen/_11sdp">
 
             <TextView
                 android:id="@+id/tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/SidebarLabel"
+
                 android:layout_centerInParent="true"
                 android:lineSpacingExtra="@dimen/_13sdp"
                 android:text="Your health experiences have the potential to help others in a similar situation and transform lives. Because this may involve you sharing sensitive information, we encourage you to stay anonymous: \n -Don\'t share your real full name\n -Don\'t share your contact details\n -Don\'t share any other piece of information that could identify you."
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="@dimen/_11sdp" />
         </RelativeLayout>
     </LinearLayout>
 

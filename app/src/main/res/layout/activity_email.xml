@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".activity.EmailActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_standard_new"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Heading"
+            android:text="@string/lbl_email_to_woobox" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:focusable="false"
+            android:textColor="@color/textColorSecondary"
+            android:text="@string/text_iqonicdesign_gmail_com"
+            android:theme="@style/EditTextTheme" />
+
+        <TextView
+            style="@style/Heading"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:text="@string/lbl_description" />
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_description_here"
+            android:lines="5"
+            android:gravity="top"
+            android:textColorHint="@color/textColorSecondary"
+            android:textColor="@color/textColorSecondary"
+            android:theme="@style/EditTextTheme" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSendMail"
+            style="@style/MaterialButtonStyle.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_standard"
+            android:shadowColor="@color/colorPrimary"
+            android:text="@string/lbl_send_mail"
+            android:textAppearance="@style/FontMedium" />
+    </LinearLayout>
+</LinearLayout>

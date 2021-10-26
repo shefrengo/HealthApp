@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        style="@style/TabNotSelected"
+        app:srcCompat="@drawable/ic_profile_tab"
+        android:layout_marginEnd="@dimen/spacing_control_half"
+        />
+
+    <TextView
+        android:id="@+id/tvMessageCount"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_alignEnd="@id/ivProfile"
+        android:background="@drawable/bg_circle_primary"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@color/commonColorWhite"
+        android:textSize="@dimen/font_size_nano"
+        tools:text="@string/lbl_10" />
+</RelativeLayout>

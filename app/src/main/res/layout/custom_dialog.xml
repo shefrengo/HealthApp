@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_middle"
+        android:layout_marginTop="@dimen/spacing_control_half"
+        android:layout_marginEnd="@dimen/spacing_middle"
+        android:layout_marginBottom="@dimen/spacing_control_half"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="lottie/loader_2.json"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/tv_progress_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/spacing_control"
+            android:paddingStart="@dimen/spacing_control"
+            android:paddingEnd="@dimen/spacing_control"
+            android:text="@string/lbl_loading"
+            android:textAppearance="@style/FontSemiBold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/font_size_small"
+            tools:ignore="MissingPrefix" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

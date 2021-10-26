@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/semi_white"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivCloseDrawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard_new"
+                android:layout_marginTop="@dimen/spacing_standard"
+                android:contentDescription="@string/text_todo"
+                android:padding="@dimen/spacing_control"
+                android:src="@drawable/ic_close_black" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civProfile"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_profile"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/spacing_control" />
+
+            <TextView
+                android:id="@+id/txtDisplayName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:text="@string/text_guest_user"
+                android:textAppearance="@style/FontSemiBold"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/font_size_large" />
+
+            <LinearLayout
+                android:id="@+id/llInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:background="@color/sidebar_background"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/llOrders"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/spacing_medium"
+                    android:paddingBottom="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/tvOrderCount"
+                        style="@style/SidebarLabel"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        style="@style/SidebarLabel"
+                        android:layout_marginTop="@dimen/spacing_control"
+                        android:gravity="center_horizontal"
+                        android:text="@string/lbl_my_order" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llWishlistData"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/spacing_medium"
+                    android:paddingBottom="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/tvWishListCount"
+                        style="@style/SidebarLabel"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        style="@style/SidebarLabel"
+                        android:layout_marginTop="@dimen/spacing_control"
+                        android:gravity="center_horizontal"
+                        android:text="@string/lbl_wish_list" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                style="@style/RecycleView"
+                android:layout_marginTop="@dimen/spacing_standard"
+                android:layout_marginBottom="@dimen/spacing_standard" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xmedium"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_width"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/spacing_standard"
+                    android:background="@color/view_color" />
+
+                <TextView
+                    android:id="@+id/tvLblOffer"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_my_offers"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@drawable/ic_offers" />
+                <TextView
+                    android:id="@+id/tvBlog"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_messages"
+                    app:drawableStartCompat="@drawable/ic_blog" />
+
+                <TextView
+                    android:id="@+id/tvStores"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_stores"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@drawable/ic_baseline_attach_money_24" />
+                <TextView
+                    android:id="@+id/tvAdmin"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_admin"
+                    app:drawableStartCompat="@drawable/ic_baseline_person_outline" />
+                <TextView
+                    android:id="@+id/tvMyCommunities"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_my_communities"
+                    app:drawableStartCompat="@drawable/ic_baseline_sentiment_satisfied_24" />
+
+                <TextView
+                    android:id="@+id/tvAccount"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_account"
+                    app:drawableStartCompat="@drawable/ic_baseline_person_outline" />
+                <TextView
+                    android:id="@+id/tvSettings"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_settings"
+                    app:drawableStartCompat="@drawable/ic_settings" />
+
+                <TextView
+                    android:id="@+id/tvLogout"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_logout"
+                    app:drawableStartCompat="@drawable/ic_logout" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_width"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/spacing_standard"
+                    android:background="@color/view_color" />
+
+                <TextView
+                    android:id="@+id/tvFaq"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_faq"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/tvHelp"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_help"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvContactus"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_contact_us" />
+                <TextView
+                    android:id="@+id/tvAbout"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_about" />
+
+                <TextView
+                    android:id="@+id/tvRateUs"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_rate_us"
+                    tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/tvShareApp"
+                    style="@style/SidebarLabel.SidebarOption"
+                    android:paddingStart="@dimen/_46sdp"
+                    android:text="@string/lbl_share_app" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/sidebar_img_height"
+                android:layout_height="@dimen/sidebar_img_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_standard_new"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:background="@drawable/bg_logo"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ivAppLogo"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_app_icon" />
+
+                <TextView
+                    android:id="@+id/tvAppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivAppLogo"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/FontBold"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvVersionCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvAppName"
+                    android:layout_centerHorizontal="true"
+                    android:letterSpacing="0.2"
+                    android:text="v 1.0.0"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/font_size_nano" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

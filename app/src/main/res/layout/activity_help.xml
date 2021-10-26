@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".activity.HelpActivity">
+    <include layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/edtContact"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:background="@drawable/bg_ractangle_rounded_stroke"
+        android:hint="@string/hint_enter_your_contact_number"
+        android:inputType="phone"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:background="@drawable/bg_ractangle_rounded_stroke"
+        android:hint="@string/hint_enter_your_email_id"
+        android:inputType="textEmailAddress"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/edtDescription"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:background="@drawable/bg_ractangle_multiline"
+        android:gravity="top"
+        android:hint="@string/hint_description"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:singleLine="true" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        style="@style/MaterialButtonStyle.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:shadowColor="@color/colorPrimary"
+        android:text="@string/lbl_submit"
+        android:textAppearance="@style/FontMedium" />
+
+</LinearLayout>

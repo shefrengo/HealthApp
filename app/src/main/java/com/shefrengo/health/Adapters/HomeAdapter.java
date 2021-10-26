@@ -13,13 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Posts;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Posts;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
+import com.shefrengo.health.utils.extentions.AppExtensionsKt;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private OnItemClickListener onItemClickListener;
     private List<Posts> postsList;
     private Context context;
-    private List<com.shefrengo.health.Models.Data> dataList;
+    private List<com.shefrengo.health.model.Data> dataList;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -85,19 +84,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         if (image.isEmpty()) {
             holder.imageView.setVisibility(View.GONE);
         }
-        Glide.with(context).asBitmap().load(postsList.get(position).getImageUrl()).into(holder.imageView);
+        AppExtensionsKt.loadImageFromUrl(holder.imageView,postsList.get(position).getImageUrl(),R.drawable.placeholder,R.drawable.placeholder);
 
         String username = dataList.get(position).getUsername();
         String profilePhotoUrl = dataList.get(position).getProfilePhotoUrl();
 
         String text = " By @" + username + " in " + category + "'s forum ..." + SetTime.TwitterTimeDifferentitaion(timestamp);
         holder.category.setText(text);
-        Glide.with(context).asBitmap().load(profilePhotoUrl).into(holder.circleImageView);
+        AppExtensionsKt.loadImageFromUrl(holder.circleImageView,profilePhotoUrl,R.drawable.ic_profile,R.drawable.ic_profile);
+
 
     }
 
     @Override
     public int getItemCount() {
+
 
         return postsList.size();
     }

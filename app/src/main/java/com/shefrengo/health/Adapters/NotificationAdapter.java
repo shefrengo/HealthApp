@@ -1,15 +1,11 @@
 package com.shefrengo.health.Adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +25,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,13 +33,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Notifications;
-import com.shefrengo.health.Models.Posts;
-import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Notifications;
+import com.shefrengo.health.model.Posts;
+import com.shefrengo.health.model.Users;
 import com.shefrengo.health.R;
-import com.shefrengo.health.StringManipulation;
+import com.shefrengo.health.utils.StringManipulation;
 
 
 import java.util.Date;

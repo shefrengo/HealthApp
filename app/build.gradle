@@ -1,19 +1,25 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'io.fabric'
+apply plugin: 'kotlin-kapt'
+
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
+
 
     defaultConfig {
         applicationId "com.shefrengo.health"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 9
-        versionName "4.1.0"
+        versionCode 14
+        versionName "5.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,18 +36,23 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
@@ -50,10 +61,13 @@ dependencies {
     //noinspection LifecycleAnnotationProcessorWithJava8
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.3.1"
 
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31"
+
     // glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     // multidex
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -75,20 +89,71 @@ dependencies {
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
 
-    implementation 'androidx.paging:paging-runtime:3.0.0'
+    implementation 'androidx.paging:paging-runtime:3.0.1'
     implementation 'com.github.okaybroda:FragmentStateManager:1.0.1'
     implementation 'net.skoumal.fragmentback:fragment-back:0.2.3'
-  implementation 'com.google.android.gms:play-services-ads:19.7.0'
-    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
-   //implementation project(':nativetemplates')
-    //algolia
-    implementation 'com.algolia:algoliasearch-android:3.27.0'
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
+    //implementation project(':nativetemplates')
 
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-messaging'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.firebase:firebase-analytics:19.0.1'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    //  implementation 'com.google.android.gms:play-services-ads:18.3.0'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    def lifecycle_version = "2.3.1"
+    def arch_version = "2.1.0"
+    implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
+    implementation 'com.karumi:dexter:6.2.1'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31"
+    implementation 'com.asksira.android:loopingviewpager:1.4.1'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    // implementation'com.erikagtierrez.multiple_media_picker:multiple-media-picker:1.0.5'
+    //intuit sdp
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // implementation 'com.onesignal:OneSignal:3.11.4'
+    implementation 'androidx.browser:browser:1.3.0'
+    implementation 'com.airbnb.android:lottie:3.0.7'
+    //implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.4'
+
+    // implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    // implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    //date Picker
+    implementation 'com.aminography:primedatepicker:3.4.0'
+    implementation 'com.aminography:primecalendar:1.3.2'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

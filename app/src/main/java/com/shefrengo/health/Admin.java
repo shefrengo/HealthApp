@@ -1,7 +1,7 @@
 package com.shefrengo.health;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -17,15 +17,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.algolia.search.saas.AlgoliaException;
-import com.algolia.search.saas.Client;
-import com.algolia.search.saas.CompletionHandler;
-import com.algolia.search.saas.Index;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,20 +28,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.shefrengo.health.Models.Communities;
-import com.shefrengo.health.Models.Posts;
+import com.shefrengo.health.model.Communities;
+import com.shefrengo.health.utils.StringManipulation;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Admin extends AppCompatActivity implements View.OnClickListener {
+public class Admin extends AppBaseActivity implements View.OnClickListener {
 
     private MaterialButton postBtn;
     private EditText titleEdit, descriptionEdit;
@@ -65,7 +54,11 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_admin);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Create Community");
+        setToolbar(toolbar);
         progressBar = findViewById(R.id.progressbar);
         imageView = findViewById(R.id.addImage);
         postBtn = findViewById(R.id.postbtn);
@@ -81,26 +74,31 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
     private void validate() {
         String title = titleEdit.getText().toString().trim();
         String description = descriptionEdit.getText().toString().trim();
+        showProgress(true);
 
 
         if (title.isEmpty()) {
             titleEdit.requestFocus();
             titleEdit.setError(getResources().getString(R.string.enter_field));
+            showProgress(false);
             return;
         }
 
         if (description.isEmpty()) {
             descriptionEdit.requestFocus();
             descriptionEdit.setError(getResources().getString(R.string.enter_field));
+            showProgress(false);
             return;
         }
 
         if (storageTask != null && storageTask.isInProgress()) {
             Toast.makeText(Admin.this, "upload is in progress", Toast.LENGTH_SHORT).show();
+            showProgress(false);
             return;
         }
         if (profileImageUri == null) {
             Toast.makeText(this, "Select Photo", Toast.LENGTH_SHORT).show();
+            showProgress(false);
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
@@ -139,6 +137,23 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
         }).addOnFailureListener(e -> Toast.makeText(Admin.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
 
     }
+    private ArrayList<String> generatekeywords(String newText) {
+        String inputString = newText.toLowerCase();
+        ArrayList<String> keywords = new ArrayList<>();
+        String[] words = inputString.split(" ");
+        for (String word : words) {
+            // for every word this string will be empty at first
+            String append = "";
+            int var4 = 0;
+            for (int i = ((CharSequence) inputString).length(); var4 < i; var4++) {
+                append += String.valueOf(inputString.charAt(var4));
+                keywords.add(append);
+            }
+
+            inputString = inputString.replace(word + " ", "");
+        }
+        return keywords;
+    }
 
     private void uploadPostInfo(String imageUri) {
 
@@ -146,9 +161,11 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
         String title = titleEdit.getText().toString().trim();
         String description = descriptionEdit.getText().toString().trim();
         Communities communities = new Communities();
+        ArrayList<String> search =generatekeywords(title);
         communities.setName(title);
         communities.setDescription(description);
         communities.setPosts(0);
+        communities.setSearch_keywords(search);
         List<String> strings = new ArrayList<>();
         strings.add(user.getUid());
         communities.setAdminUserid(strings);
@@ -156,29 +173,7 @@ public class Admin extends AppCompatActivity implements View.OnClickListener {
         communities.setCommunityId(StringManipulation.getSaltString());
         communities.setImageUrl(imageUri);
         collectionReference.add(communities).addOnSuccessListener(documentReference -> {
-
-
-            Client client = new Client(getString(R.string.Agloia_application_id), getString(R.string.Admiin_api_key));
-            Index index = client.getIndex(getString(R.string.agolia_index_name));
-            List<JSONObject> communityList = new ArrayList<JSONObject>();
-
-            try {
-                communityList.add(new JSONObject()
-                        .put("name", title)
-                        .put("profilePhotoUrl", imageUri)
-                        .put("objectID", documentReference.getId()));
-
-
-            } catch (JSONException e) {
-                Toast.makeText(Admin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-
-            index.addObjectsAsync(new JSONArray(communityList), (jsonObject, e) -> {
-                Toast.makeText(Admin.this, "Posted", Toast.LENGTH_SHORT).show();
-                finish();
-            });
-
+            showProgress(false);
         }).addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
     }
 

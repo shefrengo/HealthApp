@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,17 +30,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.shefrengo.health.Adapters.HomeAdapter;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Posts;
-import com.shefrengo.health.Models.Users;
-import com.shefrengo.health.PostDetails;
-import com.shefrengo.health.PostQuestionActivity;
+import com.shefrengo.health.AppBaseActivity;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Posts;
+import com.shefrengo.health.model.Users;
+import com.shefrengo.health.activity.PostDetails;
+import com.shefrengo.health.activity.PostQuestionActivity;
 import com.shefrengo.health.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyCommunitiesDetails extends AppCompatActivity {
+public class MyCommunitiesDetails extends AppBaseActivity {
     private NestedScrollView nestedScrollView;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -64,11 +65,15 @@ public class MyCommunitiesDetails extends AppCompatActivity {
     private String postid;
     private ImageView imageView;
     private static final String TAG = "MyCommunitiesDetails";
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_communities_details);
+
+        toolbar = findViewById(R.id.toolbar);
+
 
         nestedScrollView = findViewById(R.id.nestedScr);
         progressBar = findViewById(R.id.progressbar);
@@ -84,7 +89,7 @@ public class MyCommunitiesDetails extends AppCompatActivity {
         count = findViewById(R.id.count);
         imageView = findViewById(R.id.header_image);
         title = findViewById(R.id.title);
-        header_title = findViewById(R.id.title_header);
+
         writeButton = findViewById(R.id.write_post_button);
         showProgress();
         setIntents();
@@ -193,7 +198,9 @@ public class MyCommunitiesDetails extends AppCompatActivity {
     void setWigdets() {
 
         title.setText(titleText);
-        header_title.setText(titleText);
+        toolbar.setTitle(titleText);
+        setToolbar(toolbar);
+
         count.setText(members + " members ." + " " + postscoun + " posts");
     }
 

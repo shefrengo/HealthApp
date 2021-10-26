@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.shefrengo.health.Models.Communities;
+import com.shefrengo.health.model.Communities;
 import com.shefrengo.health.R;
 
 import java.util.List;

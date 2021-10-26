@@ -43,7 +43,6 @@
             android:indeterminateDuration="@android:integer/config_longAnimTime" />
 
 
-
         <androidx.core.widget.NestedScrollView
             android:id="@+id/center_relative_layout"
             android:layout_width="match_parent"

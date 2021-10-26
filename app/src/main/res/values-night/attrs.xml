@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScratchView">
+        <attr name="overlay_image" format="reference" />
+        <attr name="tile_mode" format="string" />
+        <attr name="overlay_width" format="dimension" />
+        <attr name="overlay_height" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="ShadowLayout">
+        <attr name="sl_shadowed" format="boolean" />
+        <attr name="sl_shadow_distance" format="dimension" />
+        <attr name="sl_shadow_angle" format="integer" />
+        <attr name="sl_shadow_radius" format="dimension" />
+        <attr name="sl_shadow_color" format="color" />
+    </declare-styleable>
+    <attr name="dotsColor" format="color" />
+    <attr name="selectedDotColor" format="color" />
+    <attr name="dotsStrokeColor" format="color" />
+    <attr name="dotsSize" format="dimension" />
+    <attr name="dotsWidthFactor" format="float" />
+    <attr name="dotsSpacing" format="dimension" />
+    <attr name="dotsCornerRadius" format="dimension" />
+    <attr name="dotsStrokeWidth" format="dimension" />
+    <attr name="stiffness" format="float" />
+    <attr name="dampingRatio" format="float" />
+    <attr name="progressMode" format="boolean" />
+    <declare-styleable name="CircleImageView">
+        <attr name="name" format="string" />
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="hnc_text" format="string" />
+        <attr name="hnc_maxLine" format="integer" />
+        <attr name="hnc_textColor" format="color" />
+        <attr name="hnc_moreLessTextColor" format="color" />
+        <attr name="hnc_textSize" format="dimension" />
+        <attr name="hnc_moreLessTextSize" format="dimension" />
+        <attr name="hnc_moreLessShow" format="boolean" />
+        <attr name="hnc_moreLessGravity">
+            <flag name="left" value="3" />
+            <flag name="right" value="5" />
+        </attr>
+
+        <attr name="hnc_animationDuration" format="integer" />
+        <attr name="hnc_moreLessAllCaps" format="boolean" />
+        <attr name="hnc_moreLessTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="hnc_TextStyle">
+            <flag name="normal" value="1" />
+            <flag name="medium" value="2" />
+            <flag name="bold" value="3" />
+        </attr>
+        <attr name="hnc_defaultExpand" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowView">
+        <attr name="angle" format="enum">
+            <enum name="topToBottom" value="0" />
+            <enum name="topRightToBottomLeft" value="1" />
+            <enum name="rightToLeft" value="2" />
+            <enum name="bottomRightToTopLeft" value="3" />
+            <enum name="bottomToTop" value="4" />
+            <enum name="bottomLeftToTopRight" value="5" />
+            <enum name="LeftToRight" value="6" />
+            <enum name="topLeftToBottomRight" value="7" />
+        </attr>
+        <attr name="startColor" format="color" />
+        <attr name="endColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="CrescentoImageView">
+        <attr name="curvature" format="dimension" />
+        <attr name="gravity" format="integer">
+            <flag name="top" value="0" />
+            <flag name="bottom" value="1" />
+        </attr>
+        <attr name="curvatureDirection" format="integer">
+            <flag name="outward" value="0" />
+            <flag name="inward" value="1" />
+        </attr>
+        <attr name="crescentoTintMode" format="integer">
+            <flag name="automatic" value="0" />
+            <flag name="manual" value="1" />
+        </attr>
+        <attr name="crescentoTintColor" format="color" />
+        <attr name="crescentoTintAlpha" format="integer" />
+        <attr name="gradientDirection" format="integer">
+            <flag name="top_to_bottom" value="0" />
+            <flag name="bottom_to_top" value="1" />
+            <flag name="left_to_right" value="2" />
+            <flag name="right_to_left" value="3" />
+        </attr>
+        <attr name="gradientStartColor" format="color" />
+        <attr name="gradientEndColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="DotsIndicator">
+        <attr name="dot_width" format="dimension" />
+        <attr name="dot_height" format="dimension" />
+        <attr name="dot_margin" format="dimension" />
+
+        <attr name="dot_drawable" format="reference" />
+        <attr name="dot_drawable_unselected" format="reference" />
+        <attr name="dot_tint" format="color" />
+
+        <attr name="dots_animator" format="reference" />
+        <attr name="dots_animator_reverse" format="reference" />
+
+        <attr name="dots_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+
+        <attr name="dots_gravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="fill_vertical" value="0x70" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="fill_horizontal" value="0x07" />
+            <flag name="center" value="0x11" />
+            <flag name="fill" value="0x77" />
+            <flag name="clip_vertical" value="0x80" />
+            <flag name="clip_horizontal" value="0x08" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RangeBar">
+        <attr name="mrb_tickStart" format="float" />
+        <attr name="mrb_tickEnd" format="float" />
+        <attr name="mrb_tickInterval" format="float" />
+        <attr name="mrb_tickHeight" format="dimension" />
+        <attr name="mrb_tickDefaultColor" format="color" />
+        <attr name="mrb_tickColors" format="reference" />
+        <attr name="mrb_tickLabelColor" format="color" />
+        <attr name="mrb_tickLabelSelectedColor" format="color" />
+        <attr name="mrb_tickBottomLabels" format="reference" />
+        <attr name="mrb_tickTopLabels" format="reference" />
+        <attr name="mrb_tickDefaultLabel" format="reference|string" />
+        <attr name="mrb_tickLabelSize" format="dimension" />
+        <attr name="mrb_barWeight" format="dimension" />
+        <attr name="mrb_rangeBarColor" format="reference|color" />
+        <attr name="mrb_selectorSize" format="dimension" />
+        <attr name="mrb_selectorBoundaryColor" format="reference|color" />
+        <attr name="mrb_selectorBoundarySize" format="dimension" />
+        <attr name="mrb_pinTextColor" format="reference|color" />
+        <attr name="mrb_pinColor" format="reference|color" />
+        <attr name="mrb_pinPadding" format="dimension" />
+        <attr name="mrb_pinMinFont" format="dimension" />
+        <attr name="mrb_pinMaxFont" format="dimension" />
+        <attr name="mrb_rangeBarPaddingBottom" format="dimension" />
+        <attr name="mrb_selectorColor" format="reference|color" />
+        <attr name="mrb_leftSelectorColor" format="reference|color" />
+        <attr name="mrb_rightSelectorColor" format="reference|color" />
+        <attr name="mrb_rangeBar" format="boolean" />
+        <attr name="mrb_temporaryPins" format="boolean" />
+        <attr name="mrb_rangeBar_rounded" format="boolean" />
+        <attr name="mrb_connectingLineWeight" format="dimension" />
+        <attr name="mrb_connectingLineColor" format="reference|color" />
+        <attr name="mrb_pinRadius" format="dimension" />
+        <attr name="mrb_connectingLineColors" format="reference" />
+        <attr name="mrb_onlyOnDrag" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CircleView">
+        <attr name="radius" format="dimension" />
+        <attr name="color" format="color" />
+        <attr name="circle_gravity" format="integer">
+            <flag name="top" value="0" />
+            <flag name="bottom" value="1" />
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="LineView">
+        <attr name="dash_gap" format="dimension" />
+        <attr name="dash_width" format="dimension" />
+        <attr name="line_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragEdge">
+            <flag name="left" value="1" />
+            <flag name="right" value="2" />
+            <flag name="top" value="4" />
+            <flag name="bottom" value="8" />
+        </attr>
+
+        <attr name="mode">
+            <enum name="normal" value="0" />
+            <enum name="same_level" value="1" />
+        </attr>
+
+        <attr name="flingVelocity" format="integer" />
+
+        <attr name="minDistRequestDisallowParent" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="CardSlider">
+        <!-- Active card offset from start of RecyclerView. Default value is 50dp. -->
+        <attr name="activeCardLeftOffset" format="dimension"/>
+        <!-- Card width. Default value is 148dp. -->
+        <attr name="cardWidth" format="dimension"/>
+        <!-- Distance between cards. Default value is 12dp. -->
+        <attr name="cardsGap" format="dimension"/>
+        <!-- ViewUpdater implementation class. If not set, DefaultViewUpdater class is used. -->
+        <attr name="viewUpdater" format="string"/>
+    </declare-styleable>
+</resources>

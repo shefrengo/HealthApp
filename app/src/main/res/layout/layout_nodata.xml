@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlNoData"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:visibility="gone">
+    <ImageView
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_undraw_no_data_qbuo"/>
+
+    <TextView
+        android:id="@+id/tvMsg"
+        style="@style/Heading"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="@dimen/spacing_standard_new"
+        android:textSize="@dimen/font_size_normal"
+        android:textAppearance="@style/FontBold"
+        android:textStyle="bold"
+        android:textColor="@color/textColorSecondary"
+        android:text="@string/lbl_no_data_found" />
+</LinearLayout>

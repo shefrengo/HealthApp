@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.nativead.NativeAd;
-import com.shefrengo.health.AdClass;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Posts;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Posts;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
 import com.shefrengo.health.ViewHolders.AdViewHolder;

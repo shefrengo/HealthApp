@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.shefrengo.health.Models.Communities;
+import com.shefrengo.health.model.Communities;
 import com.shefrengo.health.R;
+import com.shefrengo.health.utils.extentions.AppExtensionsKt;
 
-import java.awt.font.TextAttribute;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +42,10 @@ public class CommunityAdapter  extends RecyclerView.Adapter<CommunityAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).asBitmap().load(communities.get(position).getImageUrl()).into(holder.circleImageView);
+
+        AppExtensionsKt.loadImageFromUrl(holder.circleImageView,communities.get(position).getImageUrl()
+        ,R.drawable.placeholder,R.drawable.placeholder);
+
         holder.textView.setText(communities.get(position).getName());
     }
 

@@ -1,18 +1,11 @@
 <resources>
     <string name="app_name">Health App</string>
-    <string name="action_search">search</string>
+
     <string name="action_home">home</string>
     <string name="action_heart">heart</string>
     <string name="action_profile">profile</string>
-    <string name="hint_first_name">name</string>
-    <string name="hint_last_name">surname</string>
-    <string name="hint_email">Email Address</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_confirm_password">Confirm Password</string>
-    <string name="lbl_sign_up">Sign Up</string>
-    <string name="hint_username">Username</string>
-    <string name="lbl_sign_in">Sign In</string>
-    <string name="lbl_forgot">Forgot</string>
+
+
     <string name="enter_field">Field Required</string>
     <string name="user_exits">Username already exits</string>
     <string name="password_legth">should be at least 8 characters</string>
@@ -21,9 +14,8 @@
     <string name="give_your_post_a_title">Give your post a title</string>
     <string name="add_image">Optionally add image</string>
 
-
     <string name="privacy_tip">Privacy tip</string>
-    <string name="write_your_post_here">Write your post here</string>
+    <string name="write_your_post_here">About the community</string>
     <string name="create_post">Create post</string>
     <string name="mens_forum">In mens forum</string>
     <string name="women_forum">In womens forum</string>
@@ -37,7 +29,7 @@
     <string name="comment_reply">Replied to your comment</string>
     <string name="notifications">Notifications</string>
     <string name="community_title">Give your community a title</string>
-    <string name="enroll_in_program">Enroll in program</string>
+    <string name="enroll_in_program">Join Community</string>
     <string name="warning_text">Content on this app does not replace the relationship between you and your doctors or other healthcare professionals
     not the advice you receive from them. \Never delay seeking advice or  dialling emergency services because of something that you have read here</string>
     <string name="about_this_program">About this program</string>
@@ -48,7 +40,7 @@
     <string name="search">Search</string>
     <string name="all_communities">All Communities</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="search_community">Search for Community</string>
     <string name="post">Post</string>
     <string name="write">Write</string>
@@ -58,7 +50,7 @@
     <string name="company_name">Ren Technology</string>
     <string name="no_notifications">No notifications</string>
     <string name="username">username</string>
-    <string name="home">Home</string>
+
     <string name="admin">(admin)</string>
     <string name="delete">Delete</string>
     <string name="Agloia_application_id">DSXA6S4A7I</string>
@@ -71,9 +63,547 @@
     <string name="admob_interstitial">ca-app-pub-3577292392494352/8160008460</string>
     <string name="admob_sample_interstitial">ca-app-pub-3940256099942544/2247696110</string>
     <string name="action_chats">Inbox</string>
-    <string name="type_a_message">Type a Message</string>
-    <string name="no_messages">No Messages</string>
+
     <string name="community_support">Community Support</string>
     <string name="administrator">Administrator</string>
+
+    <string name="lbl_sign_in">Sign In</string>
+    <string name="lbl_sign_up">Sign Up</string>
+    <string name="lbl_sign_in_with">Sign In with</string>
+    <string name="lbl_forgot">Forgot ?</string>
+    <string name="lbl_already_have_a_account">Already have a account?</string>
+    <string name="lbl_enter_the_code_nto_verify_email">Enter the Code to Verify Your Email</string>
+    <string name="lbl_we_have_sent_you_mail_with_verification_code_to">We have sent you mail with verification code to-</string>
+    <string name="lbl_tep_email">rentech99@gmail.com</string>
+    <string name="lbl_did_not_receive">Didn\'t receive?</string>
+    <string name="lbl_resend_code">Resend code</string>
+    <string name="lbl_verify">Verify</string>
+    <string name="lbl_hi_we_re_woobox">Hi, We\'re Treadaway!</string>
+    <string name="lbl_subheading">We make around your city Affordable, easy and efficient.</string>
+
+
+    <string name="lbl_my_order">Orders</string>
+    <string name="lbl_reward">Reward</string>
+    <string name="lbl_wish_list">Wishlist</string>
+    <string name="lbl_women">Women</string>
+    <string name="lbl_men">Men</string>
+    <string name="lbl_kids">Kids</string>
+    <string name="lbl_sports">Sports</string>
+    <string name="lbl_camera">Camera</string>
+    <string name="lbl_account">Account</string>
+    <string name="lbl_settings">Settings</string>
+    <string name="lbl_faq">FAQ</string>
+    <string name="lbl_help">Help</string>
+    <string name="lbl_contact_us">Contact us</string>
+    <string name="lbl_newest_product">Newest Product</string>
+    <string name="lbl_recent_search">Recent Product</string>
+    <string name="lbl_top_selling">Top Selling</string>
+    <string name="lbl_Featured">Featured Products</string>
+    <string name="lbl_offers">Offers</string>
+    <string name="lbl_deal">Deal</string>
+    <string name="lbl_suggested">Suggested</string>
+    <string name="lbl_you_may_like">You May Like</string>
+    <string name="lbl_mens">Mens</string>
+    <string name="lbl_womens">Womens</string>
+    <string name="lbl_electronic">Electronic</string>
+    <string name="lbl_optic">Optic</string>
+    <string name="lbl_bags">Bags</string>
+    <string name="lbl_1">1</string>
+    <string name="lbl_add_to_cart">Add to Cart</string>
+    <string name="lbl_buy_now">Buy Now</string>
+    <string name="lbl_check_availability">Check Availability</string>
+    <string name="lbl_delivery_by">Delivery By</string>
+    <string name="lbl_free">Free</string>
+    <string name="lbl_brand">Brand</string>
+    <string name="lbl_colour">Colour</string>
+    <string name="lbl_height">Height</string>
+    <string name="lbl_clouser">Clouser</string>
+    <string name="lbl_lace_ups">Lace-ups</string>
+    <string name="lbl_pattern">Pattern</string>
+    <string name="lbl_rate_now">Rate Now</string>
+    <string name="lbl_5">5</string>
+    <string name="lbl_80">80</string>
+    <string name="lbl_4">4</string>
+    <string name="lbl_70">70</string>
+    <string name="lbl_3">3</string>
+    <string name="lbl_2">2</string>
+    <string name="lbl_50">50</string>
+    <string name="lbl_10">10</string>
+    <string name="lbl_reviews">Reviews</string>
+    <string name="lbl_filter">Filters</string>
+    <string name="lbl_categories">Categories</string>
+    <string name="lbl_more">More</string>
+    <string name="lbl_price">Price</string>
+    <string name="lbl_select_all">Select All</string>
+    <string name="lbl_colors">Colors</string>
+    <string name="lbl_size">Size</string>
+    <string name="lbl_discount">Discount</string>
+    <string name="lbl_ratings">Ratings</string>
+    <string name="lbl_reset">Reset</string>
+    <string name="lbl_apply">Apply</string>
+    <string name="lbl_less">Less</string>
+    <string name="lbl_delivered_on">Delivered on</string>
+    <string name="lbl_rated">Rated</string>
+    <string name="lbl_payment_details">Payment Detail</string>
+    <string name="lbl_item_price">Item Price -</string>
+    <string name="lbl_offer">Offer -</string>
+    <string name="lbl_shipping_charge">Shipping Charge -</string>
+    <string name="lbl_total_amount">Total Amount -</string>
+    <string name="lbl_payment_method">Payment Method -</string>
+    <string name="lbl_shipping_details">Shipping Details</string>
+    <string name="lbl_order_id">Order ID -</string>
+    <string name="lbl_order_date">Order Date -</string>
+    <string name="lbl_give_ratings">Give Rating</string>
+    <string name="lbl_rate_5">/5</string>
+    <string name="lbl_delivery_status">Your Ordered Item has been Delivered</string>
+    <string name="lbl_return_replace"><![CDATA[Return & Replace]]></string>
+    <string name="lbl_cancel_order">Cancel Order</string>
+    <string name="lbl_see_return_policy">See Return Policy</string>
+    <string name="lbl_track_item">Track Item</string>
+    <string name="lbl_continue">Continue</string>
+    <string name="lbl_delivered_by">Delivery By,</string>
+    <string name="lbl_change_address">Change Address</string>
+    <string name="lbl_item_deliver_here">Item Deliver Here</string>
+    <string name="lbl_add_new_address">Add New address</string>
+    <string name="lbl_current_location">Use Current Location</string>
+    <string name="lbl_save_address">Save Address</string>
+    <string name="lbl_edit_address">Edit Address</string>
+    <string name="lbl_add_address">Add New Address</string>
+    <string name="lbl_home">Home Address</string>
+    <string name="lbl_office_commercial">Work Address</string>
+    <string name="lbl_add_card">Add Card</string>
+    <string name="lbl_pay_with_debit_credit_card">Pay with PayPal</string>
+    <string name="lbl_net_banking">Net Banking</string>
+    <string name="lbl_cash_on_delivery">Cash on Delivery</string>
+    <string name="lbl_other_wallet">Other Wallet</string>
+    <string name="lbl_valid">Valid</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_ok">Ok</string>
+    <string name="lbl_change_qty">Change Quantity</string>
+    <string name="lbl_new_arrival">New Arrival</string>
+    <string name="lbl_popular">Popular</string>
+    <string name="lbl_help_center">Help Center</string>
+    <string name="lbl_quick_pay_cards">Quick Pay Cards</string>
+    <string name="lbl_my_offers">Special Offers</string>
+    <string name="lbl_my_orders">My Orders</string>
+    <string name="lbl_address_manager">Address Manager</string>
+    <string name="lbl_verify_now">Verify now</string>
+    <string name="lbl_get_newest_offers">Get newest offers</string>
+    <string name="lbl_please_verify_your_email_or_number">Please verify your email or number</string>
+    <string name="lbl_remove">Remove</string>
+    <string name="lbl_move_to_cart">Move to Cart</string>
+    <string name="lbl_enable">Enable</string>
+    <string name="lbl_invite_now">Invite Now</string>
+    <string name="lbl_your_rewards">Your Rewards</string>
+    <string name="lbl_cloths">Cloths</string>
+    <string name="lbl_60">60</string>
+    <string name="lbl_submit">Submit</string>
+    <string name="lbl_Accessories">Accessories</string>
+    <string name="lbl_footwear">Footwear</string>
+    <string name="lbl_order_pending">Order Pending</string>
+    <string name="lbl_choose_item">Choose an item</string>
+    <string name="lbl_tabDescription">Description</string>
+    <string name="lbl_tab_more_info">More info</string>
+    <string name="lbl_tabReviews">Reviews</string>
+    <string name="lbl_qty">Qty:</string>
+    <string name="lbl_see_price_detail">See Price Detail</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_work_address">Work Address</string>
+    <string name="lbl_remove_cart">Remove cart</string>
+    <string name="lbl_tap_to_retry">Tap to retry</string>
+    <string name="lbl_sign_up_success">Sign up success</string>
+    <string name="lbl_successfully_signed_in">Successfully signed in</string>
+    <string name="lbl_logout_confirmation">Are you want to logout?</string>
+    <string name="lbl_dialog_title">Confirmation</string>
+    <string name="lbl_yes">YES</string>
+    <string name="lbl_no">NO</string>
+    <string name="lbl_max">Max</string>
+    <string name="lbl_min">Min</string>
+    <string name="lbl_order">orders</string>
+    <string name="lbl_sign_up_with">Sign up with</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="msg_loading">Loading</string>
+    <string name="msg_please_wait">Please Wait</string>
+    <string name="msg_walkHeading1">Hi, We\'re Treadaway!</string>
+    <string name="msg_walkHeading2">Most Unique Styles!</string>
+    <string name="msg_walkHeading3">Shop Till You Drop!</string>
+    <string name="msg_walkSubHeading2">Shop the most trending fashion on the biggest shopping website.</string>
+    <string name="msg_walkSubHeading3">Grab the best seller pieces at bargain prices.</string>
+    <string name="msg_walkSubHeading1">We make around your city Affordable,\n easy and efficient.</string>
+    <string name="msg_confirmation">Are you sure you want to delete?</string>
+    <string name="msg_want_to_order">Are you sure you want to order now?</string>
+
+    <string name="error_no_internet">Oops!! You Are Not Connected To Internet</string>
+    <string name="error_field_required">Field Required</string>
+    <string name="click_add_button">Click the add button</string>
+    <string name="error_pwd_digit_required">Maximum 6 digit Required</string>
+    <string name="error_enter_valid_email">Enter Valid Email</string>
+    <string name="error_password_not_matches">Password not matches</string>
+    <string name="error_old_password_not_matches">Old password not matches</string>
+    <string name="error_new_password_same">Your old password is same please use another password</string>
+    <string name="error_password_length" translatable="false">Password length less than 6</string>
+    <string name="error_gps_not_enabled">GPS location is not enabled.</string>
+    <string name="error_something_went_wrong">Please try again later</string>
+    <string name="error_permission_required">Location Permission Required</string>
+    <string name="error_address_type">Please Select Address Type</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_full_name">Full Name*</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_state">State/Province*</string>
+    <string name="hint_address_type">Address Type</string>
+    <string name="hint_city">City*</string>
+    <string name="hint_pin_code">Pin code</string>
+    <string name="hint_mobile_no">Phone number*</string>
+    <string name="text_collection_2019">Collection 2019</string>
+
+    <string name="text_start_to_shopping">Start to Shopping</string>
+    <string name="text_todo">TODO</string>
+    <string name="text_juliane_deerman">Juliane Deerman</string>
+    <string name="title_account">My Account</string>
+    <string name="title_reward">My Rewards</string>
+    <string name="title_payment">Payments</string>
+    <string name="title_my_orders">My Orders</string>
+    <string name="title_Confirmation">Confirmation</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
+    <string name="lbl_total_item_count">Total Item-\u0020</string>
+    <string name="lbl_total_items">Total Item (</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_order">Order</string>
+    <string name="menu_my_cart">My Cart</string>
+    <string name="menu_my_rewords">My Rewords</string>
+    <string name="menu_account_setting">Account Setting</string>
+    <string name="menu_help_center">Help Center</string>
+    <string name="menu_logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="cart">My Cart</string>
+    <string name="more">Read More</string>
+    <string name="less">Read Less</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="RS">₹</string>
+    <string name="success">Successfully deleted</string>
+    <string name="success_add">Successfully Added</string>
+    <string name="update">Successfully Updated</string>
+    <string name="send_to">Share with</string>
+    <string name="hint_search">Search here</string>
+    <string name="lbl_save_profile">Save Profile</string>
+    <string name="lbl_change_pswd">Change Password</string>
+    <string name="lbl_edit_profile">Edit Profile</string>
+    <string name="error_phone_no">Enter Valid Phone Number</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last name</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="lbl_change_now">Change Now</string>
+    <string name="hint_enter_your_contact_number">Enter your contact number</string>
+    <string name="hint_enter_your_email_id">Enter your email id</string>
+    <string name="hint_description">Description</string>
+    <string name="title_help">Help Center</string>
+    <string name="title_setting">App Settings</string>
+    <string name="title_faq">FAQ</string>
+    <string name="lbl_language">Language</string>
+    <string name="lbl_email_notification">Email Notification</string>
+    <string name="lbl_sms_notification">SMS Notification</string>
+    <string name="lbl_notification_arrive_on_order_status">Notification arrive on order status</string>
+    <string name="lbl_push_notification">Push Notification</string>
+    <string name="lbl_account_deactivate">Account Deactivate</string>
+    <string name="lbl_return_items">Return items</string>
+    <string name="lbl_replace_items">Replace items</string>
+    <string name="lbl_quick_pay">Quick Pay</string>
+    <string name="lbl_call_request">Call Request</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_send_mail">Send mail</string>
+    <string name="lbl_email_to_woobox">Email to Treadaway</string>
+    <string name="lbl_from">From</string>
+    <string name="lbl_description">Description</string>
+    <string name="hint_description_here">Description here</string>
+    <string name="lbl_successfully">Successfully Done</string>
+    <string name="error_enter_valid_contact">Enter valid contact number</string>
+    <string name="title_contactus">Contact us</string>
+    <string name="lbl_card_number">Card Number</string>
+    <string name="text_iqonicdesign_gmail_com">rentech99@gmail.com</string>
+    <string name="lbl_length">Length</string>
+    <string name="lbl_width">Width</string>
+    <string name="days">Days</string>
+    <string name="hours">hr</string>
+    <string name="minutes">min</string>
+    <string name="seconds">sec</string>
+    <string name="title_offer">Offers</string>
+    <string name="text_sunday_special">Sunday Special</string>
+    <string name="lbl_view_all">View all</string>
+    <string name="text_colon">:</string>
+    <string name="lbl_no_tracking_available">No Tracking Available</string>
+    <string name="hint_enter_email_or_username">Enter email or username</string>
+    <string name="hint_enter_old_password">Old password</string>
+    <string name="msg_successpwd">Successfully password changed</string>
+    <string name="title_payments">Payment</string>
+    <string name="text_guest_user">Guest User</string>
+    <string name="msg_selectcolorsize"><![CDATA[Please select color & size value]]></string>
+    <string name="text_offer_not_available">Offer Not Available</string>
+    <string name="msg_not_allowed">This is demo version. You are not allowed to perform this action.</string>
+    <string name="lbl_logout">Logout</string>
+    <string name="lbl_success">Success!!</string>
+    <string name="lbl_share_app">Share App</string>
+    <!--font File-->
+    <string name="msg_sold_out">Sold Out</string>
+    <string name="lbl_about">About Us</string>
+    <string name="lbl_terms_conditions">Terms &amp; Conditions</string>
+    <string name="llb_privacy_policy">Privacy Policy</string>
+    <string name="llb_follow_us">Follow Us</string>
+    <string name="lbl_introduction">Introduction</string>
+    <string name="lbl_brands">Brands</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="lbl_blog">Blog</string>
+    <string name="lbl_no_data_found">No Products found</string>
+    <string name="llb_no_items_in_your_cart">No items in your cart</string>
+    <string name="lbl_shop_now">Shop Now</string>
+    <string name="lbl_product_reviews">Product Reviews</string>
+    <string name="lbl_review">Reviews</string>
+    <string name="lbl_out_stock">Out of stock</string>
+    <string name="lbl_qty_error">Quantity should be less than</string>
+    <string name="lbl_night_mode">Night Mode</string>
+    <string name="lbl_availability">Availability :</string>
+    <string name="lbl_in_stock">In Stock</string>
+    <string name="lbl_select_quantity">Select Quantity</string>
+    <string name="lbl_offer_not_available">Offer not available</string>
+    <string name="lbl_clear_cart">Clear Cart</string>
+    <string name="lbl_testimonials">Testimonials</string>
+    <string name="lbl_google">Google</string>
+    <string name="lbl_facebook">Facebook</string>
+    <string name="lbl_sign_in_failed">Sign in failed</string>
+    <string name="lbl_not_verified">Not Verified</string>
+    <string name="lbl_verified">Verified Buyer</string>
+    <string name="contact_phone">+260971537692</string>
+
+    <string name="ad_mob_app_id" translatable="false">ca-app-pub-4937593957421986~3239804062</string>
+    <string name="ad_mob_banner_id" translatable="false">ca-app-pub-4937593957421986/6921418147</string>
+    <string name="ad_mob_interstitial_id" translatable="false">ca-app-pub-4937593957421986/8959234608</string>
+    <!--<string name="ad_mob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="ad_mob_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_mob_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>-->
+    <string name="font_medium" translatable="false">fonts/Montserrat-Medium.ttf</string>
+    <string name="font_semibold" translatable="false">fonts/Montserrat-SemiBold.ttf</string>
+    <string name="font_bold" translatable="false">fonts/Montserrat-Bold.ttf</string>
+    <string name="font_regular" translatable="false">fonts/Montserrat-Regular.ttf</string>
+    <string name="facebook_app_id" translatable="false"> 519323575384019</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb519323575384019</string>
+
+    <string name="lbl_select_language">Select Language</string>
+    <string name="lbl_select_dashboard">Select Dashboard</string>
+    <string name="lbl_done">Done</string>
+    <string name="lbl_country">Country</string>
+    <string name="hint_address_line_1">Address line 1*</string>
+    <string name="hint_address_line_2">Address line 2</string>
+    <string name="lbl_change_dashboard">Change Dashboard</string>
+    <string name="lbl_more_info">More Info</string>
+    <string name="lbl_please_wait">Please Wait</string>
+    <string name="lbl_try_later">Please Try Again Later</string>
+    <string name="lbl_profile_saved">Profile Saved Successfully</string>
+    <string name="lbl_coming_soon">Coming Soon</string>
+    <string name="lbl_removed">Successfully removed</string>
+    <string name="lbl_item_delivering">Item Delivering</string>
+    <string name="lbl_sort">Sort</string>
+    <string name="lbl_low_price">Low Price</string>
+    <string name="lbl_high_price">High Price</string>
+    <string name="lbl_response_within_24_business_hours">Response within 24 business hours</string>
+    <string name="lbl_no_reviews">No Reviews Found</string>
+    <string name="lbl_loading">Loading</string>
+    <string name="lbl_select_image">Select Image</string>
+    <string name="lbl_send_email">Send email...</string>
+    <string name="lbl_great_deal">Great Deals</string>
+    <string name="load_more">Load More</string>
+    <string name="ren_technology" translatable="false">Ren Technology</string>
+
+    <string-array name="qty_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <array name="gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </array>
+    <array name="complaints">
+        <item>Report type</item>
+        <item>intellectual property complaint</item>
+        <item>Product Authenticity complaint</item>
+        <item>Product safety complaint</item>
+        <item>Product Condition complaint</item>
+    </array>
+    <array name="store_complaints">
+        <item>Report type</item>
+        <item>intellectual property complaint</item>
+        <item>Product Authenticity complaint</item>
+        <item>Product safety complaint</item>
+        <item>Product Condition complaint</item>
+    </array>
+    <array name="category">
+        <item>Select Category</item>
+        <item>Accessories</item>
+        <item>Books</item>
+        <item>Fashion</item>
+        <item>Books</item>
+        <item>Grocery</item>
+        <item>Men</item>
+        <item>Shoes</item>
+        <item>Women</item>
+        <item>Children</item>
+        <item>Electronics</item>
+        <item>Groceries</item>
+        <item>Cosmetics</item>
+        <item>Fragrances</item>
+        <item>Phones</item>
+        <item>Liquor</item>
+        <item>Health and Fitness</item>
+    </array>
+    <array name="Sizes">
+        <item>Select Sizes</item>
+        <item>XS</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+        <item>XXL</item>
+
+    </array>
+    <string-array name="language">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>German</item>
+        <item>Indonesian</item>
+        <item>Afrikaans</item>
+        <item>Portuguese</item>
+        <item>Turkish</item>
+        <item>Arabic</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="done">Done</string>
+    <string name="llb_no_items_ordered">No Items ordered</string>
+    <string name="lbl_browse_now">Browse Now</string>
+    <string name="lbl_open_a_store">Open a  store</string>
+    <string name="lbl_add_a_product">Add a Product</string>
+    <string name="lbl_manage_orders">Manage Orders</string>
+    <string name="lbl_messages">Messages</string>
+    <string name="lbl_manage_inventory">Manage Inventory</string>
+    <string name="lbl_account_health">Store Health</string>
+    <string name="lbl_communication">Communication</string>
+    <string name="hint_store_name">Store Name*</string>
+    <string name="hint_id">"NRC/Passport*"</string>
+    <string name="lbl_postal">Postal Code</string>
+    <string name="selected_images">Selected Images</string>
+    <string name="no_images_selected">No Images selected</string>
+    <string name="hint_product_name">Product name</string>
+    <string name="lbl_additional_info">Additional Information</string>
+    <string name="lbl_required_info">Required Information</string>
+    <string name="hint_product_price">Product Selling Price</string>
+    <string name="hint_custom_size">Size (Number)</string>
+    <string name="hint_brand">Product Brand (Eg: Apple, Gucci, Valentino)</string>
+    <string name="hint_colors">Product Colors</string>
+    <string name="hint_product_description">Product Description</string>
+    <string name="lbl_select_product_image">Select Product Images</string>
+    <string name="next">Next</string>
+    <string name="hint_product_quantitiy">Quantity in stock</string>
+    <string name="product_reviews">Product Reviews</string>
+    <string name="store_reviews">Store Reviews</string>
+    <string name="lbl_remove_product">Are you sure you want to delete</string>
+    <string name="status">Status:</string>
+    <string name="product_id">Product ID:</string>
+    <string name="date_modified">Date modified:</string>
+    <string name="lbl_save">Save</string>
+    <string name="hint_category_name">Category Name</string>
+    <string name="hint_category_description">Category Description</string>
+    <string name="lbl_admin">Administrator</string>
+    <string name="empty_cart">Cart is empty</string>
+    <string name="lbl_add_orders">Are you sure you want to continue</string>
+    <string name="customer_note">Customer Note: </string>
+    <string name="lbl_ordered">Ordered</string>
+    <string name="lbl_send_message">Send Message</string>
+    <string name="lbl_stores">Stores</string>
+    <string name="lbl_call">Call</string>
+    <string name="report_product">Report Product</string>
+    <string name="report_store">Report Store</string>
+    <string name="product_compliance_text">Product and Store Policy Compliance</string>
+    <string name="no_complaints">No Complaints</string>
+    <string name="lbl_complaint_warning">Product Complaint</string>
+    <string name="complaint_recommendation">A customer has reported this product. Please improve the quality of  products sold to customers or your account will be suspended</string>
+    <string name="lbl_select_store_image">Select Store Image</string>
+    <string name="lbl_reported">Reported</string>
+    <string name="no_special_offers">No Special Offers</string>
+    <string name="no_messages">No Messages</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="special_offers">Special Offers</string>
+    <string name="hint_store_description">Tell users about your store</string>
+    <string name="lbl_place_order">Place Order</string>
+    <string name="lbl_note_to_seller">Write to Seller</string>
+    <string name="hint_enter_note">Enter note</string>
+    <string name="lbl_walkthrough_sub">We help connect buyers and sellers</string>
+    <string name="lbl_walkthrough_head">Hi, We are Treadaway!</string>
+    <string name="lbl_walkthrough_store_head">Open your store!</string>
+    <string name="lbl_walkthrough_store_sub">"Showcase you products by opening a store "</string>
+    <string name="no_address_added">No addresses added</string>
+    <string name="hint_postal_code">Postal Code</string>
+    <string name="hint_delivery_fee">Enter delivery fee. Default is 0</string>
+    <string name="address_information">Address Information</string>
+    <string name="lbl_rate_us">Rate Us</string>
+    <string name="delivery_fee_text">Delivery fee</string>
+    <string name="lbl_other_info">Other Information</string>
+    <string name="starting_from">Starting Date</string>
+    <string name="ending_date">Ending Date</string>
+    <string name="select_dates">Select Dates</string>
+    <string name="product_unavailable">product Unavailable</string>
+    <string name="discount">Discount</string>
+    <string name="lbl_sponsored_product">Sponsored</string>
+    <string name="lbl_delivered">Delivered</string>
+    <string name="lbl_message">Message</string>
+    <string name="lbl_edit_store">Edit Store</string>
+    <string name="lbl_popular_product">Popular</string>
+    <string name="hello_admins">Hello Admins</string>
+    <string name="add_category">Add Category</string>
+    <string name="admin_stores">All Stores</string>
+    <string name="admin_users">All Users</string>
+    <string name="admin_add_testimonials">Add Testimonials</string>
+    <string name="admin_add_ad_banner">AD Banners</string>
+    <string name="admin_add_home_banners">Add Main Banners</string>
+    <string name="all_users">TreadAway Users</string>
+    <string name="admin_all_stores">All Stores</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="lbl_shoes_product">Shoes</string>
+    <string name="lbl_fashion_product">Fashion</string>
+    <string name="lbl_phones_product">Phones</string>
+    <string name="lbl_contact">Contact</string>
+    <string name="lbl_groceries">Groceries</string>
+    <string name="lbl_fragrance">Fragrances</string>
+
     <string name="health_app_warning">Content on the Health App does not replace the relationship between you and doctors or other healthcare professionals nor the advice you receive from them. Never delay seeking advice or dialing emergency services because something you have read on the Health App</string>
+    <string name="hint_username">Username</string>
+    <string name="lbl_chats_fragment">Chats </string>
+    <string name="lbl_communities">Communities</string>
+    <string name="community_image">Community Image</string>
+    <string name="lbl_my_communities">My Communities</string>
+    <string name="no_communities_joined">You have not joined any communities</string>
 </resources>

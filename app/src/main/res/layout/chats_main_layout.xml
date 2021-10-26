@@ -39,7 +39,7 @@
                 android:id="@+id/chats_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="16sp"
                 tools:text="John Snow" />
 
@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
+                android:textColor="@color/textColorSecondary"
                 android:text="7/13/19" />
 
         </LinearLayout>
@@ -62,9 +63,10 @@
                 android:id="@+id/_chat_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:layout_marginRight="6dp"
+                android:ellipsize="end"
+                android:textColor="@color/textColorSecondary"
+                android:maxLines="1"
                 tools:text="This is a message from John Snow and Snow White from London" />
 
             <TextView

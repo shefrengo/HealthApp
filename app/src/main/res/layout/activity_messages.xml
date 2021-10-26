@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_2"
-    tools:context=".Activities.MessagesActivity">
-
+    android:background="@color/background_color"
+    tools:context=".activity.MessagesActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,7 +15,8 @@
             android:id="@+id/toolbar_chat_room"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/background_color_2"
+            android:background="@color/background_color"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp">
 
@@ -32,31 +32,26 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:src="@drawable/back_arrow" />
+                    android:src="@drawable/ic_baseline_west_24" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_chat_room"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:src="@mipmap/ic_launcher"
+                    app:civ_border_width="0.9dp"
+                    app:civ_border_color="@color/white"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/username_chat_room"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:text="Imam Candra Kusuma"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        style="@style/Heading" />
 
 
                 </LinearLayout>
@@ -65,43 +60,33 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <RelativeLayout
         android:id="@+id/frame_layout_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <LinearLayout
-            android:id="@+id/layout_bottom_chat"
+        <EditText
+            android:id="@+id/message_editText"
+            style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:layout_toLeftOf="@id/send_message"
-            android:background="@drawable/rounded_rectangle"
-            android:orientation="horizontal">
-
-
-            <EditText
-                android:id="@+id/message_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@color/fui_transparent"
-                android:hint="@string/type_a_message"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
-
-
-        </LinearLayout>
+            android:layout_marginStart="@dimen/spacing_standard"
+            android:layout_marginTop="@dimen/spacing_xxxlarge"
+            android:layout_marginEnd="@dimen/spacing_standard"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_toStartOf="@id/send_message"
+            android:hint="@string/type_a_message"
+            android:inputType="textMultiLine"
+            android:singleLine="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messages_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/layout_bottom_chat"
-
+            android:layout_above="@id/send_message"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:paddingTop="5dp"
@@ -109,14 +94,14 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/send_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MaterialButtonStyle.Filled"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-
             android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:backgroundTint="@color/twitter_dark_blue"
+            android:layout_marginBottom="@dimen/_6sdp"
+
             android:src="@drawable/ic_baseline_send_24"
             android:tint="@color/white"
             app:tint="@color/white" />

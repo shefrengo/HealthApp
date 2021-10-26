@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/action_home"
-        android:icon="@drawable/ic_home"
-        android:orderInCategory="100"
-        android:title="@string/action_home"
-        android:visible="true"
-        app:iconTint="@color/black"
-        app:showAsAction="always" />
-
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
         android:orderInCategory="100"
         android:title="@string/action_search"
         android:visible="true"
-        app:showAsAction="always"
-
-        />
-
-    <item
-        android:id="@+id/action_chats"
-        android:icon="@drawable/chat"
-        android:orderInCategory="100"
-        android:title="@string/action_chats"
-        android:visible="true"
+        app:iconTint="@color/black"
         app:showAsAction="always"
         />
-
     <item
-        android:id="@+id/action_heart"
-        android:icon="@drawable/ic_heart"
-        android:iconTint="@color/black"
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter"
         android:orderInCategory="100"
-        android:title="@string/action_heart"
-        android:visible="true"
+        android:title="@string/action_filter"
+        android:visible="false"
         app:iconTint="@color/black"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_profile"
-        android:icon="@drawable/ic_profile_tab"
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_hearts"
         android:iconTint="@color/black"
         android:orderInCategory="100"
-        android:title="@string/action_profile"
-        android:visible="true"
+        android:title="@string/action_filter"
+        android:visible="false"
+        app:actionLayout="@layout/menu_cart"
         app:iconTint="@color/black"
         app:showAsAction="always" />
-
-
 </menu>

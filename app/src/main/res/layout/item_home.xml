@@ -19,25 +19,22 @@
             android:id="@+id/profile_pic"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
-            android:src="@drawable/ic_app_background" />
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/spacing_control_half"
+           />
 
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextAppearance.Headline5.Medium"
-            android:layout_width="wrap_content"
+            style="@style/SidebarLabel"
 
-            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@id/profile_pic"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="The wok"
-            android:textColor="@color/twitter_dark_blue"
-
-            android:textSize="@dimen/_11sdp" />
+            android:text="The wok" />
 
         <TextView
             android:id="@+id/category"
@@ -51,7 +48,7 @@
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@id/profile_pic"
             android:text="Mens health "
-            android:textColor="@color/gray_text"
+            android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/_10sdp" />
 
         <ImageView
@@ -68,18 +65,19 @@
 
         <TextView
             android:id="@+id/short_description"
-            style="@style/TextAppearance.Headline6"
-            android:layout_width="wrap_content"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/image"
-            android:layout_marginStart="@dimen/_5sdp"
+
             android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/spacing_control"
+            android:layout_marginEnd="@dimen/spacing_control"
             android:layout_toEndOf="@id/profile_pic"
             android:ellipsize="end"
             android:maxLines="5"
             android:text="Realy hoping everything will be ok"
-            android:textColor="@color/black"
+            android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/_11sdp" />
 
         <TextView
@@ -92,7 +90,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_toEndOf="@id/profile_pic"
             android:text="15 replies"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/black"
             android:textSize="@dimen/_11sdp" />
     </RelativeLayout>
 </RelativeLayout>

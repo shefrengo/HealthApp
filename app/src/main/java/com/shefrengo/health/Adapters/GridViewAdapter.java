@@ -1,19 +1,18 @@
 package com.shefrengo.health.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.model.Users;
 import com.shefrengo.health.R;
+import com.shefrengo.health.utils.extentions.AppExtensionsKt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHolder> {
     private List<Users> usersList;
     private Context context;
-    LayoutInflater inflter;
+    private LayoutInflater inflter;
 
 
     public GridViewAdapter(List<Users> usersList, Context context) {
@@ -34,12 +33,11 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     }
 
 
-
     @NonNull
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.contact_us_grid_layout,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.contact_us_grid_layout, parent, false);
 
         return new ViewHolder(view);
     }
@@ -47,14 +45,12 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
-        Glide.with(context).asBitmap().load(usersList.get(position).getProfilePhotoUrl()).into(holder.circleImageView);
+        AppExtensionsKt.loadImageFromUrl(holder.circleImageView, usersList.get(position).getProfilePhotoUrl(), R.drawable.ic_profile, R.drawable.ic_profile);
         String names = usersList.get(position).getName();
         String surname = usersList.get(position).getSurname();
 
         holder.name.setText(new StringBuilder().append(names).append(" ").append(surname).toString());
-
-
-      holder.  title.setText(R.string.administrator);
+        holder.title.setText(R.string.administrator);
 
     }
 

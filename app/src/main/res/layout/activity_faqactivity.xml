@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".activity.FAQActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <ExpandableListView
+        android:id="@+id/exFaq"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/view_color"
+        android:dividerHeight="@dimen/divider_width"
+        android:groupIndicator="@null"
+        android:overScrollMode="never"
+        android:paddingTop="@dimen/spacing_standard"
+        android:scrollbars="none" />
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:paddingStart="@dimen/spacing_standard_new"
+    android:paddingEnd="@dimen/spacing_standard_new"
+    android:paddingTop="@dimen/spacing_standard"
+    android:paddingBottom="@dimen/spacing_standard"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:id="@+id/ivLogo"
+        android:contentDescription="@string/text_todo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        style="@style/Heading"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="@style/FontMedium"
+        android:id="@+id/tvName"
+        android:layout_marginStart="@dimen/spacing_standard" />
+</LinearLayout>

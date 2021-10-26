@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_5sdp"
     android:layout_marginEnd="30dp"
-    android:background="@color/background_color_2">
+    android:background="@color/background_color">
 
 
 

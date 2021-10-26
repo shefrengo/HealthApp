@@ -1,6 +1,5 @@
 package com.shefrengo.health.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Posts;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Posts;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
+import com.shefrengo.health.utils.extentions.AppExtensionsKt;
 
 import java.util.List;
 
@@ -73,8 +73,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         if (image.isEmpty()){
             holder.imageView.setVisibility(View.GONE);
         }
-        Glide.with(context).asBitmap().load(postsList.get(position).getImageUrl()).into(holder.imageView);
-        Glide.with(context).asBitmap().load(photo).into(holder.circleImageView);
+
+        AppExtensionsKt.loadImageFromUrl(holder.imageView, postsList.get(position).getImageUrl(),R.drawable.placeholder,R.drawable.placeholder);
+        AppExtensionsKt.loadImageFromUrl(holder.circleImageView, photo,R.drawable.ic_profile,R.drawable.ic_profile);
+
 
 
         String text =" By @"+username+" in "+category +"'s forum .."+ SetTime.TwitterTimeDifferentitaion(timestamp);

@@ -8,6 +8,8 @@
     <color name="textColorSecondary">#757575</color>
     <color name="commonColorWhite">#FFFFFF</color>
     <color name="white">#ffffff</color>
+
+    <color name="left_chat_bubble">#757575</color>
     <color name="semi_white">#F8F7F7</color>
     <color name="fui_transparent">#00000000</color>
     <color name="black">#243447</color>
@@ -27,10 +29,13 @@
     <color name="transparent">#00000000</color>
     <color name="transparent_view_color">#1D4A90E2</color>
     <color name="notification_unread">#f1f8fb</color>
+    <color name="warning_bg">#f1f8fb</color>
     <color name="link_text">#358CC9</color>
     <color name="background_color">#FCFDFD</color>
     <color name="background_color_2">#F3F3F3</color>
+    <color name="background_color_3">#F2F2F2</color>
     <color name="editText_background">#F1F1F1</color>
+
     <color name="img_background">#F4F4F4</color>
     <color name="tomato">#FF6347</color>
     <color name="dots_color">#A5A5A5</color>

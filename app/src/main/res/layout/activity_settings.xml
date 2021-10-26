@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    tools:context=".activity.SettingsActivity">
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/llGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/llFavourites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginBottom="@dimen/spacing_standard"
+            android:layout_marginStart="@dimen/_14sdp">
+            <ImageView
+                android:id="@+id/ivNotification"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/spacing_control"
+                android:src="@drawable/ic_notification"
+                />
+            <LinearLayout
+                android:id="@+id/llNotification"
+                android:layout_toEndOf="@id/ivNotification"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/spacing_middle"
+                android:layout_alignBottom="@id/ivNotification"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/textColorPrimary"
+                    android:textAppearance="@style/FontMedium"
+                    android:layout_marginEnd="@dimen/spacing_middle"
+                    android:text="@string/notification" />
+
+                <Switch
+                    android:id="@+id/switchNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:checked="true"
+                    android:layout_marginEnd="@dimen/spacing_standard_new"
+                    android:layout_gravity="center_vertical"
+                    android:track="@drawable/custom_switch"
+                    android:thumbTint="@color/commonColorWhite"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/view_color"/>
+        <LinearLayout
+            android:id="@+id/llLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginBottom="@dimen/spacing_standard"
+            android:layout_marginStart="@dimen/_14sdp">
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_translate"
+                android:padding="@dimen/spacing_control"
+                />
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_middle">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_centerVertical="true"
+                    android:textAppearance="@style/FontMedium"
+                    android:layout_marginEnd="@dimen/spacing_middle"
+                    android:text="@string/language" />
+                <LinearLayout
+                    android:id="@+id/lLanguage"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_standard_new">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/ivLanguage"
+                        android:contentDescription="@string/text_todo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        style="@style/Heading"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textAppearance="@style/FontMedium"
+                        android:id="@+id/tvLanguage"
+                        android:layout_marginStart="@dimen/spacing_standard" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/view_color"/>
+        <RelativeLayout
+            android:id="@+id/rlNightMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginBottom="@dimen/spacing_standard"
+            android:layout_marginStart="@dimen/_14sdp">
+            <ImageView
+                android:id="@+id/ivNightMode"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_moon"
+                android:padding="@dimen/spacing_control"
+                />
+            <LinearLayout
+                android:id="@+id/llNightMode"
+                android:layout_toEndOf="@id/ivNightMode"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/ivNightMode"
+                android:layout_marginStart="@dimen/spacing_middle"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/textColorPrimary"
+                    android:textAppearance="@style/FontMedium"
+                    android:layout_marginEnd="@dimen/spacing_middle"
+                    android:text="@string/lbl_night_mode" />
+
+                <Switch
+                    android:id="@+id/switchNightMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_marginEnd="@dimen/spacing_standard_new"
+                    android:layout_gravity="center_vertical"
+                    android:track="@drawable/custom_switch"
+                    android:thumbTint="@color/commonColorWhite"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/view_color"/>
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/view_color"/>
+
+    </LinearLayout>
+
+</LinearLayout>

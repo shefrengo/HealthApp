@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_bottom_bar"
+        android:scaleType="centerCrop"
+        app:tint="@color/bottom_bar_color" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        >
+        <LinearLayout
+            android:id="@+id/llHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivHome"
+                style="@style/TabNotSelected"
+                app:srcCompat="@drawable/ic_home" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llWishList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivWishList"
+                style="@style/TabNotSelected"
+                app:srcCompat="@drawable/ic_baseline_view_comfy_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include layout="@layout/menu_cart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+           <include layout="@layout/menu_profile"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

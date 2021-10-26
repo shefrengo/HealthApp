@@ -7,36 +7,12 @@
     android:background="@color/background_color">
 
 
-    <ProgressBar
-        android:id="@+id/communities_progress"
-        android:layout_width="@dimen/_27sdp"
-        android:layout_height="@dimen/_27sdp"
-        android:layout_centerInParent="true" />
-
-
-    <RelativeLayout
-        android:id="@+id/deltaRelative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/top_toolbar_laout" />
-
-        <TextView
-            style="@style/TextAppearance.Body2.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/search"
-            android:textColor="@color/textColorPrimary" />
-    </RelativeLayout>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/communities_nested"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/deltaRelative"
-        android:fillViewport="true"
-      >
+
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,99 +20,12 @@
 
 
             <RelativeLayout
-                android:id="@+id/my_communities_relative"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_140sdp"
-
-                android:background="@drawable/gray_bottom_border"
-
-                android:padding="@dimen/_5sdp">
-
-                <TextView
-                    style="@style/TextAppearance.Body2.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:text="@string/my_communities"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/_11sdp"
-
-                    />
-
-                <TextView
-                    android:id="@+id/view_all"
-                    style="@style/TextAppearance.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_4sdp"
-                    android:text="@string/view_all"
-                    android:textColor="@color/link_text"
-                    android:textSize="@dimen/_11sdp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/my_communities_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/view_all" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/search_relative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/my_communities_relative"
-                android:layout_marginStart="@dimen/spacing_standard"
-                android:layout_marginTop="@dimen/spacing_smlarge"
-                android:layout_marginEnd="@dimen/spacing_standard">
-
-                <EditText
-                    android:id="@+id/edtPassword"
-                    style="@style/EditTextStylePost"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:hint="@string/search_community"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
-                    android:textColorHint="@color/textColorPrimary" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/search_relative">
-
-                <RelativeLayout
-                    android:id="@+id/communtiy_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:padding="@dimen/_5sdp">
-
-                    <TextView
-                        style="@style/TextAppearance.Body2.Medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
-
-                        android:text="@string/all_communities"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="@dimen/_11sdp" />
-                </RelativeLayout>
-
+                android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/communitiesRecy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/communtiy_text"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:padding="@dimen/_5sdp" />
             </RelativeLayout>

@@ -14,11 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ProgressBar
-                android:layout_width="@dimen/_26sdp"
-                android:layout_height="@dimen/_26sdp"
-                android:layout_centerInParent="true"
-                android:id="@+id/recycler_view_progress"/>
             <RelativeLayout
                 android:id="@+id/head_profile_relative"
                 android:layout_width="match_parent"
@@ -26,12 +21,12 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_display_photo"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_12sdp"
-                    app:civ_border_color="@color/gray_text"
-                    app:civ_border_width="1dp" />
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="@dimen/spacing_control"  />
 
                 <TextView
                     android:id="@+id/profile_display_name"

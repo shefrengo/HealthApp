@@ -3,24 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_2"
-    tools:context=".PostDetails">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    tools:context=".activity.PostDetails">
 
     <RelativeLayout
         android:id="@+id/deltaRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/top_toolbar_laout" />
+        <include layout="@layout/toolbar" />
 
-        <TextView
-            style="@style/TextAppearance.Body2.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/post"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_11sdp" />
+
 
         <ImageView
             android:id="@+id/more"
@@ -55,13 +49,14 @@
 
                 <TextView
                     android:id="@+id/title_question"
-                    style="@style/TextAppearance.Body2.Medium"
+                    style="@style/SidebarLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/women_forum"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_11sdp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -70,7 +65,9 @@
                     android:layout_height="@dimen/_39sdp"
                     android:layout_below="@id/title_question"
                     android:layout_marginTop="@dimen/_8sdp"
+                    app:civ_border_color="@color/white"
 
+                    app:civ_border_width="@dimen/spacing_control_half"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_app_background" />
 
@@ -85,7 +82,7 @@
                     android:layout_toEndOf="@id/profile_pic"
                     android:text="shefrengo"
 
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_11sdp" />
 
                 <ImageView
@@ -107,7 +104,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_toEndOf="@id/profile_pic"
                     android:text="timestamp"
-                    android:textColor="#373737"
+                    android:textColor="@color/textColorSecondary"
                     android:textSize="@dimen/_11sdp" />
 
 
@@ -121,7 +118,7 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:text="description"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColorSecondary"
                     android:textSize="@dimen/_11sdp" />
 
 
@@ -141,7 +138,8 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:scaleType="centerCrop"
-
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="@dimen/spacing_control_half"
                     android:src="@drawable/ic_app_background" />
 
                 <TextView
@@ -220,18 +218,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/reply_recyclerview"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/notification_unread"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@color/warning_bg"
                 android:padding="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/health_app_warning"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColorSecondary"
                     android:textSize="@dimen/_11sdp" />
             </RelativeLayout>
 

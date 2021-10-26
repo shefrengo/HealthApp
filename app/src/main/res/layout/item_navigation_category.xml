@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.shefrengo.health.model.Category" />
+
+        <variable
+            name="callback"
+            type="com.shefrengo.health.base.BaseRecyclerAdapter.OnClickListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingBottom="@dimen/spacing_middle"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:id="@+id/ivCat"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible"
+            android:src="@drawable/ic_dresses_women"
+            app:tint="@color/textColorPrimary" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            style="@style/SidebarLabel.SidebarOption"
+            android:layout_width="wrap_content"
+            android:paddingStart="@dimen/_8sdp"
+            android:foreground="@null"
+            tools:text="Fashion"
+            android:gravity="center_vertical|start"
+            android:padding="0dp"
+
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+</layout>

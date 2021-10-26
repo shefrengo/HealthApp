@@ -22,8 +22,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.shefrengo.health.Activities.MessagesActivity;
+import com.shefrengo.health.activity.ChatsActivity;
+import com.shefrengo.health.activity.MessagesActivity;
 import com.shefrengo.health.R;
+import com.shefrengo.health.utils.extentions.AppExtensionsKt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +36,10 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull @NotNull String s) {
         super.onNewToken(s);
-        updateToken(s);
+        if (AppExtensionsKt.isLoggedIn()){
+            updateToken(s);
+        }
+
     }
 
     private void updateToken(String refreshToken) {
@@ -93,7 +98,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 //        assert user != null;
         //  int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
         int j = 1;
-        Intent intent = new Intent(this, MessagesActivity.class);
+        Intent intent = new Intent(this, ChatsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userid", "");
         intent.putExtras(bundle);
@@ -121,7 +126,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         RemoteMessage.Notification notification = remoteMessage.getNotification();
         assert user != null;
         int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
-        Intent intent = new Intent(this, MessagesActivity.class);
+        Intent intent = new Intent(this, ChatsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userid", "");
         intent.putExtras(bundle);

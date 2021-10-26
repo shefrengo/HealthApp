@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color">
 
     <RelativeLayout
@@ -14,7 +15,10 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/notification_profile_pic2"
             android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp" />
+            android:layout_height="@dimen/_30sdp"
+
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/spacing_control_half" />
 
         <TextView
             android:id="@+id/notificatin_type"

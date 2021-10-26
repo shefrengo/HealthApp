@@ -13,15 +13,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.shefrengo.health.Models.Chats;
-import com.shefrengo.health.Models.Data;
+import com.shefrengo.health.model.Chats;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.Objects;

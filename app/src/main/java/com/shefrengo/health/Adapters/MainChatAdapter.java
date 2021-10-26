@@ -14,19 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.shefrengo.health.Models.Conversations;
-import com.shefrengo.health.Models.Data;
-import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.model.Conversations;
+import com.shefrengo.health.model.Data;
+import com.shefrengo.health.model.Users;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.List;
 

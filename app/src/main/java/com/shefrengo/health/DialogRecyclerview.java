@@ -8,26 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.shefrengo.health.Adapters.CommunityAdapter;
 import com.shefrengo.health.Adapters.DialogAdapter;
-import com.shefrengo.health.Models.Communities;
-import com.shefrengo.health.Models.MyCommunities;
+import com.shefrengo.health.activity.PostQuestionActivity;
+import com.shefrengo.health.model.Communities;
+import com.shefrengo.health.model.MyCommunities;
 
 import java.util.ArrayList;
 import java.util.List;

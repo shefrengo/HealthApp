@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.shefrengo.health.Models.Comment;
-import com.shefrengo.health.Models.Users;
+import com.shefrengo.health.model.Comment;
+import com.shefrengo.health.model.Users;
 import com.shefrengo.health.R;
 import com.shefrengo.health.SetTime;
 

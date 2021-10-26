@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.22135416666666666" />
+        <entry key="../../.gradle/caches/transforms-3/b02e35893b387a951fb3df700a6743bb/transformed/core-1.6.0/res/layout/custom_dialog.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/drawable-night/bg_ractangle_rounded_stroke.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable-v24/bg_ractangle_multiline.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable-v24/bg_ractangle_rounded_inactive.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_logo.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_ractangle_multiline.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_ractangle_rounded_inactive.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/bg_ractangle_rounded_stroke.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/chat_background_left.xml" value="0.1685185185185185" />
+        <entry key="app/src/main/res/drawable/gray_bottom_border.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_outline.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sentiment_satisfied_24.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_blog.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/placeholder.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.1787037037037037" />
+        <entry key="app/src/main/res/layout/activity_admin_page.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/activity_chat_list.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_chats.xml" value="0.1787037037037037" />
+        <entry key="app/src/main/res/layout/activity_community_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_contact_us.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_email.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/activity_faqactivity.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/activity_help.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/layout/activity_messages.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_my_communities.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_post_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_post_question.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/activity_walk_through.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/app_bar_dash_board.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/bottom_bar.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/center_profile_content.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/chatlist_layout.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/chats_main_layout.xml" value="0.19025641025641027" />
+        <entry key="app/src/main/res/layout/contact_us_grid_layout.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.17037037037037037" />
+        <entry key="app/src/main/res/layout/dialog_launguage_selection.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/expandable_text_view_layout.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/layout/fragment_communities.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_dialog.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/home.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/home_fragment_center_layout.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/item_chats.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/layout/item_communities.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/item_community.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/item_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_navigation_category.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/layout_nodata.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/layout_sidebar.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/menu_cart.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/message_item_left.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/message_item_right.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/spinner_items.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/layout/top_toolbar_laout.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/menu/menu_dashboard.xml" value="0.19322916666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

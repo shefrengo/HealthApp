@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".activity.AboutActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivAppLogo"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:src="@drawable/ic_app_icon" />
+
+            <TextView
+                android:id="@+id/tvAppName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivAppLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_standard_new"
+                android:text="@string/app_name"
+                android:textAppearance="@style/FontBold"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/font_size_xxxlarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCopyRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAppName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_standard_new"
+                tools:text="© Ren Tech 2021 | All rights reserved"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/font_size_normal" />
+
+            <TextView
+                android:id="@+id/tvTOC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCopyRight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_standard_new"
+                android:text="@string/lbl_terms_conditions"
+                android:textAppearance="@style/FontSemiBold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTOC"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_standard_new"
+                android:text="@string/llb_privacy_policy"
+                android:textAppearance="@style/FontSemiBold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/llBottom"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:text="@string/llb_follow_us"
+                android:textAppearance="@style/FontSemiBold"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/font_size_normal"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/spacing_standard_new"
+                android:layout_marginEnd="@dimen/spacing_standard_new"
+                android:layout_marginBottom="@dimen/spacing_standard"
+                android:gravity="center_horizontal|bottom">
+
+                <ImageView
+                    android:id="@+id/iv_whatsapp"
+                    style="@style/ImageButton"
+                    android:src="@drawable/ic_whatsapp" />
+
+                <ImageView
+                    android:id="@+id/iv_instagram"
+                    style="@style/ImageButton"
+                    android:src="@drawable/ic_instagram" />
+
+                <ImageView
+                    android:id="@+id/iv_twitter_sign"
+                    style="@style/ImageButton"
+                    android:src="@drawable/ic_twitter_new" />
+
+                <ImageView
+                    android:id="@+id/iv_facebook"
+                    style="@style/ImageButton"
+                    android:src="@drawable/ic_facebook" />
+
+                <ImageView
+                    android:id="@+id/iv_contact"
+                    style="@style/ImageButton"
+                    android:src="@drawable/ic_call"
+                    app:tint="@color/colorPrimary" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
